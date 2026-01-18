@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>
+      Diagnóstico CD II - Habilidades digitales y pensamiento crítico
+    </title>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --card: #121a33;
+        --card2: #0f1630;
+        --text: #e8ecff;
+        --muted: #a9b2da;
+        --accent: #7c5cff;
+        --accent2: #29d3c5;
+        --danger: #ff4d6d;
+        --ok: #29d36a;
+        --border: rgba(255, 255, 255, 0.1);
+        --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+        --radius: 16px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        background: radial-gradient(
+            1200px 600px at 10% -10%,
+            rgba(124, 92, 255, 0.35),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 500px at 95% 10%,
+            rgba(41, 211, 197, 0.25),
+            transparent 55%
+          ),
+          radial-gradient(
+            800px 450px at 50% 100%,
+            rgba(255, 77, 109, 0.18),
+            transparent 55%
+          ),
+          var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .wrap {
+        width: min(980px, 100%);
+        display: grid;
+        gap: 18px;
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 18px 18px 0 18px;
+      }
+      .title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .badge {
+        background: linear-gradient(
+          90deg,
+          rgba(124, 92, 255, 0.95),
+          rgba(41, 211, 197, 0.9)
+        );
+        color: #081022;
+        font-weight: 800;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        letter-spacing: 0.4px;
+      }
+      h1 {
+        margin: 0;
+        font-size: 22px;
+        line-height: 1.2;
+      }
+      p.sub {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(18, 26, 51, 0.92),
+          rgba(14, 20, 42, 0.92)
+        );
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .content {
+        padding: 18px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 760px) {
+        .grid.two {
+          grid-template-columns: 1fr 1fr;
+        }
+        .grid.three {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+      }
+
+      label {
+        font-size: 12px;
+        color: var(--muted);
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        outline: none;
+        transition: 0.2s;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: rgba(124, 92, 255, 0.65);
+        box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.12);
+      }
+      textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+
+      .sectionTitle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 6px;
+        padding-top: 10px;
+        border-top: 1px dashed rgba(255, 255, 255, 0.15);
+      }
+      .sectionTitle h2 {
+        margin: 0;
+        font-size: 15px;
+        letter-spacing: 0.2px;
+      }
+      .hint {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .q {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 12px;
+        display: grid;
+        gap: 10px;
+      }
+      .qHead {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+      .qTitle {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.35;
+        color: var(--text);
+      }
+      .pill {
+        font-size: 11px;
+        color: #081022;
+        font-weight: 800;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: rgba(41, 211, 197, 0.9);
+        white-space: nowrap;
+      }
+
+      .options {
+        display: grid;
+        gap: 8px;
+      }
+      .opt {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.02);
+        cursor: pointer;
+        transition: 0.15s;
+        user-select: none;
+      }
+      .opt:hover {
+        border-color: rgba(124, 92, 255, 0.35);
+        transform: translateY(-1px);
+      }
+      .opt input {
+        width: auto;
+      }
+      .opt span {
+        font-size: 13px;
+        color: var(--text);
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+        border-top: 1px solid var(--border);
+        background: rgba(0, 0, 0, 0.18);
+      }
+
+      .btn {
+        appearance: none;
+        border: none;
+        border-radius: 14px;
+        padding: 11px 14px;
+        font-weight: 800;
+        cursor: pointer;
+        color: #081022;
+        background: linear-gradient(
+          90deg,
+          rgba(124, 92, 255, 0.95),
+          rgba(41, 211, 197, 0.95)
+        );
+        transition: 0.15s;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .btnGhost {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+      .btnGhost:hover {
+        border-color: rgba(124, 92, 255, 0.55);
+      }
+
+      .msg {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .err {
+        color: var(--danger);
+        font-weight: 700;
+      }
+
+      .result {
+        padding: 18px;
+        display: none;
+        gap: 14px;
+        background: linear-gradient(
+          180deg,
+          rgba(18, 26, 51, 0.92),
+          rgba(14, 20, 42, 0.92)
+        );
+      }
+      .result.show {
+        display: grid;
+      }
+      .summary {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        padding: 12px;
+        display: grid;
+        gap: 10px;
+      }
+      .kvs {
+        display: grid;
+        gap: 10px;
+      }
+      @media (min-width: 760px) {
+        .kvs {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .kv {
+        background: rgba(0, 0, 0, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 10px;
+      }
+      .kv .k {
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+      .kv .v {
+        font-size: 13px;
+        color: var(--text);
+        font-weight: 700;
+        word-break: break-word;
+      }
+      .code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas,
+          "Liberation Mono", monospace;
+        background: rgba(0, 0, 0, 0.28);
+        border: 1px dashed rgba(255, 255, 255, 0.18);
+        border-radius: 14px;
+        padding: 12px;
+        font-size: 12.5px;
+        line-height: 1.5;
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .mini {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <header>
+          <div class="title">
+            <span class="badge">CD II</span>
+            <h1>Diagnóstico: habilidades digitales y pensamiento crítico</h1>
+          </div>
+          <p class="sub">
+            Completa la actividad. Al final se generará un
+            <b>ID de terminación</b> único y un texto listo para pegar en el
+            foro.
+          </p>
+        </header>
+
+        <form id="form" class="content" autocomplete="off">
+          <div class="grid two">
+            <div>
+              <label for="studentName">Nombre completo</label>
+              <input
+                id="studentName"
+                name="studentName"
+                type="text"
+                placeholder="Ej. Juan Pérez López"
+                maxlength="80"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="career">Carrera técnica</label>
+              <select id="career" name="career" required></select>
+            </div>
+          </div>
+
+          <div class="grid three">
+            <div>
+              <label for="groupPrefix">Grupo (por defecto)</label>
+              <input id="groupPrefix" name="groupPrefix" type="text" readonly />
+            </div>
+
+            <div>
+              <label for="groupLetter">Selecciona A o B</label>
+              <select id="groupLetter" name="groupLetter" required>
+                <option value="A">A</option>
+                <option value="B">B</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="turn">Turno</label>
+              <select id="turn" name="turn" required>
+                <option value="TMN">TMN</option>
+                <option value="VESP">VESP</option>
+                <option value="MIXTO">MIXTO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sectionTitle">
+            <h2>Diagnóstico (selecciona una opción por pregunta)</h2>
+            <p class="hint">
+              Responde con honestidad. No hay respuestas “perfectas”.
+            </p>
+          </div>
+
+          <div id="questions"></div>
+
+          <div class="sectionTitle">
+            <h2>Reflexión breve (para el foro)</h2>
+            <p class="hint">
+              2–4 líneas: ¿cómo influye la tecnología en tu aprendizaje y en tus
+              decisiones?
+            </p>
+          </div>
+
+          <div>
+            <label for="reflection">Escribe tu reflexión</label>
+            <textarea
+              id="reflection"
+              name="reflection"
+              maxlength="400"
+              placeholder="Ej. La tecnología me ayuda a organizar tareas, pero si no filtro la información puedo tomar malas decisiones..."
+            ></textarea>
+            <p class="mini" id="charCount">0 / 400</p>
+          </div>
+
+          <div class="row">
+            <div class="msg" id="msg">
+              Completa todas las preguntas y escribe una reflexión para generar
+              tu ID.
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap">
+              <button type="button" class="btn btnGhost" id="btnReset">
+                Limpiar
+              </button>
+              <button type="submit" class="btn" id="btnFinish">
+                Finalizar y generar ID
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div id="result" class="result">
+          <div class="summary">
+            <h2 style="margin: 0; font-size: 16px">
+              ¡Listo! Copia y pega esto en el foro
+            </h2>
+            <p class="mini">
+              El ID se genera con tu nombre + selección + tiempo + aleatorio
+              (evita que todos entreguen lo mismo).
+            </p>
+
+            <div class="kvs" id="kvs"></div>
+
+            <div>
+              <div class="code" id="copyBlock"></div>
+              <div
+                style="
+                  display: flex;
+                  gap: 10px;
+                  flex-wrap: wrap;
+                  margin-top: 10px;
+                "
+              >
+                <button class="btn" id="btnCopy" type="button">
+                  Copiar texto
+                </button>
+                <button class="btn btnGhost" id="btnBack" type="button">
+                  Regresar
+                </button>
+              </div>
+              <p class="mini" id="copyMsg"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="mini" style="text-align: center">
+        Consejo docente: si quieres, cambia el valor de
+        <b>“Semilla del día”</b> en el JS para que cada generación tenga IDs
+        diferentes.
+      </p>
+    </div>
+
+    <script>
+      /**************************************************************
+       * CONFIGURACIÓN RÁPIDA (EDITA ESTO)
+       **************************************************************/
+      const CAREERS = [
+        "Técnico en Programación",
+        "Técnico en Administración",
+        "Técnico en Contabilidad",
+        "Técnico en Pesquerías",
+        "Técnico en Acuacultura",
+        "Técnico en Refrigeración y Climatización",
+        // Agrega o quita carreras aquí
+      ];
+
+      const DEFAULT_GROUP_PREFIX = "TMN"; // Por defecto aparece esto (ej. TMN). El alumno solo elige A o B.
+      const DAILY_SEED = "CD2-2026-S2"; // Cambia esto por periodo/generación para variar IDs.
+
+      /**************************************************************
+       * PREGUNTAS (diagnóstico)
+       **************************************************************/
+      const QUESTIONS = [
+        {
+          id: "q1",
+          tag: "Uso digital",
+          text: "¿Con qué frecuencia usas herramientas digitales para tareas escolares (Docs, Classroom, Drive, etc.)?",
+          options: [
+            "Casi nunca",
+            "A veces",
+            "Frecuentemente",
+            "Todos los días",
+          ],
+        },
+        {
+          id: "q2",
+          tag: "Organización",
+          text: "Cuando guardas archivos escolares, ¿cómo los organizas normalmente?",
+          options: [
+            "Los dejo donde caigan",
+            "Uso carpetas básicas",
+            "Uso carpetas por materia/tema",
+            "Uso carpetas + nombres claros + fechas",
+          ],
+        },
+        {
+          id: "q3",
+          tag: "Datos y gráficas",
+          text: "Si te dan una tabla de datos, ¿qué tan seguro te sientes interpretando una gráfica simple (barras o pastel)?",
+          options: ["Nada seguro", "Poco seguro", "Seguro", "Muy seguro"],
+        },
+        {
+          id: "q4",
+          tag: "Energía",
+          text: "¿Qué tan consciente eres del consumo energético al usar dispositivos (cargar, brillo, tiempo de pantalla, etc.)?",
+          options: ["Nada", "Poco", "Algo", "Mucho"],
+        },
+        {
+          id: "q5",
+          tag: "Uso responsable",
+          text: "¿Qué haces si encuentras información dudosa en internet para una tarea?",
+          options: [
+            "La uso tal cual",
+            "La uso si suena lógica",
+            "Comparo con otra fuente",
+            "Verifico fuentes y autor antes de usarla",
+          ],
+        },
+        {
+          id: "q6",
+          tag: "Ética",
+          text: "Sobre el uso de tecnología/IA: ¿qué tan importante es citar fuentes y no copiar/pegar?",
+          options: [
+            "No es importante",
+            "Poco importante",
+            "Importante",
+            "Muy importante",
+          ],
+        },
+      ];
+
+      /**************************************************************
+       * UTILIDADES
+       **************************************************************/
+      function safeTrim(s) {
+        return (s || "").trim().replace(/\s+/g, " ");
+      }
+
+      // Hash simple (FNV-1a) para huella/ID
+      function fnv1a(str) {
+        let h = 0x811c9dc5;
+        for (let i = 0; i < str.length; i++) {
+          h ^= str.charCodeAt(i);
+          h =
+            (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+        }
+        return ("00000000" + h.toString(16)).slice(-8).toUpperCase();
+      }
+
+      function nowStamp() {
+        const d = new Date();
+        const pad = (n) => String(n).padStart(2, "0");
+        return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(
+          d.getDate()
+        )}-${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
+      }
+
+      function randomToken(len = 6) {
+        const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // sin 0,1,I,O
+        let out = "";
+        crypto
+          .getRandomValues(new Uint32Array(len))
+          .forEach((n) => (out += chars[n % chars.length]));
+        return out;
+      }
+
+      function requiredAnswered() {
+        // todas las preguntas respondidas
+        return QUESTIONS.every((q) =>
+          document.querySelector(`input[name="${q.id}"]:checked`)
+        );
+      }
+
+      /**************************************************************
+       * RENDER
+       **************************************************************/
+      const careerSel = document.getElementById("career");
+      const groupPrefix = document.getElementById("groupPrefix");
+      const questionsDiv = document.getElementById("questions");
+      const reflection = document.getElementById("reflection");
+      const charCount = document.getElementById("charCount");
+      const msg = document.getElementById("msg");
+
+      function initCareers() {
+        careerSel.innerHTML = `<option value="" disabled selected>Selecciona tu carrera</option>`;
+        CAREERS.forEach((c) => {
+          const opt = document.createElement("option");
+          opt.value = c;
+          opt.textContent = c;
+          careerSel.appendChild(opt);
+        });
+      }
+
+      function initQuestions() {
+        questionsDiv.innerHTML = "";
+        QUESTIONS.forEach((q, idx) => {
+          const box = document.createElement("div");
+          box.className = "q";
+
+          const head = document.createElement("div");
+          head.className = "qHead";
+
+          const title = document.createElement("p");
+          title.className = "qTitle";
+          title.textContent = `${idx + 1}. ${q.text}`;
+
+          const pill = document.createElement("span");
+          pill.className = "pill";
+          pill.textContent = q.tag;
+
+          head.appendChild(title);
+          head.appendChild(pill);
+
+          const opts = document.createElement("div");
+          opts.className = "options";
+
+          q.options.forEach((op, j) => {
+            const lab = document.createElement("label");
+            lab.className = "opt";
+
+            const radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = q.id;
+            radio.value = op;
+            radio.required = true;
+
+            const sp = document.createElement("span");
+            sp.textContent = op;
+
+            lab.appendChild(radio);
+            lab.appendChild(sp);
+            opts.appendChild(lab);
+          });
+
+          box.appendChild(head);
+          box.appendChild(opts);
+          questionsDiv.appendChild(box);
+        });
+      }
+
+      function updateCharCount() {
+        const n = reflection.value.length;
+        charCount.textContent = `${n} / 400`;
+      }
+
+      function validateUI() {
+        const nameOk =
+          safeTrim(document.getElementById("studentName").value).length >= 6;
+        const careerOk = !!careerSel.value;
+        const reflectionOk = safeTrim(reflection.value).length >= 40; // mínimo para evitar "ok"
+        const qOk = requiredAnswered();
+
+        if (!nameOk) {
+          msg.innerHTML = `Escribe tu <b>nombre completo</b> (mínimo 6 caracteres).`;
+          msg.className = "msg err";
+          return false;
+        }
+        if (!careerOk) {
+          msg.innerHTML = `Selecciona tu <b>carrera técnica</b>.`;
+          msg.className = "msg err";
+          return false;
+        }
+        if (!qOk) {
+          msg.innerHTML = `Contesta <b>todas</b> las preguntas del diagnóstico.`;
+          msg.className = "msg err";
+          return false;
+        }
+        if (!reflectionOk) {
+          msg.innerHTML = `Escribe una reflexión (mínimo <b>40 caracteres</b>).`;
+          msg.className = "msg err";
+          return false;
+        }
+
+        msg.textContent = "¡Listo! Puedes finalizar y generar tu ID.";
+        msg.className = "msg";
+        return true;
+      }
+
+      /**************************************************************
+       * RESULTADO
+       **************************************************************/
+      const form = document.getElementById("form");
+      const result = document.getElementById("result");
+      const copyBlock = document.getElementById("copyBlock");
+      const kvs = document.getElementById("kvs");
+      const btnCopy = document.getElementById("btnCopy");
+      const btnBack = document.getElementById("btnBack");
+      const btnReset = document.getElementById("btnReset");
+      const copyMsg = document.getElementById("copyMsg");
+
+      function buildPayload() {
+        const name = safeTrim(document.getElementById("studentName").value);
+        const career = careerSel.value;
+        const groupLetter = document.getElementById("groupLetter").value;
+        const turn = document.getElementById("turn").value;
+        const group = `${DEFAULT_GROUP_PREFIX} ${groupLetter} (${turn})`;
+
+        const answers = QUESTIONS.map((q) => {
+          const v =
+            document.querySelector(`input[name="${q.id}"]:checked`)?.value ||
+            "";
+          return { id: q.id, tag: q.tag, question: q.text, answer: v };
+        });
+
+        const refl = safeTrim(reflection.value);
+        const stamp = nowStamp();
+        const rnd = randomToken(6);
+
+        // Huella/ID: mezcla de inputs + respuestas + semilla + timestamp + aleatorio
+        const signatureBase = [
+          DAILY_SEED,
+          name.toUpperCase(),
+          career,
+          group,
+          JSON.stringify(answers.map((a) => a.answer)),
+          refl.toLowerCase(),
+          stamp,
+          rnd,
+        ].join("|");
+
+        const hash = fnv1a(signatureBase);
+        const completionId = `CD2-${hash}-${stamp}-${rnd}`; // ID grande y único
+
+        // Mini-huella para que no digan "es la misma"
+        const fingerprint = fnv1a(
+          `${name}|${career}|${group}|${DAILY_SEED}|${rnd}`
+        );
+
+        return {
+          name,
+          career,
+          group,
+          answers,
+          refl,
+          stamp,
+          rnd,
+          hash,
+          completionId,
+          fingerprint,
+        };
+      }
+
+      function renderResult(payload) {
+        kvs.innerHTML = "";
+        const items = [
+          ["Nombre", payload.name],
+          ["Carrera técnica", payload.career],
+          ["Grupo", payload.group],
+          ["Fecha/Hora", payload.stamp],
+          ["ID de terminación", payload.completionId],
+          ["Huella", payload.fingerprint],
+        ];
+        items.forEach(([k, v]) => {
+          const div = document.createElement("div");
+          div.className = "kv";
+          div.innerHTML = `<div class="k">${k}</div><div class="v">${v}</div>`;
+          kvs.appendChild(div);
+        });
+
+        const lines = [];
+        lines.push(`DIAGNÓSTICO CULTURA DIGITAL II`);
+        lines.push(`Nombre: ${payload.name}`);
+        lines.push(`Carrera técnica: ${payload.career}`);
+        lines.push(`Grupo: ${payload.group}`);
+        lines.push(`Fecha/Hora: ${payload.stamp}`);
+        lines.push(`ID de terminación: ${payload.completionId}`);
+        lines.push(`Huella: ${payload.fingerprint}`);
+        lines.push(``);
+        lines.push(`Resultados (resumen):`);
+        payload.answers.forEach((a, i) => {
+          lines.push(`${i + 1}) [${a.tag}] ${a.answer}`);
+        });
+        lines.push(``);
+        lines.push(`Reflexión breve:`);
+        lines.push(payload.refl);
+
+        copyBlock.textContent = lines.join("\n");
+      }
+
+      async function copyToClipboard() {
+        try {
+          await navigator.clipboard.writeText(copyBlock.textContent);
+          copyMsg.textContent =
+            "✅ Copiado. Pégalo en el Foro: Diagnóstico Cultura Digital II.";
+        } catch (e) {
+          copyMsg.textContent =
+            "No se pudo copiar automáticamente. Selecciona el texto y cópialo manualmente.";
+        }
+      }
+
+      /**************************************************************
+       * EVENTOS
+       **************************************************************/
+      initCareers();
+      initQuestions();
+      groupPrefix.value = DEFAULT_GROUP_PREFIX;
+
+      reflection.addEventListener("input", () => {
+        updateCharCount();
+        validateUI();
+      });
+
+      form.addEventListener("change", validateUI);
+      form.addEventListener("input", validateUI);
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (!validateUI()) return;
+
+        const payload = buildPayload();
+        renderResult(payload);
+
+        form.style.display = "none";
+        result.classList.add("show");
+        copyMsg.textContent = "";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      btnCopy.addEventListener("click", copyToClipboard);
+
+      btnBack.addEventListener("click", () => {
+        result.classList.remove("show");
+        form.style.display = "grid";
+        copyMsg.textContent = "";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      btnReset.addEventListener("click", () => {
+        if (!confirm("¿Seguro que deseas limpiar todo?")) return;
+        form.reset();
+        groupPrefix.value = DEFAULT_GROUP_PREFIX;
+        initCareers();
+        initQuestions();
+        reflection.value = "";
+        updateCharCount();
+        msg.textContent =
+          "Completa todas las preguntas y escribe una reflexión para generar tu ID.";
+        msg.className = "msg";
+        copyMsg.textContent = "";
+      });
+
+      updateCharCount();
+      validateUI();
+    </script>
+  </body>
+</html>
