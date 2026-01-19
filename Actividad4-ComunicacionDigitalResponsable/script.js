@@ -277,16 +277,16 @@ function updateWordCount(lang) {
   const wordCount = val ? val.split(/\s+/).length : 0;
 
   const countEl = document.getElementById(countId);
-  const limit = 25;
+  const min = 25;
 
   if (countEl) {
     countEl.textContent = wordCount;
-    if (wordCount > limit) {
+    if (wordCount < min) {
       countEl.className = "character-count warning";
       countEl.parentElement.querySelector(".limit-instruction").style.color = "var(--danger)";
     } else {
       countEl.className = "character-count success";
-      countEl.parentElement.querySelector(".limit-instruction").style.color = "initial";
+      countEl.parentElement.querySelector(".limit-instruction").style.color = "var(--ok)";
     }
   }
 }
@@ -339,13 +339,8 @@ function saveOpinions() {
   const english = document.getElementById("englishOpinion").value.trim();
   const wordCount = spanish ? spanish.split(/\s+/).length : 0;
 
-  if (wordCount > 25) {
-    showFeedback(`Tu opinión excede el límite de 25 palabras (tienes ${wordCount})`, "error");
-    return;
-  }
-
-  if (spanish.length < 10) { // Check minimal content
-    showFeedback("Escribe una opinión válida", "error");
+  if (wordCount < 25) {
+    showFeedback(`Tu opinión es muy corta. Mínimo 25 palabras (tienes ${wordCount})`, "error");
     return;
   }
 

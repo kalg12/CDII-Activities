@@ -498,6 +498,15 @@ body {
     overflow-y: auto;
 }
 
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
 .forum-actions {
     display: flex;
     gap: 1rem;
