@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividad 4: Comunicación digital responsable</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header class="header">
         <div class="container">
@@ -15,122 +17,141 @@
     </header>
 
     <main class="main">
-        <!-- Sección de introducción -->
-        <section id="introduction" class="section">
+        <!-- Formulario de registro -->
+        <section id="registration" class="section">
             <div class="container">
-                <h2 class="section-title">📋 Comunicación Digital Responsable</h2>
-                <div class="intro-content">
-                    <p class="intro-text">En esta actividad explorarás tu postura sobre el uso responsable de la tecnología mediante un ejercicio interactivo de conexión de ideas.</p>
-                    <p class="intro-highlight">🧠 Dinámica: "Elige, conecta y opina"</p>
-                    <p class="intro-description">Selecciona situaciones tecnológicas, relaciona las consecuencias y expresa tu opinión de forma clara y ética.</p>
-                </div>
-                
-                <div class="start-section">
-                    <button id="startActivity" class="btn btn-primary">🚀 Comenzar Actividad</button>
-                </div>
+                <h2 class="section-title">📝 Datos del Estudiante</h2>
+                <form id="studentForm" class="form">
+                    <div class="form-group">
+                        <label for="fullName">Nombre completo:</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="career">Carrera técnica:</label>
+                        <select id="career" name="career" required>
+                            <option value="">Selecciona tu carrera</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="group">Grupo:</label>
+                        <select id="group" name="group" required>
+                            <option value="">Selecciona tu grupo</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Comenzar Actividad</button>
+                </form>
             </div>
         </section>
 
-        <!-- Actividad interactiva -->
+        <!-- Actividad interactiva de Relación -->
         <section id="interactiveActivity" class="section hidden">
             <div class="container">
-                <h2 class="section-title">🎮 Actividad Interactiva</h2>
-                
+                <h2 class="section-title">🎮 Actividad de Relación</h2>
+
                 <div class="activity-instructions">
-                    <p><strong>Elige, conecta y opina</strong></p>
-                    <p>Observa las siguientes situaciones relacionadas con el uso de la tecnología. Selecciona una, elige una consecuencia y luego opina sobre ellas.</p>
+                    <p><strong>Instrucciones:</strong></p>
+                    <p>Relaciona cada <b>Situación Tecnológica</b> (izquierda) con su <b>Consecuencia</b>
+                        correspondiente (derecha).</p>
+                    <p>Encuentra los 5 pares correctos.</p>
                 </div>
 
-                <!-- Situación tecnológica -->
-                <div class="scenario-section">
-                    <h3>📱 Situación Tecnológica</h3>
-                    <div class="scenarios-grid">
-                        <div class="scenario-card" data-scenario="excessive-phone">
-                            <div class="scenario-icon">📱</div>
-                            <h4>Uso excesivo del celular</h4>
-                            <p>Pasar muchas horas diarias en el celular sin fines productivos</p>
+                <div class="matching-game-container">
+                    <!-- Columna Situaciones -->
+                    <div class="column scenarios-column">
+                        <h3>📱 Situaciones</h3>
+                        <div class="cards-container" id="scenariosContainer">
+                            <div class="scenario-card match-card" data-id="excessive-phone">
+                                <div class="card-icon">📱</div>
+                                <div class="card-content">
+                                    <h4>Uso excesivo del celular</h4>
+                                    <p>Pasar muchas horas sin fines productivos</p>
+                                </div>
+                            </div>
+                            <div class="scenario-card match-card" data-id="ai-homework">
+                                <div class="card-icon">🤖</div>
+                                <div class="card-content">
+                                    <h4>Usar IA para tareas</h4>
+                                    <p>Copiar respuestas sin revisar ni entender</p>
+                                </div>
+                            </div>
+                            <div class="scenario-card match-card" data-id="social-media">
+                                <div class="card-icon">📵</div>
+                                <div class="card-content">
+                                    <h4>Redes en clase</h4>
+                                    <p>Distraerse mientras explica el profesor</p>
+                                </div>
+                            </div>
+                            <div class="scenario-card match-card" data-id="fake-news">
+                                <div class="card-icon">📰</div>
+                                <div class="card-content">
+                                    <h4>Noticias falsas</h4>
+                                    <p>Compartir información no verificada</p>
+                                </div>
+                            </div>
+                            <div class="scenario-card match-card" data-id="digital-wellness">
+                                <div class="card-icon">🧘</div>
+                                <div class="card-content">
+                                    <h4>Bienestar digital</h4>
+                                    <p>Tomar descansos y limitar pantallas</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="scenario-card" data-scenario="ai-homework">
-                            <div class="scenario-icon">🤖</div>
-                            <h4>Usar IA para tareas escolares</h4>
-                            <p>Copiar respuestas de inteligencia artificial en trabajos</p>
-                        </div>
-                        <div class="scenario-card" data-scenario="social-media">
-                            <div class="scenario-icon">📱</div>
-                            <h4>Redes sociales durante clases</h4>
-                            <p>Navegar en redes mientras el profesor explica</p>
-                        </div>
-                        <div class="scenario-card" data-scenario="fake-news">
-                            <div class="scenario-icon">📰</div>
-                            <h4>Compartir noticias falsas</h4>
-                            <p>Difundir información no verificada sin verificar la fuente</p>
-                        </div>
-                        <div class="scenario-card" data-scenario="digital-wellness">
-                            <div class="scenario-icon">🧘</div>
-                            <h4>Bienestar digital</h4>
-                            <p>Tomar descansos regulares y limitar tiempo de pantalla</p>
+                    </div>
+
+                    <!-- Columna Consecuencias -->
+                    <div class="column consequences-column">
+                        <h3>⚡ Consecuencias</h3>
+                        <div class="cards-container" id="consequencesContainer">
+                            <div class="consequence-card match-card" data-target="academic-impact">
+                                <div class="card-icon">📚</div>
+                                <div class="card-content">
+                                    <h4>Impacto académico</h4>
+                                    <p>Bajo rendimiento y falta de atención</p>
+                                </div>
+                            </div>
+                            <div class="consequence-card match-card" data-target="health-issues">
+                                <div class="card-icon">🏥</div>
+                                <div class="card-content">
+                                    <h4>Problemas de salud</h4>
+                                    <p>Dolor de cabeza, vista cansada y estrés</p>
+                                </div>
+                            </div>
+                            <div class="consequence-card match-card" data-target="misinformation">
+                                <div class="card-icon">💭</div>
+                                <div class="card-content">
+                                    <h4>Desinformación</h4>
+                                    <p>Confusión y propagación de mentiras</p>
+                                </div>
+                            </div>
+                            <div class="consequence-card match-card" data-target="wellness-benefits">
+                                <div class="card-icon">🌟</div>
+                                <div class="card-content">
+                                    <h4>Beneficios personales</h4>
+                                    <p>Mejor salud mental y equilibrio</p>
+                                </div>
+                            </div>
+                            <!-- Nuevo par para IA -->
+                            <div class="consequence-card match-card" data-target="ai-dependency">
+                                <div class="card-icon">🧠</div>
+                                <div class="card-content">
+                                    <h4>Falta de aprendizaje</h4>
+                                    <p>Dependencia y nulo desarrollo cognitivo</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Consecuencia -->
-                <div class="consequence-section">
-                    <h3>⚡ Consecuencia</h3>
-                    <div class="consequences-grid">
-                        <div class="consequence-card" data-consequence="academic-impact">
-                            <div class="consequence-icon">📚</div>
-                            <h4>Impacto académico</h4>
-                            <p>Bajo rendimiento escolar y problemas de concentración</p>
-                        </div>
-                        <div class="consequence-card" data-consequence="health-issues">
-                            <div class="consequence-icon">🏥</div>
-                            <h4>Problemas de salud</h4>
-                            <p>Dolor de cabeza, problemas de sueño y estrés</p>
-                        </div>
-                        <div class="consequence-card" data-consequence="misinformation">
-                            <div class="consequence-icon">💭</div>
-                            <h4>Desinformación</h4>
-                            <p>Difusión de noticias falsas y confusión en la comunidad</p>
-                        </div>
-                        <div class="consequence-card" data-consequence="wellness-benefits">
-                            <div class="consequence-icon">🌟</div>
-                            <h4>Beneficios personales</h4>
-                            <p>Mejor salud mental, más tiempo para actividades reales</p>
-                        </div>
-                    </div>
+                <div class="game-status">
+                    <p>Pares encontrados: <span id="matchCount">0</span> / 5</p>
+                    <div id="gameMessage" class="game-message"></div>
                 </div>
 
-                <!-- Área de selección -->
-                <div class="selection-area">
-                    <div class="selection-row">
-                        <div class="selection-item">
-                            <label>Elige una situación:</label>
-                            <div id="selectedScenario" class="selection-display">No seleccionado</div>
-                        </div>
-                    </div>
-                    <div class="selection-row">
-                        <div class="selection-item">
-                            <label>Elige una consecuencia:</label>
-                            <div id="selectedConsequence" class="selection-display">No seleccionado</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Botón de construcción -->
+                <!-- Botón para continuar (deshabilitado hasta terminar) -->
                 <div class="builder-section">
-                    <button id="buildConnection" class="btn btn-primary">🔗 Conectar Ideas</button>
-                </div>
-
-                <!-- Resultado de la conexión -->
-                <div id="connectionResult" class="connection-result hidden">
-                    <h3>🔗 Tu Conexión en Inglés</h3>
-                    <div id="connectionPhrase" class="connection-phrase">
-                        <!-- Se generará dinámicamente -->
-                    </div>
-                    <div class="phrase-meaning">
-                        <h4>📖 Significado:</h4>
-                        <div id="phraseMeaning">--</div>
-                    </div>
+                    <button id="finishMatchingBtn" class="btn btn-primary" disabled>✅ Continuar a Opinión</button>
                 </div>
             </div>
         </section>
@@ -139,31 +160,22 @@
         <section id="opinionSection" class="section hidden">
             <div class="container">
                 <h2 class="section-title">✍️ Tu Opinión Bilingüe</h2>
-                
+
                 <div class="opinion-instructions">
                     <div class="instruction-box spanish">
-                        <h3>🇪🇸 En Español (4-5 líneas)</h3>
-                        <p>Expresa tu opinión sobre el uso responsable de la tecnología. Incluye:</p>
-                        <ul>
-                            <li>Tu postura personal</li>
-                            <li>Una recomendación práctica</li>
-                            <li>Por qué es importante para ti</li>
-                        </ul>
+                        <h3>🇪🇸 En Español</h3>
+                        <p>Expresa tu opinión sobre el uso responsable de la tecnología.</p>
+                        <p class="limit-instruction">⚠️ <strong>Límite: 25 palabras</strong></p>
                         <div class="character-count">
-                            <span id="spanishCharCount">0</span> caracteres (mínimo 100)
+                            <span id="spanishWordCount">0</span> / 25 palabras
                         </div>
                     </div>
-                    
+
                     <div class="instruction-box english">
-                        <h3>🇬🇧 In English (3-4 líneas)</h3>
-                        <p>Express your opinion on responsible technology use. Include:</p>
-                        <ul>
-                            <li>Your personal stance</li>
-                            <li>A practical recommendation</li>
-                            <li>Why it's important to you</li>
-                        </ul>
+                        <h3>🇬🇧 In English</h3>
+                        <p>The system will help you translate your opinion.</p>
                         <div class="character-count">
-                            <span id="englishCharCount">0</span> characters (mínimo 120)
+                            <span id="englishWordCount">0</span> words
                         </div>
                     </div>
                 </div>
@@ -171,12 +183,18 @@
                 <div class="opinion-forms">
                     <div class="form-group">
                         <label for="spanishOpinion">Tu opinión en español:</label>
-                        <textarea id="spanishOpinion" rows="4" placeholder="Escribe tu opinión aquí..." maxlength="500"></textarea>
+                        <textarea id="spanishOpinion" rows="4" placeholder="Escribe tu opinión breve aquí..."
+                            maxlength="200"></textarea>
                     </div>
-                    
+
+                    <div class="translate-controls">
+                        <button id="translateBtn" class="btn btn-primary">🔄 Traducir a Inglés (Auto-Translate)</button>
+                    </div>
+
                     <div class="form-group">
-                        <label for="englishOpinion">Your opinion in English:</label>
-                        <textarea id="englishOpinion" rows="4" placeholder="Write your opinion here..." maxlength="400"></textarea>
+                        <label for="englishOpinion">Your opinion in English (Auto-generated):</label>
+                        <textarea id="englishOpinion" rows="4" placeholder="Translation will appear here..."
+                            readonly></textarea>
                     </div>
                 </div>
 
@@ -194,7 +212,7 @@
             <div class="container">
                 <div class="result-content">
                     <h2 class="section-title">🎉 Resultado de la Actividad</h2>
-                    
+
                     <!-- Resumen del estudiante -->
                     <div class="student-summary">
                         <h3>📋 Datos del Estudiante</h3>
@@ -270,8 +288,11 @@
                     <!-- Mensaje final -->
                     <div class="final-message">
                         <h3>🎯 Conclusión</h3>
-                        <p>Has completado exitosamente la actividad de comunicación digital responsable. Esta experiencia te permite reflexionar sobre tus hábitos tecnológicos y desarrollar una postura ética en el uso de las herramientas digitales.</p>
-                        <p>Comparte tus pensamientos con tus compañeros y continúa desarrollando un uso consciente y responsable de la tecnología.</p>
+                        <p>Has completado exitosamente la actividad de comunicación digital responsable. Esta
+                            experiencia te permite reflexionar sobre tus hábitos tecnológicos y desarrollar una postura
+                            ética en el uso de las herramientas digitales.</p>
+                        <p>Comparte tus pensamientos con tus compañeros y continúa desarrollando un uso consciente y
+                            responsable de la tecnología.</p>
                     </div>
                 </div>
             </div>
@@ -294,4 +315,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
