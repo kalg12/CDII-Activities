@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 2: Modelación de datos y toma de decisiones</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="title">Actividad 2: Modelación de datos y toma de decisiones</h1>
+            <p class="subtitle">🎯 Modelar datos escolares y justificar decisiones basadas en evidencia</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Formulario de registro -->
+        <section id="registration" class="section">
+            <div class="container">
+                <h2 class="section-title">📝 Datos del Estudiante</h2>
+                <form id="studentForm" class="form">
+                    <div class="form-group">
+                        <label for="fullName">Nombre completo:</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="career">Carrera técnica:</label>
+                        <select id="career" name="career" required>
+                            <option value="">Selecciona tu carrera</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="group">Grupo:</label>
+                        <select id="group" name="group" required>
+                            <option value="">Selecciona tu grupo</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Comenzar Actividad</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Captura de datos -->
+        <section id="dataCapture" class="section hidden">
+            <div class="container">
+                <h2 class="section-title">📊 Tiempo de uso de herramientas digitales por semana</h2>
+                <p class="instructions">Registra cuántos minutos u horas usas cada herramienta digital durante una semana típica:</p>
+                
+                <div class="data-input-section">
+                    <div class="input-controls">
+                        <div class="input-row">
+                            <div class="form-group">
+                                <label for="conceptInput">Concepto (herramienta/materia):</label>
+                                <input type="text" id="conceptInput" placeholder="Ej: Google Drive" maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="valueInput">Valor (minutos/semana):</label>
+                                <input type="number" id="valueInput" placeholder="Ej: 120" min="0" max="2000">
+                            </div>
+                            <button id="addRowBtn" class="btn btn-primary">➕ Agregar</button>
+                        </div>
+                    </div>
+
+                    <div class="table-section">
+                        <div class="table-controls">
+                            <button id="clearTableBtn" class="btn btn-secondary">🗑️ Limpiar tabla</button>
+                            <div class="table-info">
+                                <span id="rowCount">0</span> filas agregadas (mínimo 4 para graficar)
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <table id="dataTable" class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Concepto</th>
+                                        <th>Valor (minutos)</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Se llenará dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="chart-section">
+                        <h3 class="section-subtitle">📈 Generar Gráficas</h3>
+                        <div class="chart-controls">
+                            <button id="generateBarBtn" class="btn btn-primary">📊 Generar gráfica de barras</button>
+                            <button id="generatePieBtn" class="btn btn-secondary">🥧 Generar gráfica de pastel</button>
+                            <button id="updateChartsBtn" class="btn btn-secondary">🔄 Actualizar gráficas</button>
+                        </div>
+                        
+                        <div class="charts-container">
+                            <div id="barChartContainer" class="chart-wrapper hidden">
+                                <h4>Gráfica de Barras</h4>
+                                <canvas id="barChart"></canvas>
+                            </div>
+                            <div id="pieChartContainer" class="chart-wrapper hidden">
+                                <h4>Gráfica de Pastel</h4>
+                                <canvas id="pieChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interpretación y toma de decisiones -->
+                    <div class="interpretation-section">
+                        <h3 class="section-subtitle">🧠 Interpretación y Toma de Decisiones</h3>
+                        <div class="form-group">
+                            <label for="interpretation">Interpretación breve (20-80 palabras):</label>
+                            <textarea id="interpretation" rows="4" placeholder="Analiza los datos y responde: ¿Qué concepto tuvo mayor valor? ¿Qué significa? ¿Qué decisión tomarías para mejorar tu organización? ¿Qué cambiarías la próxima semana?"></textarea>
+                            <div class="word-counter">
+                                <span id="interpretationWordCount">0</span> / 80 palabras
+                            </div>
+                        </div>
+                        
+                        <div class="interpretation-guide">
+                            <h4>📋 Preguntas guía:</h4>
+                            <ul>
+                                <li>¿Qué concepto tuvo mayor valor? ¿Qué significa?</li>
+                                <li>¿Qué decisión tomarías para mejorar tu organización?</li>
+                                <li>¿Qué cambiarías la próxima semana?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Botón de finalización -->
+                    <div class="completion-section">
+                        <button id="completeBtn" class="btn btn-primary">➡️ Completar Actividad</button>
+                        <p class="completion-hint">🎯 Genera tu evidencia final para el foro</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resultado final -->
+        <section id="finalResult" class="section hidden">
+            <div class="container">
+                <div class="result-content">
+                    <h2 class="section-title">🎉 Resultado Final</h2>
+                    
+                    <!-- Resumen del estudiante -->
+                    <div class="student-summary">
+                        <h3>📋 Datos del Estudiante</h3>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <span class="summary-label">Nombre:</span>
+                                <span class="summary-value" id="summaryName">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Carrera:</span>
+                                <span class="summary-value" id="summaryCareer">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Grupo:</span>
+                                <span class="summary-value" id="summaryGroup">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Fecha:</span>
+                                <span class="summary-value" id="summaryDate">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla final -->
+                    <div class="final-table">
+                        <h3>📊 Resumen de Datos</h3>
+                        <div id="finalTableContent">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                    </div>
+
+                    <!-- Tipo de gráfica -->
+                    <div class="chart-type">
+                        <h3>📈 Tipo de Gráfica Generada</h3>
+                        <div id="chartTypeGenerated" class="chart-type-info">-</div>
+                    </div>
+
+                    <!-- Interpretación final -->
+                    <div class="final-interpretation">
+                        <h3>🧠 Interpretación Final</h3>
+                        <div id="finalInterpretation" class="interpretation-display">-</div>
+                    </div>
+
+                    <!-- Código único -->
+                    <div class="completion-code">
+                        <h3>🆔 Código de Terminación</h3>
+                        <div id="completionCode" class="code-display">-</div>
+                    </div>
+
+                    <!-- Texto para el foro -->
+                    <div class="forum-content">
+                        <h3>📋 Texto para el Foro</h3>
+                        <div class="forum-preview">
+                            <div id="forumText" class="forum-text-content">
+                                <!-- Se generará dinámicamente -->
+                            </div>
+                        </div>
+                        <div class="forum-actions">
+                            <button id="copyForumBtn" class="btn btn-primary">📋 Copiar Texto para Foro</button>
+                            <button id="exportPdfBtn" class="btn btn-secondary">📄 Exportar a PDF</button>
+                        </div>
+                        <p class="export-hint">💡 Para PDF: Imprimir → Guardar como PDF</p>
+                    </div>
+
+                    <!-- Mensaje final -->
+                    <div class="final-message">
+                        <h3>🎯 Conclusiones</h3>
+                        <p>Has completado exitosamente la actividad de modelación de datos. Esta experiencia te permite tomar decisiones basadas en evidencia cuantitativa, una habilidad fundamental en el mundo digital.</p>
+                        <p>Comparte tus resultados en el foro: <strong>Modelación de datos</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© Centro de Estudios Tecnológicos del Mar <span id="footerYear">2026</span></p>
+        </div>
+    </footer>
+
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-message">Procesando...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
