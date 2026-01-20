@@ -1,4 +1,10 @@
-const AppState = { name: "", group: "" };
+const AppState = { name: "", group: "", career: "" };
+
+const CAREERS = [
+  "TÉCNICO EN ACUACULTURA", "TÉCNICO EN MECÁNICA NAVAL", 
+  "TÉCNICO EN PREPARACIÓN DE ALIMENTOS Y BEBIDAS", "TÉCNICO EN RECREACIONES ACUÁTICAS",
+  "TÉCNICO EN REFRIGERACIÓN Y CLIMATIZACIÓN", "TÉCNICO LABORATORISTA AMBIENTAL"
+];
 
 const LAYOUT = [
     { word: "ENERGIA", r: 1, c: 1, d: 'h' },
@@ -20,20 +26,33 @@ LAYOUT.forEach(item => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Populate Careers
+    const sel = document.getElementById("career");
+    if(sel) {
+        CAREERS.forEach(c => {
+            let opt = document.createElement("option");
+            opt.value = c; opt.textContent = c;
+            sel.appendChild(opt);
+        });
+    }
+
     renderGrid();
     
     document.getElementById("studentForm").onsubmit = (e) => {
         e.preventDefault();
         const n = document.getElementById("fullName").value.trim();
         const g = document.getElementById("group").value;
-        if(n && g) {
+        const c = document.getElementById("career").value;
+        
+        if(n && g && c) {
             AppState.name = n;
             AppState.group = g;
+            AppState.career = c;
             document.querySelector("#registration").classList.add("hidden");
             document.querySelector("#gameSection").classList.remove("hidden");
             document.querySelector("#gameSection").classList.add("show");
         } else {
-            alert("Completa los datos");
+            alert("Completa todos los datos");
         }
     };
     
@@ -112,7 +131,7 @@ function showResult(pct) {
     document.getElementById("scoreDisplay").textContent = `${pct}%`;
     
     let t = `=== ACTIVIDAD DE CIERRE 2: CRUCIGRAMA ===\n`;
-    t += `Alumno: ${AppState.name} | Grupo: ${AppState.group}\n`;
+    t += `Alumno: ${AppState.name}\nCarrera: ${AppState.career} | Grupo: ${AppState.group}\n`;
     t += `Resultado: ${pct}% Aciertos\n`;
     t += `Conceptos: Dominados ✅\n`;
     t += `Código: CRUCI-${Date.now().toString().slice(-4)}`;
