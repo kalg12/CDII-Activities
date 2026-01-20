@@ -64,7 +64,45 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("choiceB").onclick = () => makeDecision('B');
     document.getElementById("finishBtn").onclick = submitReflection;
     document.getElementById("copyForumBtn").onclick = copyToClipboard;
+    
+    // Translation binding
+    const translateBtn = document.getElementById("translateBtn");
+    if(translateBtn) {
+        translateBtn.addEventListener("click", handleTranslation);
+    }
 });
+
+async function handleTranslation() {
+  const spanishText = document.getElementById("opinionSpanish").value.trim();
+  const englishArea = document.getElementById("opinionEnglish");
+  const btn = document.getElementById("translateBtn");
+
+  if (!spanishText) return alert("Escribe algo en español primero.");
+
+  btn.disabled = true;
+  btn.textContent = "Traduciendo...";
+  englishArea.placeholder = "Translating...";
+
+  try {
+    const encodedText = encodeURIComponent(spanishText);
+    const url = `https://api.mymemory.translated.net/get?q=${encodedText}&langpair=es|en`;
+    
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data && data.responseData && data.responseData.translatedText) {
+      englishArea.value = data.responseData.translatedText;
+    } else {
+      throw new Error("No translation returned");
+    }
+  } catch (error) {
+    console.error("Translation error:", error);
+    alert("Error al traducir. Por favor intenta manualmente.");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "🔄 Traducir Automáticamente";
+  }
+}
 
 function initRegistration() {
     const sel = document.getElementById("career");
