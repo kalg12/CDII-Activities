@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad de Cierre 3: Reto Interactivo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="title">Actividad de Cierre 3</h1>
+            <p class="subtitle">🚀 Reto Integral: Cultura Digital II</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- REGISTRO -->
+        <section id="registration" class="section">
+            <div class="container">
+                <h2 class="section-title">📝 Registro de Participante</h2>
+                <form id="studentForm" class="form">
+                    <div class="form-group">
+                        <label for="fullName">Nombre Completo:</label>
+                        <input type="text" id="fullName" required placeholder="Tu nombre aquí...">
+                    </div>
+                    <div class="form-group">
+                        <label for="career">Carrera técnica:</label>
+                        <select id="career" name="career" required>
+                            <option value="">Selecciona tu carrera</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="group">Grupo:</label>
+                        <select id="group" required>
+                            <option value="">Selecciona...</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                    <div class="centered-actions">
+                        <button type="submit" class="btn btn-primary start-btn">Iniciar Reto</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- GAME CONTAINER -->
+        <section id="gameSection" class="section hidden">
+            <div class="container">
+                <!-- PROGRESS BAR -->
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progressBar"></div>
+                </div>
+                <p class="stage-indicator">Etapa <span id="currentStageNum">1</span> de 3</p>
+
+                <!-- STAGE 1: DRAG & DROP -->
+                <div id="stage1" class="game-stage">
+                    <h2 class="stage-title">🏷️ Clasifica las Prácticas Digitales</h2>
+                    <p class="instruction">Arrastra cada elemento a la columna correcta: "Buenas Prácticas" o "Riesgos/Malas Prácticas".</p>
+                    
+                    <div class="drag-container">
+                        <div class="source-zone" id="sourceZone">
+                            <!-- Draggable Items injected by JS -->
+                        </div>
+                        <div class="drop-zones">
+                            <div class="drop-zone good" data-type="good">
+                                <h3>✅ Buenas Prácticas</h3>
+                                <div class="zone-content"></div>
+                            </div>
+                            <div class="drop-zone bad" data-type="bad">
+                                <h3>⚠️ Riesgos / Malas</h3>
+                                <div class="zone-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="stage1Next" class="btn btn-primary hidden">Siguiente Etapa ➡️</button>
+                </div>
+
+                <!-- STAGE 2: QUIZ / CONNECTIONS -->
+                <div id="stage2" class="game-stage hidden">
+                    <h2 class="stage-title">🔗 Conecta Datos con Decisiones</h2>
+                    <p class="instruction">Analiza el dato presentado y elige la decisión más responsable.</p>
+                    
+                    <div class="scenario-card">
+                        <div class="data-point">
+                            <h3>📊 Dato:</h3>
+                            <p id="scenarioData">...</p>
+                        </div>
+                        <div class="question-options" id="scenarioOptions">
+                            <!-- Buttons injected by JS -->
+                        </div>
+                    </div>
+                    <div id="stage2Feedback" class="feedback-msg"></div>
+                </div>
+
+                <!-- STAGE 3: IMPACT -->
+                <div id="stage3" class="game-stage hidden">
+                    <h2 class="stage-title">🌍 Impacto Ambiental y Social</h2>
+                    <p class="instruction">Determina si la acción tiene un impacto POSITIVO o NEGATIVO.</p>
+                    
+                    <div class="impact-card">
+                        <h3 id="impactAction">...</h3>
+                        <div class="impact-actions">
+                            <button class="btn impact-btn positive" onclick="checkImpact('positive')">🌱 Positivo</button>
+                            <button class="btn impact-btn negative" onclick="checkImpact('negative')">🏭 Negativo</button>
+                        </div>
+                    </div>
+                    <div id="stage3Feedback" class="feedback-msg"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- RESULTADOS -->
+        <section id="resultSection" class="section hidden">
+            <div class="container">
+                <h2 class="section-title">🏆 Reto Finalizado</h2>
+                
+                <div class="result-card">
+                    <div class="score-circle">
+                        <span id="finalScore">0</span>%
+                    </div>
+                    <h3>Nivel Alcanzado: <span id="finalLevel">...</span></h3>
+                    <p id="finalFeedback">...</p>
+                </div>
+                
+                <div class="forum-content">
+                    <h3>📋 Evidencia para el Foro</h3>
+                    <div id="forumText" class="forum-preview">...</div>
+                    <div class="centered-actions">
+                        <button id="copyBtn" class="btn btn-primary">📋 Copiar Texto</button>
+                        <button onclick="location.reload()" class="btn btn-secondary">🔄 Reiniciar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© Centro de Estudios Tecnológicos del Mar 2026 | Cultura Digital II</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
