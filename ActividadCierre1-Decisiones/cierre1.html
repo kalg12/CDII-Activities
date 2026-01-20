@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad de Cierre 1: Toma de Decisiones</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="title">Actividad de Cierre 1</h1>
+            <p class="subtitle">🤔 Juego Interactivo: Ciudadanía Digital Responsable</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- 1. Registro -->
+        <section id="registration" class="section">
+            <div class="container">
+                <h2 class="section-title">📝 Registro del Estudiante</h2>
+                <form id="studentForm" class="form">
+                    <div class="form-group">
+                        <label for="fullName">Nombre Completo:</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="career">Carrera técnica:</label>
+                        <select id="career" name="career" required>
+                            <option value="">Selecciona tu carrera</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="group">Grupo:</label>
+                        <select id="group" name="group" required>
+                            <option value="">Selecciona tu grupo</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                    <div class="centered-actions">
+                        <button type="submit" class="btn btn-primary">Comenzar Juego</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- 2. Juego -->
+        <section id="gameSection" class="section hidden">
+            <div class="container">
+                <div class="status-bar">
+                    <div class="battery-container">
+                        <div class="battery-icon">🔋</div>
+                        <div class="battery-level">
+                            <div id="batteryFill" class="battery-fill" style="width: 50%;"></div>
+                        </div>
+                        <span id="batteryText">Energía Digital: 50%</span>
+                    </div>
+                </div>
+
+                <h2 class="section-title">🕹️ Toma la Mejor Decisión</h2>
+                
+                <div class="game-container">
+                    <!-- Feedback Overlay for Animations -->
+                    <div id="feedbackOverlay" class="feedback-overlay"></div>
+
+                    <div id="scenarioCard" class="scenario-card">
+                        <span id="scenarioIcon" class="scenario-icon">❓</span>
+                        <h3 id="scenarioTitle" class="scenario-title">Situación</h3>
+                        <p id="scenarioDesc" class="scenario-desc">...</p>
+                        
+                        <div class="choices-container">
+                            <button id="choiceA" class="choice-btn">Opción A</button>
+                            <button id="choiceB" class="choice-btn">Opción B</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Resultados -->
+        <section id="resultSection" class="section hidden">
+            <div class="container">
+                <h2 class="section-title">🏆 Resultado Final</h2>
+                
+                <div class="result-content">
+                    <div class="badge-container">
+                        <span id="resultIcon" class="scenario-icon">🌟</span>
+                        <h3 id="resultTitle">Nivel Alcanzado</h3>
+                        <p id="resultDesc">Descripción...</p>
+                        <p id="scoreText" style="font-weight:bold; color:var(--accent);">Responsabilidad: 0/100</p>
+                    </div>
+
+                    <div class="forum-content">
+                        <h3>📋 Texto para el Foro</h3>
+                        <div id="forumText" class="forum-preview">Generando resultado...</div>
+                        
+                        <div class="centered-actions">
+                            <button id="copyBtn" class="btn btn-primary">📋 Copiar Texto</button>
+                            <button onclick="location.reload()" class="btn btn-secondary">🔄 Reiniciar</button>
+                        </div>
+                        <p class="forum-hint">💡 Toma captura de esta pantalla y comparte el texto en el <strong>Foro: Toma de decisiones responsables</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© Centro de Estudios Tecnológicos del Mar 2026</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
