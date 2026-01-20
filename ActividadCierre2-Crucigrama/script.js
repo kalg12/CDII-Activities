@@ -6,24 +6,17 @@ const CAREERS = [
   "TÉCNICO EN REFRIGERACIÓN Y CLIMATIZACIÓN", "TÉCNICO LABORATORISTA AMBIENTAL"
 ];
 
-const LAYOUT = [
-    { word: "ENERGIA", r: 1, c: 1, d: 'h' },
-    { word: "GRAFICOS", r: 0, c: 4, d: 'v' }, // Intersects ENERGIA at G(1,4)
-    { word: "ETICA", r: 3, c: 6, d: 'h' }, 
-    { word: "DATOS", r: 5, c: 5, d: 'h' },
-    { word: "RESPONSABLE", r: 0, c: 8, d: 'v' }
+const DATA = [
+    { id: 1, concept: "ENERGÍA", def: "Recurso vital que impulsa la tecnología y los centros de datos." },
+    { id: 2, concept: "ÉTICA DIGITAL", def: "Disciplina que distingue el buen uso del mal uso en la red." },
+    { id: 3, concept: "RESPONSABILIDAD", def: "Cualidad de usar la tecnología asumiendo las consecuencias." },
+    { id: 4, concept: "GRÁFICOS", def: "Representaciones visuales para facilitar la comprensión de datos." },
+    { id: 5, concept: "DATOS", def: "Materia prima de la información digital (hechos, cifras)." }
 ];
 
-const gridCells = {};
-
-LAYOUT.forEach(item => {
-    for(let i=0; i<item.word.length; i++) {
-        let r = item.r + (item.d==='v'?i:0);
-        let c = item.c + (item.d==='h'?i:0);
-        const key = `${r},${c}`;
-        if(!gridCells[key]) gridCells[key] = { answer: item.word[i], ids: [] };
-    }
-});
+let selectedConcept = null;
+let selectedDef = null;
+let matchesFound = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
     // Populate Careers
@@ -35,8 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
             sel.appendChild(opt);
         });
     }
-
-    renderGrid();
     
     document.getElementById("studentForm").onsubmit = (e) => {
         e.preventDefault();
@@ -51,90 +42,111 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelector("#registration").classList.add("hidden");
             document.querySelector("#gameSection").classList.remove("hidden");
             document.querySelector("#gameSection").classList.add("show");
+            initGame();
         } else {
             alert("Completa todos los datos");
         }
     };
     
-    document.getElementById("checkBtn").onclick = checkAnswers;
     document.getElementById("copyBtn").onclick = () => {
         navigator.clipboard.writeText(document.getElementById("forumText").textContent)
         .then(() => alert("Texto copiado al portapapeles"));
     };
 });
 
-function renderGrid() {
-    const gridEl = document.getElementById("grid");
-    gridEl.innerHTML = "";
+function initGame() {
+    const conceptsList = document.getElementById("conceptsList");
+    const definitionsList = document.getElementById("definitionsList");
     
-    for(let r=0; r<12; r++) {
-        for(let c=0; c<12; c++) {
-            const key = `${r},${c}`;
-            const cellDiv = document.createElement("div");
-            cellDiv.className = "cell";
-            
-            if(gridCells[key]) {
-                const inp = document.createElement("input");
-                inp.maxLength = 1;
-                inp.dataset.row = r;
-                inp.dataset.col = c;
-                inp.dataset.answer = gridCells[key].answer;
-                inp.oninput = (e) => {
-                    e.target.value = e.target.value.toUpperCase();
-                    if(e.target.value) focusNext(r, c);
-                };
-                cellDiv.appendChild(inp);
-            } else {
-                cellDiv.classList.add("empty");
-            }
-            gridEl.appendChild(cellDiv);
-        }
-    }
-}
-
-function focusNext(r, c) {
-    // Simple logic to try finding the next input in row or col
-    // This is a basic enhancement
-}
-
-function checkAnswers() {
-    const inputs = document.querySelectorAll(".cell input");
-    let correct = 0;
-    let total = 0;
+    // Convert to array and shuffle definitions
+    let concepts = [...DATA];
+    let definitions = [...DATA].sort(() => Math.random() - 0.5);
     
-    inputs.forEach(inp => {
-        total++;
-        if(inp.value.toUpperCase() === inp.dataset.answer) {
-            correct++;
-            inp.classList.add("correct");
-            inp.classList.remove("incorrect");
-        } else {
-            inp.classList.add("incorrect");
-            inp.classList.remove("correct");
-        }
+    concepts.forEach(item => {
+        const card = createCard(item.concept, item.id, 'concept');
+        conceptsList.appendChild(card);
     });
     
-    const pct = Math.round((correct / total) * 100);
+    definitions.forEach(item => {
+        const card = createCard(item.def, item.id, 'def');
+        definitionsList.appendChild(card);
+    });
+}
+
+function createCard(text, id, type) {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.textContent = text;
+    div.dataset.id = id;
+    div.dataset.type = type;
+    div.onclick = () => handleCardClick(div);
+    return div;
+}
+
+function handleCardClick(card) {
+    if(card.classList.contains("matched")) return;
     
-    if(pct === 100) {
-        showResult(pct);
+    const type = card.dataset.type;
+    
+    // Select logic
+    if(type === 'concept') {
+        if(selectedConcept) selectedConcept.classList.remove("selected");
+        selectedConcept = card;
+        card.classList.add("selected");
     } else {
-        alert(`Tienes un ${pct}% de aciertos. Revisa las casillas rojas.`);
+        if(selectedDef) selectedDef.classList.remove("selected");
+        selectedDef = card;
+        card.classList.add("selected");
+    }
+    
+    // Check match
+    if(selectedConcept && selectedDef) {
+        checkMatch();
     }
 }
 
-function showResult(pct) {
+function checkMatch() {
+    const id1 = selectedConcept.dataset.id;
+    const id2 = selectedDef.dataset.id;
+    
+    if(id1 === id2) {
+        // Match!
+        selectedConcept.classList.add("matched");
+        selectedDef.classList.add("matched");
+        selectedConcept.classList.remove("selected");
+        selectedDef.classList.remove("selected");
+        
+        selectedConcept = null;
+        selectedDef = null;
+        matchesFound++;
+        document.getElementById("matchCount").textContent = matchesFound;
+        
+        if(matchesFound === DATA.length) {
+            setTimeout(showResult, 1000);
+        }
+    } else {
+        // No match
+        selectedConcept.classList.add("shake");
+        selectedDef.classList.add("shake");
+        
+        setTimeout(() => {
+            selectedConcept.classList.remove("shake", "selected");
+            selectedDef.classList.remove("shake", "selected");
+            selectedConcept = null;
+            selectedDef = null;
+        }, 500);
+    }
+}
+
+function showResult() {
     document.getElementById("gameSection").classList.add("hidden");
     document.getElementById("resultSection").classList.remove("hidden");
     document.getElementById("resultSection").classList.add("show");
     
-    document.getElementById("scoreDisplay").textContent = `${pct}%`;
-    
-    let t = `=== ACTIVIDAD DE CIERRE 2: CRUCIGRAMA ===\n`;
+    let t = `=== ACTIVIDAD DE CIERRE 2: CONEXIÓN DE SABERES ===\n`;
     t += `Alumno: ${AppState.name}\nCarrera: ${AppState.career} | Grupo: ${AppState.group}\n`;
-    t += `Resultado: ${pct}% Aciertos\n`;
-    t += `Conceptos: Dominados ✅\n`;
-    t += `Código: CRUCI-${Date.now().toString().slice(-4)}`;
+    t += `Resultado: Conceptos Conectados (100%)\n`;
+    t += `Código: KNOWLEDGE-${Date.now().toString().slice(-4)}`;
     
     document.getElementById("forumText").textContent = t;
 }
