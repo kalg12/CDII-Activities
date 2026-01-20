@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 6: Proyecto Integrador</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="title">Actividad 6: Proyecto Integrador</h1>
+            <p class="subtitle">🌍 Simulador: Tecnología, Ética y Ambiente</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- 1. Registro -->
+        <section id="registration" class="section">
+            <div class="container">
+                <h2 class="section-title">📝 Registro de Consultor</h2>
+                <form id="studentForm" class="form">
+                    <div class="form-group">
+                        <label for="fullName">Nombre del Consultor:</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="career">Carrera técnica:</label>
+                        <select id="career" name="career" required>
+                            <option value="">Selecciona tu carrera</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="group">Grupo:</label>
+                        <select id="group" name="group" required>
+                            <option value="">Selecciona tu grupo</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Iniciar Simulación</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 2. Simulación -->
+        <section id="simulationSection" class="section hidden">
+            <div class="container">
+                <h2 class="section-title">🎮 Simulador de Decisiones</h2>
+                
+                <div class="game-container">
+                    <div class="progress-bar">
+                        <div id="progressBar" class="progress-fill"></div>
+                    </div>
+
+                    <div id="scenarioCard" class="scenario-card">
+                        <span id="scenarioIcon" class="scenario-icon">🤖</span>
+                        <h3 id="scenarioTitle" class="scenario-title">Cargando escenario...</h3>
+                        <p id="scenarioDesc" class="scenario-desc">...</p>
+                        
+                        <div class="choices-container">
+                            <button id="choiceA" class="choice-btn">Opción A</button>
+                            <button id="choiceB" class="choice-btn">Opción B</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Reflexión Final -->
+        <section id="reflectionSection" class="section hidden">
+            <div class="container">
+                <h2 class="section-title">🧠 Reflexión Integradora</h2>
+                <div class="instructions">
+                    <p>Has completado la simulación. Ahora, sintetiza tus aprendizajes.</p>
+                </div>
+
+                <div class="opinion-split">
+                     <div class="opinion-box">
+                        <h4>🇪🇸 Opinión en Español</h4>
+                        <p>¿Cuál es el rol del usuario en la responsabilidad digital?</p>
+                        <textarea id="opinionSpanish" rows="4" style="width:100%" placeholder="Escribe tu opinión... (Mín. 30 palabras)"></textarea>
+                    </div>
+                    <div class="opinion-box">
+                        <h4>🇬🇧 Opinion in English</h4>
+                        <p>What is the user's role in digital responsibility?</p>
+                        <textarea id="opinionEnglish" rows="4" style="width:100%" placeholder="Write your opinion here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group" style="padding: 0 1.5rem;">
+                    <label for="ethicalArgument">⚖️ Argumento Ético Final:</label>
+                    <p class="subtitle" style="color:var(--muted); font-size:0.9rem;">Conclusión sobre el equilibrio entre progreso tecnológico y cuidado ambiental.</p>
+                    <textarea id="ethicalArgument" rows="3" placeholder="Tu conclusión ética..."></textarea>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="finishBtn" class="btn btn-primary">💾 Guardar y Generar Evidencia</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Resultado Final -->
+        <section id="finalResult" class="section hidden">
+            <div class="container">
+                <div class="result-content">
+                    <h2 class="section-title">🏆 Evidencia del Proyecto</h2>
+
+                    <!-- Badge Result -->
+                    <div class="badge-container">
+                        <span id="badgeIcon" class="badge-icon">🌟</span>
+                        <h3 id="badgeTitle" class="badge-title">Título Obtenido</h3>
+                        <p id="badgeDesc">Descripción del perfil...</p>
+                    </div>
+
+                    <!-- Intelligent Feedback Report -->
+                    <div id="feedbackReport" class="feedback-report-card">
+                        <!-- JS injected content -->
+                    </div>
+
+                    <!-- Forum Text -->
+                    <div class="forum-content">
+                        <h3>📋 Texto para el Foro: Proyecto integrador</h3>
+                        <div class="forum-preview">
+                            <div id="forumText" class="forum-text-content"></div>
+                        </div>
+                        <div class="forum-actions">
+                            <button id="copyForumBtn" class="btn btn-primary">📋 Copiar Texto</button>
+                            <button onclick="location.reload()" class="btn btn-secondary">🔄 Reiniciar</button>
+                        </div>
+                        <p class="forum-hint">💡 Toma captura de esta pantalla y copia el texto para el foro.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© Centro de Estudios Tecnológicos del Mar <span id="footerYear">2026</span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
