@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 5: Análisis ético del uso de la tecnología</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="title">Actividad 5: Análisis ético del uso de la tecnología</h1>
+            <p class="subtitle">🤔 Reflexiona sobre el impacto del avance tecnológico en la sociedad</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Formulario de registro -->
+        <section id="registration" class="section">
+            <div class="container">
+                <h2 class="section-title">📝 Datos del Estudiante</h2>
+                <form id="studentForm" class="form">
+                    <div class="form-group">
+                        <label for="fullName">Nombre completo:</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="career">Carrera técnica:</label>
+                        <select id="career" name="career" required>
+                            <option value="">Selecciona tu carrera</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="group">Grupo:</label>
+                        <select id="group" name="group" required>
+                            <option value="">Selecciona tu grupo</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Comenzar Análisis</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Actividad de Análisis - Preguntas y Reflexión -->
+        <section id="analysisSection" class="section hidden">
+            <div class="container">
+                <h2 class="section-title">🧠 Análisis y Reflexión</h2>
+                
+                <div class="instructions">
+                    <p>A partir de las actividades desarrolladas durante el semestre, analiza el impacto del avance tecnológico en la vida de las personas.</p>
+                </div>
+
+                <div class="opinion-instructions">
+                    <div class="instruction-box">
+                        <h3>❓ Pregunta Central</h3>
+                        <p style="font-size: 1.2rem; font-weight: bold; color: var(--card);">¿El avance tecnológico siempre mejora la vida de las personas?</p>
+                        <p>En tu reflexión deberás:</p>
+                        <ul style="margin-left: 20px; line-height: 1.8;">
+                            <li>Expresar tu postura personal.</li>
+                            <li>Justificar tu respuesta con al menos un argumento.</li>
+                            <li>Mencionar posibles beneficios y riesgos.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <form id="analysisForm" class="form">
+                    <div class="form-group">
+                        <label for="postura">1. Postura Personal (¿El avance siempre mejora la vida? ¿Por qué sí o por qué no?)</label>
+                        <textarea id="postura" name="postura" rows="4" placeholder="Escribe tu postura personal aquí..." required></textarea>
+                        <div class="character-count"><span id="posturaCount">0</span> caracteres (Mínimo 50)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="argumento">2. Argumento / Justificación (Justifica tu respuesta)</label>
+                        <textarea id="argumento" name="argumento" rows="4" placeholder="Escribe tu justificación aquí..." required></textarea>
+                         <div class="character-count"><span id="argumentoCount">0</span> caracteres (Mínimo 50)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="beneficiosRiesgos">3. Beneficios y Riesgos (Menciona ejemplos concretos)</label>
+                        <textarea id="beneficiosRiesgos" name="beneficiosRiesgos" rows="4" placeholder="Menciona posibles beneficios y riesgos..." required></textarea>
+                         <div class="character-count"><span id="brCount">0</span> caracteres (Mínimo 50)</div>
+                    </div>
+                </form>
+
+                <!-- Botones de acción -->
+                <div class="action-buttons">
+                    <button id="saveAnalysisBtn" class="btn btn-primary">💾 Guardar Análisis y Ver Resultado</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resultado final -->
+        <section id="finalResult" class="section hidden">
+            <div class="container">
+                <div class="result-content">
+                    <h2 class="section-title">🎉 Resultado de la Actividad</h2>
+
+                    <!-- Resumen del estudiante -->
+                    <div class="student-summary">
+                        <h3>📋 Datos del Estudiante</h3>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <span class="summary-label">Nombre:</span>
+                                <span class="summary-value" id="resultName">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Carrera:</span>
+                                <span class="summary-value" id="resultCareer">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Grupo:</span>
+                                <span class="summary-value" id="resultGroup">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Fecha:</span>
+                                <span class="summary-value" id="resultDate">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visualización de la Reflexión -->
+                    <div class="opinions-summary">
+                         <h3>📝 Tu Reflexión Ética</h3>
+                         <div class="opinion-display">
+                            <div class="opinion-box" style="margin-bottom: 1rem;">
+                                <h4>Postura Personal</h4>
+                                <div id="displayPostura" class="opinion-text">-</div>
+                            </div>
+                            <div class="opinion-box" style="margin-bottom: 1rem;">
+                                <h4>Argumento</h4>
+                                <div id="displayArgumento" class="opinion-text">-</div>
+                            </div>
+                             <div class="opinion-box">
+                                <h4>Beneficios y Riesgos</h4>
+                                <div id="displayBR" class="opinion-text">-</div>
+                            </div>
+                         </div>
+                    </div>
+
+                    <!-- Texto para el foro -->
+                    <div class="forum-content">
+                        <h3>📋 Texto para el Foro: Ética y tecnología</h3>
+                        <div class="forum-preview">
+                            <div id="forumText" class="forum-text-content">
+                                <!-- Se generará dinámicamente -->
+                            </div>
+                        </div>
+                        <div class="forum-actions">
+                            <button id="copyForumBtn" class="btn btn-primary">📋 Copiar Texto para Foro</button>
+                            <button id="newActivity" class="btn btn-secondary">🔄 Nueva Actividad</button>
+                        </div>
+                        <p class="forum-hint">💡 Publica esto en el foro indicado por tu profesor.</p>
+                    </div>
+
+                    <!-- Mensaje final -->
+                    <div class="final-message">
+                        <h3>🎯 Conclusión</h3>
+                        <p>Has completado el análisis ético. Reflexionar sobre el impacto de la tecnología es fundamental para ser ciudadanos digitales responsables.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© Centro de Estudios Tecnológicos del Mar <span id="footerYear">2026</span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
