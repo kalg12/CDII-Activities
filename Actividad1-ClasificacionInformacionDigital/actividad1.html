@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividad 1: Clasificación Interactiva de Información Digital</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header class="header">
         <div class="container">
@@ -48,7 +50,7 @@
             <div class="container">
                 <h2 class="section-title">🎮 Clasificación de Información Digital</h2>
                 <p class="instructions">Arrastra cada elemento al tipo de dato correspondiente:</p>
-                
+
                 <!-- Tarjetas para clasificar -->
                 <div class="cards-container">
                     <div class="card-item" draggable="true" data-type="texto">Nombre del estudiante</div>
@@ -98,7 +100,7 @@
             <div class="container">
                 <h2 class="section-title">📊 Organización en Tabla Digital</h2>
                 <p class="instructions">Observa cómo se organiza la información correctamente:</p>
-                
+
                 <div class="table-container">
                     <table id="dataTable" class="data-table">
                         <thead>
@@ -115,18 +117,12 @@
                     </table>
                 </div>
 
-                <!-- Análisis de resultados -->
-                <div class="analysis-container">
-                    <h3>🔍 Análisis de Resultados</h3>
-                    <div id="analysisContent" class="analysis-content">
-                        <!-- Se llenará dinámicamente -->
-                    </div>
-                </div>
+
 
                 <!-- Resultado final y reflexión -->
                 <div id="finalResult" class="final-result">
                     <h3>🎯 Resultado Final de la Actividad</h3>
-                    
+
                     <!-- Datos del estudiante -->
                     <div class="student-summary">
                         <h4>📋 Datos del Estudiante</h4>
@@ -173,7 +169,7 @@
                     <!-- Reflexión dinámica para el foro -->
                     <div class="reflection-section">
                         <h4>💭 Tu Publicación para el Foro</h4>
-                        
+
                         <!-- Formulario de reflexión -->
                         <div class="reflection-form">
                             <div class="form-group">
@@ -186,7 +182,7 @@
                                     <option value="categoria">Categoría</option>
                                 </select>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="difficultType">¿Qué tipo fue más difícil de organizar?</label>
                                 <select id="difficultType" class="form-select">
@@ -197,21 +193,24 @@
                                     <option value="categoria">Categoría</option>
                                 </select>
                             </div>
-                            
+
                             <div class="form-group">
-                                <label for="importanceReason">¿Por qué es importante organizar datos para tomar decisiones?</label>
-                                <textarea id="importanceReason" class="form-textarea" rows="3" placeholder="Escribe tu reflexión (mínimo 20 palabras)..."></textarea>
+                                <label for="importanceReason">¿Por qué es importante organizar datos para tomar
+                                    decisiones?</label>
+                                <textarea id="importanceReason" class="form-textarea" rows="3"
+                                    placeholder="Escribe tu reflexión (mínimo 20 palabras)..."></textarea>
                                 <div class="word-counter">
                                     <span id="wordCount">0</span> / 20 palabras mínimas
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Vista previa dinámica -->
                         <div class="preview-section">
                             <h5>📋 Vista Previa de tu Publicación:</h5>
                             <div id="dynamicContent" class="dynamic-content">
-                                <p><strong>Actividad:</strong> Clasificación interactiva de información digital y toma de decisiones</p>
+                                <p><strong>Actividad:</strong> Clasificación interactiva de información digital y toma
+                                    de decisiones</p>
                                 <p><strong>Nombre:</strong> <span id="previewName">-</span></p>
                                 <p><strong>Carrera:</strong> <span id="previewCareer">-</span></p>
                                 <p><strong>Grupo:</strong> <span id="previewGroup">-</span></p>
@@ -221,7 +220,8 @@
                                 <p><strong>Reflexión:</strong></p>
                                 <p>La información más fácil de organizar fue: <span id="previewEasy">-</span></p>
                                 <p>La información más difícil de organizar fue: <span id="previewDifficult">-</span></p>
-                                <p>La organización de datos es importante porque: <span id="previewImportance">-</span></p>
+                                <p>La organización de datos es importante porque: <span id="previewImportance">-</span>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -235,6 +235,39 @@
             </div>
         </section>
 
+        <!-- Sección de publicación en Riseup Pad -->
+        <section id="riseup" class="section hidden">
+            <div class="container">
+                <h2 class="section-title">📝 Publicación de Evidencia</h2>
+
+                <div class="instructions-box">
+                    <h3>Pasos para completar la actividad:</h3>
+                    <ol>
+                        <li>Copia el reporte generado que aparece abajo.</li>
+                        <li>Ve a <a href="https://pad.riseup.net/" target="_blank"
+                                rel="noopener noreferrer">pad.riseup.net</a>.</li>
+                        <li>Crea un pad nuevo, pega tu reporte y cambia el nombre del pad (opcional).</li>
+                        <li>Copia el enlace de tu pad (asegúrate de que sea accesible o modo lectura si prefieres).</li>
+                        <li>Pega el enlace en el campo de abajo para validarlo.</li>
+                    </ol>
+                </div>
+
+                <div class="report-preview-container">
+                    <label for="reportToCopy">Tu reporte generado:</label>
+                    <textarea id="reportToCopy" class="form-textarea" rows="10" readonly></textarea>
+                    <button id="copyReportBtn" class="btn btn-secondary small-btn">📋 Copiar Reporte</button>
+                </div>
+
+                <div class="link-submission">
+                    <div class="form-group">
+                        <label for="riseupLink">Enlace de tu Riseup Pad:</label>
+                        <input type="url" id="riseupLink" placeholder="https://pad.riseup.net/..." required>
+                    </div>
+                    <button id="validateRiseupBtn" class="btn btn-primary">✅ Validar y Finalizar</button>
+                </div>
+            </div>
+        </section>
+
         <!-- Página final de agradecimiento -->
         <section id="thankYou" class="section hidden">
             <div class="container">
@@ -244,15 +277,17 @@
                             <span class="checkmark">✓</span>
                         </div>
                     </div>
-                    
+
                     <h2 class="thank-you-title">¡Muchas gracias!</h2>
-                    
+
                     <div class="thank-you-message">
-                        <p>Has completado exitosamente la actividad de clasificación interactiva de información digital.</p>
+                        <p>Has completado exitosamente la actividad de clasificación interactiva de información digital.
+                        </p>
                         <p class="highlight">No olvides poner tu evidencia en el foro correspondiente.</p>
-                        <p>Tu participación es fundamental para desarrollar habilidades digitales y pensamiento crítico.</p>
+                        <p>Tu participación es fundamental para desarrollar habilidades digitales y pensamiento crítico.
+                        </p>
                     </div>
-                    
+
                     <div class="completion-summary">
                         <h3>📊 Resumen de tu Actividad</h3>
                         <div class="summary-grid">
@@ -274,7 +309,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Vista previa del texto para foro -->
                     <div class="forum-preview">
                         <h3>📋 Texto para el Foro</h3>
@@ -285,7 +320,7 @@
                         </div>
                         <p class="preview-hint">💡 Este es el texto que se copiará para pegar en el foro</p>
                     </div>
-                    
+
                     <div class="final-actions">
                         <button id="copyFinalBtn" class="btn btn-primary">
                             📋 Copiar Texto para Foro
@@ -294,10 +329,11 @@
                             🔄 Iniciar Nueva Actividad
                         </button>
                     </div>
-                    
+
                     <div class="final-message">
                         <p><strong>¡Excelente trabajo! 🎉</strong></p>
-                        <p>La organización adecuada de datos es la base para tomar decisiones informadas en el mundo digital.</p>
+                        <p>La organización adecuada de datos es la base para tomar decisiones informadas en el mundo
+                            digital.</p>
                     </div>
                 </div>
             </div>
@@ -311,13 +347,14 @@
     </footer>
 
     <script src="script.js"></script>
-<!-- Loading Overlay -->
-<div id="loadingOverlay" class="loading-overlay hidden">
-    <div class="loading-content">
-        <div class="loading-spinner"></div>
-        <p class="loading-message">Cargando...</p>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-message">Cargando...</p>
+        </div>
     </div>
-</div>
 
 </body>
+
 </html>

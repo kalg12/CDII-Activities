@@ -29,6 +29,7 @@ const AppState = {
     fecha: [],
     categoria: [],
   },
+  riseupLink: "",
   isClassificationComplete: false,
 };
 
@@ -505,7 +506,7 @@ function transitionToOrganization() {
   hideElement("classification");
   showElement("organization");
   populateDataTable();
-  generateAnalysis();
+  // generateAnalysis removido
   generateFinalResult();
   updateStudentSummary();
 }
@@ -526,45 +527,6 @@ function populateDataTable() {
   tableBody.appendChild(row);
 }
 
-function generateAnalysis() {
-  const analysisContent = document.getElementById("analysisContent");
-  if (!analysisContent) return;
-
-  const analysisHTML = `
-        <div class="analysis-item">
-            <h4>📊 Análisis de Datos Organizados</h4>
-            <p>Cuando los datos están correctamente estructurados, podemos:</p>
-            <ul>
-                <li>Identificar rápidamente información relevante</li>
-                <li>Realizar cálculos y comparaciones</li>
-                <li>Generar reportes claros y precisos</li>
-                <li>Tomar decisiones basadas en evidencia</li>
-            </ul>
-        </div>
-        <div class="analysis-item">
-            <h4>⚠️ Consecuencias de la Desorganización</h4>
-            <p>Si los datos estuvieran mal organizados:</p>
-            <ul>
-                <li>Confusión en la interpretación</li>
-                <li>Dificultad para encontrar información</li>
-                <li>Riesgo de tomar decisiones incorrectas</li>
-                <li>Pérdida de tiempo en correcciones</li>
-            </ul>
-        </div>
-        <div class="analysis-item">
-            <h4>✅ Beneficios de la Organización Adecuada</h4>
-            <p>La clasificación correcta de tipos de datos permite:</p>
-            <ul>
-                <li>Procesamiento automático eficiente</li>
-                <li>Validación de datos consistente</li>
-                <li>Integración con sistemas digitales</li>
-                <li>Mejor experiencia de usuario</li>
-            </ul>
-        </div>
-    `;
-
-  analysisContent.innerHTML = analysisHTML;
-}
 
 function generateFinalResult() {
   const resultMessage = document.getElementById("resultMessage");
@@ -844,6 +806,12 @@ function generateDynamicContent() {
   lines.push(
     `• ¿Por qué es importante organizar datos?: ${importanceReason ? importanceReason.value : "No especificado"}`,
   );
+
+  if (AppState.riseupLink) {
+    lines.push("");
+    lines.push(`Enlace Riseup Pad: ${AppState.riseupLink}`);
+  }
+
   lines.push("");
   lines.push("=== FIN DE ACTIVIDAD ===");
 
@@ -910,12 +878,12 @@ function handleShare() {
       return;
     }
 
-    // Mostrar loading y navegar a página final
+    // Mostrar loading y navegar a sección de Riseup
     setButtonLoading("shareBtn", true);
-    showLoading("Finalizando tu actividad...");
+    showLoading("Generando reporte para publicación...");
 
     setTimeout(() => {
-      navigateToThankYouPage();
+      navigateToRiseupSection();
       setButtonLoading("shareBtn", false);
     }, 1500);
   } catch (error) {
@@ -1145,12 +1113,90 @@ function resetActivity() {
   // Resetear botones
   const shareBtn = document.getElementById("shareBtn");
   if (shareBtn) {
-    shareBtn.textContent = "📤 Completar Actividad";
+    shareBtn.textContent = "➡️ Continuar";
     shareBtn.disabled = false;
     shareBtn.style.opacity = "1";
     shareBtn.style.cursor = "pointer";
     shareBtn.classList.remove("loading");
   }
+
+  // Resetear Riseup
+  const riseupLinkInput = document.getElementById("riseupLink");
+  if (riseupLinkInput) riseupLinkInput.value = "";
+  AppState.riseupLink = "";
+  hideElement("riseup");
+}
+
+// Lógica de Riseup Pad
+function navigateToRiseupSection() {
+  hideElement("organization");
+  showElement("riseup");
+
+  // Generar reporte
+  const reportText = generateDynamicContent();
+  const textarea = document.getElementById("reportToCopy");
+  if (textarea) textarea.value = reportText;
+
+  // Configurar botones
+  const validateBtn = document.getElementById("validateRiseupBtn");
+  const copyBtn = document.getElementById("copyReportBtn");
+
+  if (validateBtn) validateBtn.onclick = validateRiseupLink;
+  if (copyBtn) copyBtn.onclick = copyReportToClipboard;
+
+  hideLoading();
+}
+
+function copyReportToClipboard() {
+  const textarea = document.getElementById("reportToCopy");
+  if (!textarea) return;
+
+  textarea.select();
+  try {
+    navigator.clipboard.writeText(textarea.value).then(() => {
+      showFeedback("✅ Reporte copiado. Pégalo en tu pad.", "success");
+    }).catch(() => {
+      document.execCommand("copy");
+      showFeedback("✅ Reporte copiado (modo fallback).", "success");
+    });
+  } catch (e) {
+    document.execCommand("copy");
+    showFeedback("✅ Reporte copiado.", "success");
+  }
+}
+
+function validateRiseupLink() {
+  const linkInput = document.getElementById("riseupLink");
+  const validateBtn = document.getElementById("validateRiseupBtn");
+
+  if (!linkInput) return;
+
+  const link = linkInput.value.trim();
+
+  if (!link) {
+    showFeedback("⚠️ Por favor ingresa el enlace de tu pad.", "error");
+    return;
+  }
+
+  if (!link.startsWith("https://pad.riseup.net/")) {
+    showFeedback("❌ El enlace debe comenzar con https://pad.riseup.net/", "error");
+    return;
+  }
+
+  // Éxito
+  AppState.riseupLink = link;
+  setButtonLoading("validateRiseupBtn", true);
+  showLoading("Validando y finalizando...");
+
+  setTimeout(() => {
+    hideElement("riseup");
+    showElement("thankYou");
+    updateThankYouPage();
+    initializeThankYouButtons();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setButtonLoading("validateRiseupBtn", false);
+    hideLoading();
+  }, 1500);
 }
 
 // Inicialización cuando el DOM está listo
