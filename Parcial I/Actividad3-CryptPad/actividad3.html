@@ -1,35 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividad 3: Relaciona la herramienta de CryptPad con su función</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Specific styles for Actividad 3 overrides if needed */
-        .card-item {
+        /* Specific styles for Actividad 3 overrides */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+            min-height: 150px;
+        }
+
+        /* Override the width: 100% from styles.css for items in the pool */
+        #cardsContainer.zone-content .card-item {
+            width: auto;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+        }
+
+        .card-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        .classification-zones {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            /* Make zones smaller/square-ish */
+            gap: 1rem;
+        }
+
+        .zone {
+            min-height: 180px;
+            /* Force height to match width somewhat */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .zone-header {
+            font-size: 0.85rem;
+            padding: 0.5rem;
+            flex-grow: 0;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .zone-content {
+            flex-grow: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 0.5rem;
         }
-        .card-item img {
-            max-width: 100%;
-            max-height: 80px;
-            pointer-events: none; /* Prevent image itself from being dragged separately */
-        }
-        .zone-header {
-            font-size: 0.9rem;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .cards-container {
-             min-height: 150px;
+
+        /* Ensure dropped items fit in the zone */
+        .zone .card-item {
+            width: 80px;
+            height: 80px;
+            padding: 2px;
+            border: none;
+            box-shadow: none;
         }
     </style>
 </head>
+
 <body>
     <header class="header">
         <div class="container">
@@ -54,9 +100,11 @@
                             <option value="">Selecciona tu carrera</option>
                             <option value="TÉCNICO EN ACUACULTURA">TÉCNICO EN ACUACULTURA</option>
                             <option value="TÉCNICO EN MECÁNICA NAVAL">TÉCNICO EN MECÁNICA NAVAL</option>
-                            <option value="TÉCNICO EN PREPARACIÓN DE ALIMENTOS Y BEBIDAS">TÉCNICO EN PREPARACIÓN DE ALIMENTOS Y BEBIDAS</option>
+                            <option value="TÉCNICO EN PREPARACIÓN DE ALIMENTOS Y BEBIDAS">TÉCNICO EN PREPARACIÓN DE
+                                ALIMENTOS Y BEBIDAS</option>
                             <option value="TÉCNICO EN RECREACIONES ACUÁTICAS">TÉCNICO EN RECREACIONES ACUÁTICAS</option>
-                            <option value="TÉCNICO EN REFRIGERACIÓN Y CLIMATIZACIÓN">TÉCNICO EN REFRIGERACIÓN Y CLIMATIZACIÓN</option>
+                            <option value="TÉCNICO EN REFRIGERACIÓN Y CLIMATIZACIÓN">TÉCNICO EN REFRIGERACIÓN Y
+                                CLIMATIZACIÓN</option>
                             <option value="TÉCNICO LABORATORISTA AMBIENTAL">TÉCNICO LABORATORISTA AMBIENTAL</option>
                         </select>
                     </div>
@@ -78,12 +126,16 @@
             <div class="container">
                 <h2 class="section-title">🚩 Instrucciones</h2>
                 <div class="instructions">
-                    <p><strong>Objetivo:</strong> Usar herramientas de trabajo colaborativo digital libre para identificar qué tipo de documento se crea y para qué sirve cada uno, comprendiendo cómo se pueden aplicar en diferentes materias.</p>
+                    <p><strong>Objetivo:</strong> Usar herramientas de trabajo colaborativo digital libre para
+                        identificar qué tipo de documento se crea y para qué sirve cada uno, comprendiendo cómo se
+                        pueden aplicar en diferentes materias.</p>
                     <p><strong>Dinámica:</strong></p>
                     <ol style="margin-left: 20px;">
-                        <li>El juego consiste en relacionar cada herramienta (imágenes) con su función correcta (texto).</li>
+                        <li>El juego consiste en relacionar cada herramienta (imágenes) con su función correcta (texto).
+                        </li>
                         <li>Arrastra la imagen de la herramienta al recuadro que describe su función.</li>
-                        <li><strong>Regla de trabajo colaborativo:</strong> En tu reflexión final, deberás justificar al menos una relación con un ejemplo de uso en una materia.</li>
+                        <li><strong>Regla de trabajo colaborativo:</strong> En tu reflexión final, deberás justificar al
+                            menos una relación con un ejemplo de uso en una materia.</li>
                     </ol>
                 </div>
                 <div style="text-align: center; padding: 1rem;">
@@ -96,21 +148,31 @@
         <section id="gameSection" class="section hidden">
             <div class="container">
                 <h2 class="section-title">🎮 Relaciona Herramienta - Función</h2>
-                <p class="instructions">Arrastra la imagen de la herramienta al recuadro de su función correspondiente:</p>
+                <p class="instructions">Arrastra la imagen de la herramienta al recuadro de su función correspondiente:
+                </p>
 
                 <div class="game-container">
                     <!-- Pool de Imágenes -->
                     <h3>Herramientas (Arrastra estas imágenes)</h3>
-                    <div class="cards-container zone-content" id="cardsContainer" data-zone="pool">
-                        <div class="card-item" draggable="true" data-type="sheet"><img src="img/sheet.png" alt="Sheet"></div>
-                        <div class="card-item" draggable="true" data-type="document"><img src="img/document.png" alt="Document"></div>
-                        <div class="card-item" draggable="true" data-type="presentation"><img src="img/presentation.png" alt="Presentation"></div>
-                        <div class="card-item" draggable="true" data-type="richtext"><img src="img/richtext.png" alt="Rich Text"></div>
-                        <div class="card-item" draggable="true" data-type="kanban"><img src="img/kanban.png" alt="Kanban"></div>
-                        <div class="card-item" draggable="true" data-type="code"><img src="img/code.png" alt="Code"></div>
-                        <div class="card-item" draggable="true" data-type="form"><img src="img/form.png" alt="Form"></div>
-                        <div class="card-item" draggable="true" data-type="diagram"><img src="img/diagram.png" alt="Diagram"></div>
-                        <div class="card-item" draggable="true" data-type="markdownslides"><img src="img/markdownslides.png" alt="Markdown Slides"></div>
+                    <div class="cards-container" id="cardsContainer" data-zone="pool">
+                        <div class="card-item" draggable="true" data-type="sheet"><img src="img/sheet.png" alt="Sheet">
+                        </div>
+                        <div class="card-item" draggable="true" data-type="document"><img src="img/document.png"
+                                alt="Document"></div>
+                        <div class="card-item" draggable="true" data-type="presentation"><img src="img/presentation.png"
+                                alt="Presentation"></div>
+                        <div class="card-item" draggable="true" data-type="richtext"><img src="img/richtext.png"
+                                alt="Rich Text"></div>
+                        <div class="card-item" draggable="true" data-type="kanban"><img src="img/kanban.png"
+                                alt="Kanban"></div>
+                        <div class="card-item" draggable="true" data-type="code"><img src="img/code.png" alt="Code">
+                        </div>
+                        <div class="card-item" draggable="true" data-type="form"><img src="img/form.png" alt="Form">
+                        </div>
+                        <div class="card-item" draggable="true" data-type="diagram"><img src="img/diagram.png"
+                                alt="Diagram"></div>
+                        <div class="card-item" draggable="true" data-type="markdownslides"><img
+                                src="img/markdownslides.png" alt="Markdown Slides"></div>
                     </div>
 
                     <!-- Zonas de soltado (Funciones) -->
@@ -133,8 +195,9 @@
                             <div class="zone-header">Notas rápidas o resúmenes con formato simple.</div>
                             <div class="zone-content"></div>
                         </div>
-                         <div class="zone" data-accept="kanban">
-                            <div class="zone-header">Organizar tareas en columnas (Pendiente, En proceso, Terminado).</div>
+                        <div class="zone" data-accept="kanban">
+                            <div class="zone-header">Organizar tareas en columnas (Pendiente, En proceso, Terminado).
+                            </div>
                             <div class="zone-content"></div>
                         </div>
                         <div class="zone" data-accept="code">
@@ -169,7 +232,7 @@
             <div class="container">
                 <div class="result-content">
                     <h2 class="section-title">📊 Resultado y Reflexión</h2>
-                    
+
                     <div class="student-summary">
                         <h3>📋 Datos del Estudiante</h3>
                         <div class="summary-grid">
@@ -195,19 +258,24 @@
                     <div class="reflection-section">
                         <h3>💭 Cierre de la actividad (Reflexión)</h3>
                         <p class="instructions">Responde las siguientes preguntas (máximo 3 líneas cada una):</p>
-                        
+
                         <div class="reflection-form">
                             <div class="form-group">
-                                <label for="toolChoice">¿Qué herramienta usarían para trabajar una tarea escolar en equipo?</label>
-                                <textarea id="toolChoice" rows="2" placeholder="Ej: Usaríamos Document porque..."></textarea>
+                                <label for="toolChoice">¿Qué herramienta usarían para trabajar una tarea escolar en
+                                    equipo?</label>
+                                <textarea id="toolChoice" rows="2"
+                                    placeholder="Ej: Usaríamos Document porque..."></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="bestOption">¿Por qué esa herramienta es la mejor opción?</label>
-                                <textarea id="bestOption" rows="2" placeholder="Ej: Porque permite editar al mismo tiempo..."></textarea>
+                                <textarea id="bestOption" rows="2"
+                                    placeholder="Ej: Porque permite editar al mismo tiempo..."></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="advantage">¿Qué ventaja tiene que sea una herramienta libre y colaborativa?</label>
-                                <textarea id="advantage" rows="3" placeholder="Ej: Que no necesitamos pagar licencia y..."></textarea>
+                                <label for="advantage">¿Qué ventaja tiene que sea una herramienta libre y
+                                    colaborativa?</label>
+                                <textarea id="advantage" rows="3"
+                                    placeholder="Ej: Que no necesitamos pagar licencia y..."></textarea>
                                 <div id="charCounter" class="word-counter">Mínimo 50 caracteres en total.</div>
                             </div>
                         </div>
@@ -225,7 +293,7 @@
             <div class="container">
                 <div class="result-content">
                     <h2 class="section-title">🎉 Evidencia Lista</h2>
-                    
+
                     <div class="completion-code">
                         <h3>🆔 Código de Terminación</h3>
                         <div id="finalCode" class="code-display">-</div>
@@ -244,7 +312,8 @@
                     <div class="final-message" style="text-align: center; padding: 2rem;">
                         <p><strong>¡Excelente trabajo!</strong></p>
                         <p>Guarda este texto como evidencia de tu actividad.</p>
-                        <button onclick="location.reload()" class="btn btn-secondary" style="margin-top: 1rem;">Reiniciar Actividad</button>
+                        <button onclick="location.reload()" class="btn btn-secondary"
+                            style="margin-top: 1rem;">Reiniciar Actividad</button>
                     </div>
                 </div>
             </div>
@@ -264,4 +333,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
