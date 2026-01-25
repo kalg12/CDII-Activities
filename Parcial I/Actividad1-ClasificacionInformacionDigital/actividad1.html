@@ -15,9 +15,91 @@
             <p class="subtitle">🎯 Análisis y organización de información digital para toma de decisiones</p>
         </div>
     </header>
+        <div class="container">
+            <header class="hero">
+                <h1>Cultura Digital II</h1>
+                <p class="subtitle">Clasifica información escolar en lenguaje común con su representación simbólica usada por sistemas digitales. Sin cálculos, solo organización.</p>
+            </header>
 
-    <main class="main">
-        <!-- Formulario de registro inicial -->
+            <section class="intro">
+                <p>
+                    Imagina una plataforma escolar que organiza datos para apoyar decisiones responsables. Tu tarea es vincular
+                    las frases en lenguaje común con las etiquetas simbólicas que el sistema utiliza. Si la organización es mala,
+                    los reportes se vuelven confusos; si es buena, son claros y útiles.
+                </p>
+                <ul class="tips">
+                    <li>Arrastra cada tarjeta de la izquierda y suéltala sobre la etiqueta correcta a la derecha.</li>
+                    <li>No hay operaciones numéricas: solo relación y clasificación.</li>
+                    <li>Observa el panel de reporte: te indica si la organización es confusa o clara.</li>
+                </ul>
+            </section>
+
+            <main class="board">
+                <section class="column column-left" aria-label="Información en lenguaje común">
+                    <h2>Información en lenguaje común</h2>
+                    <div class="cards" id="cards">
+                        <div class="card" draggable="true" data-key="horas" aria-grabbed="false">Horas dedicadas a tareas digitales</div>
+                        <div class="card" draggable="true" data-key="entregados" aria-grabbed="false">Cantidad de trabajos entregados</div>
+                        <div class="card" draggable="true" data-key="pendientes" aria-grabbed="false">Trabajos pendientes</div>
+                        <div class="card" draggable="true" data-key="tiempo" aria-grabbed="false">Tiempo de uso de plataformas digitales</div>
+                        <div class="card" draggable="true" data-key="suma-horas" aria-grabbed="false">Suma de horas dedicadas (p. ej., dos sesiones)</div>
+                        <div class="card" draggable="true" data-key="tiempo-menos-pend" aria-grabbed="false">Tiempo disponible tras atender pendientes</div>
+                    </div>
+                </section>
+
+                <section class="column column-right" aria-label="Etiquetas del sistema digital">
+                    <h2>Etiquetas del sistema digital</h2>
+                    <div class="dropzones">
+                        <div class="dropzone" data-label="H" aria-dropeffect="move">
+                            <span class="label">H</span>
+                            <span class="desc">Horas</span>
+                        </div>
+                        <div class="dropzone" data-label="E" aria-dropeffect="move">
+                            <span class="label">E</span>
+                            <span class="desc">Entregados</span>
+                        </div>
+                        <div class="dropzone" data-label="P" aria-dropeffect="move">
+                            <span class="label">P</span>
+                            <span class="desc">Pendientes</span>
+                        </div>
+                        <div class="dropzone" data-label="T" aria-dropeffect="move">
+                            <span class="label">T</span>
+                            <span class="desc">Tiempo</span>
+                        </div>
+                        <div class="dropzone" data-label="H+H" aria-dropeffect="move">
+                            <span class="label">H + H</span>
+                            <span class="desc">Suma de tiempos</span>
+                        </div>
+                        <div class="dropzone" data-label="T-P" aria-dropeffect="move">
+                            <span class="label">T − P</span>
+                            <span class="desc">Diferencia entre datos</span>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <section class="report">
+                <h3>Reporte del sistema</h3>
+                <div id="reportList" class="report-list" aria-live="polite"></div>
+                <div class="actions">
+                    <button id="resetBtn" class="btn btn-secondary">Reiniciar</button>
+                </div>
+            </section>
+
+            <section id="completion" class="completion" hidden>
+                <div class="completion-card">
+                    <h2>¡Actividad completada!</h2>
+                    <p>Has organizado correctamente la información. Los reportes ahora son claros y facilitan decisiones responsables en el uso de tecnología.</p>
+                    <a href="../Actividad2-ModelacionDatos/actividad2.html" class="btn btn-primary">Continuar a la siguiente actividad</a>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <p>Contexto CETMAR No. 18 — Uso responsable de tecnología</p>
+            </footer>
+        </div>
+
+        <script src="script.js"></script>
         <section id="registration" class="section">
             <div class="container">
                 <h2 class="section-title">📝 Datos del Estudiante</h2>

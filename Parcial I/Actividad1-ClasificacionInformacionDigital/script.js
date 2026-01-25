@@ -254,6 +254,137 @@ function initializeDragAndDrop() {
   const cards = document.querySelectorAll(".card-item");
   const zones = document.querySelectorAll(".zone");
 
+  // Lógica de arrastrar y soltar para organización simbólica
+  const mapping = {
+    'horas': 'H',
+    'entregados': 'E',
+    'pendientes': 'P',
+    'tiempo': 'T',
+    'suma-horas': 'H+H',
+    'tiempo-menos-pend': 'T-P'
+  };
+
+  const cardsContainer = document.getElementById('cards');
+  const cards = Array.from(document.querySelectorAll('.card[draggable="true"]'));
+  const dropzones = Array.from(document.querySelectorAll('.dropzone'));
+  const reportList = document.getElementById('reportList');
+  const resetBtn = document.getElementById('resetBtn');
+  const completion = document.getElementById('completion');
+
+  // Estado actual de asignaciones: { label -> key }
+  const state = {};
+
+  function buildReportItem({ key, label, correct, message }) {
+    const item = document.createElement('div');
+    item.className = 'report-item ' + (correct ? 'clear' : 'confused');
+    item.innerHTML = `<span class="status">${correct ? 'Claro' : 'Confuso'}</span>: “${prettyKey(key)}” → ${label} <br><small>${message}</small>`;
+    return item;
+  }
+
+  function prettyKey(key) {
+    switch (key) {
+      case 'horas': return 'Horas dedicadas a tareas digitales';
+      case 'entregados': return 'Cantidad de trabajos entregados';
+      case 'pendientes': return 'Trabajos pendientes';
+      case 'tiempo': return 'Tiempo de uso de plataformas digitales';
+      case 'suma-horas': return 'Suma de horas dedicadas (p. ej., dos sesiones)';
+      case 'tiempo-menos-pend': return 'Tiempo disponible tras atender pendientes';
+      default: return key;
+    }
+  }
+
+  function confusionMessage(key, label) {
+    const base = {
+      'H': 'Horas', 'E': 'Entregados', 'P': 'Pendientes', 'T': 'Tiempo', 'H+H': 'Suma de tiempos', 'T-P': 'Diferencia tiempo-pendientes'
+    }[label] || label;
+
+    return `Usar “${base}” para “${prettyKey(key)}” genera reportes ambiguos y puede inducir decisiones equivocadas.`;
+  }
+
+  function clearReport() {
+    reportList.innerHTML = '';
+  }
+
+  function refreshReport() {
+    clearReport();
+    Object.entries(state).forEach(([label, key]) => {
+      if (!key) return;
+      const correct = mapping[key] === label;
+      const message = correct
+        ? 'La etiqueta representa correctamente el concepto. El reporte es consistente.'
+        : confusionMessage(key, label);
+      reportList.appendChild(buildReportItem({ key, label, correct, message }));
+    });
+  }
+
+  function updateDropzoneVisual(dz, key) {
+    dz.classList.remove('correct', 'wrong');
+    const assigned = dz.querySelector('.assigned');
+    if (assigned) assigned.remove();
+
+    if (!key) return;
+    const correct = mapping[key] === dz.dataset.label;
+    dz.classList.add(correct ? 'correct' : 'wrong');
+
+    const tag = document.createElement('div');
+    tag.className = 'assigned ' + (correct ? 'correct' : 'wrong');
+    tag.textContent = prettyKey(key);
+    dz.appendChild(tag);
+  }
+
+  function checkCompletion() {
+    const total = Object.keys(mapping).length;
+    const correctCount = Object.entries(state)
+      .filter(([label, key]) => key && mapping[key] === label)
+      .length;
+    if (correctCount === total) {
+      completion.hidden = false;
+    } else {
+      completion.hidden = true;
+    }
+  }
+
+  // Drag events
+  cards.forEach(card => {
+    card.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', card.dataset.key);
+      card.setAttribute('aria-grabbed', 'true');
+    });
+    card.addEventListener('dragend', () => {
+      card.setAttribute('aria-grabbed', 'false');
+    });
+  });
+
+  dropzones.forEach(dz => {
+    dz.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dz.classList.add('hover');
+    });
+    dz.addEventListener('dragleave', () => dz.classList.remove('hover'));
+    dz.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dz.classList.remove('hover');
+      const key = e.dataTransfer.getData('text/plain');
+      if (!key) return;
+
+      // Asigna clave a etiqueta
+      state[dz.dataset.label] = key;
+      updateDropzoneVisual(dz, key);
+      refreshReport();
+      checkCompletion();
+    });
+  });
+
+  resetBtn.addEventListener('click', () => {
+    Object.keys(state).forEach(k => state[k] = undefined);
+    dropzones.forEach(dz => {
+      dz.classList.remove('correct', 'wrong', 'hover');
+      const assigned = dz.querySelector('.assigned');
+      if (assigned) assigned.remove();
+    });
+    clearReport();
+    completion.hidden = true;
+  });
   // Configurar tarjetas arrastrables
   cards.forEach((card) => {
     card.addEventListener("dragstart", handleDragStart);
