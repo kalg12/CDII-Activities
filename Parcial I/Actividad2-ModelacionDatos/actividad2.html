@@ -47,21 +47,56 @@
         <!-- Captura de datos -->
         <section id="dataCapture" class="section hidden">
             <div class="container">
-                <h2 class="section-title">📊 Tiempo de uso de herramientas digitales por semana</h2>
-                <p class="instructions">Registra cuántos minutos u horas usas cada herramienta digital durante una semana típica:</p>
+                <h2 class="section-title">📊 Modelación Algebraica de Situaciones Escolares</h2>
+                <p class="instructions">Registra situaciones del contexto escolar o digital, asígnales un valor numérico y represéntalas mediante una expresión algebraica. Clasifica cada expresión y, si es un monomio, identifica sus elementos:</p>
                 
                 <div class="data-input-section">
                     <div class="input-controls">
-                        <div class="input-row">
+                        <div class="input-row" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto;">
                             <div class="form-group">
-                                <label for="conceptInput">Concepto (herramienta/materia):</label>
-                                <input type="text" id="conceptInput" placeholder="Ej: Google Drive" maxlength="50">
+                                <label for="conceptInput">Concepto (situación real):</label>
+                                <input type="text" id="conceptInput" placeholder="Ej: Compra de cuadernos" maxlength="50">
                             </div>
                             <div class="form-group">
-                                <label for="valueInput">Valor (minutos/semana):</label>
-                                <input type="number" id="valueInput" placeholder="Ej: 120" min="0" max="2000">
+                                <label for="valueInput">Valor (minutos/costo):</label>
+                                <input type="number" id="valueInput" placeholder="Ej: 75" min="0" max="2000">
                             </div>
-                            <button id="addRowBtn" class="btn btn-primary">➕ Agregar</button>
+                            <div class="form-group">
+                                <label for="expressionInput">Expresión Algebraica:</label>
+                                <input type="text" id="expressionInput" placeholder="Ej: 3x">
+                            </div>
+                            <div class="form-group">
+                                <label for="typeInput">Tipo:</label>
+                                <select id="typeInput">
+                                    <option value="">Selecciona...</option>
+                                    <option value="Monomio">Monomio</option>
+                                    <option value="Binomio">Binomio</option>
+                                    <option value="Polinomio">Polinomio</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Panel de Componentes del Monomio (oculto por defecto) -->
+                        <div id="monomialComponents" class="monomial-panel hidden" style="margin-top: 1.5rem; padding: 1rem; background: rgba(166,127,93,0.1); border-radius: 12px; border-left: 5px solid var(--accent);">
+                            <h4 style="margin-bottom: 1rem; color: var(--text);">🔍 Componentes del Monomio</h4>
+                            <div class="input-row" style="grid-template-columns: repeat(3, 1fr);">
+                                <div class="form-group">
+                                    <label for="coefInput">Coeficiente:</label>
+                                    <input type="text" id="coefInput" placeholder="Ej: 3">
+                                </div>
+                                <div class="form-group">
+                                    <label for="varInput">Variable:</label>
+                                    <input type="text" id="varInput" placeholder="Ej: x">
+                                </div>
+                                <div class="form-group">
+                                    <label for="expInput">Exponente:</label>
+                                    <input type="text" id="expInput" placeholder="Ej: 1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: right; margin-top: 1.5rem;">
+                            <button id="addRowBtn" class="btn btn-primary">➕ Agregar Registro de Modelación</button>
                         </div>
                     </div>
 
@@ -77,8 +112,11 @@
                             <table id="dataTable" class="data-table">
                                 <thead>
                                     <tr>
-                                        <th>Concepto</th>
-                                        <th>Valor (minutos)</th>
+                                        <th>Situación Escolar</th>
+                                        <th>Valor</th>
+                                        <th>Expresión</th>
+                                        <th>Tipo</th>
+                                        <th>Análisis (Monomios)</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>

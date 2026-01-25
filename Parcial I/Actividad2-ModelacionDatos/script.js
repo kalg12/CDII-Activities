@@ -218,6 +218,19 @@ function initializeTable() {
     valueInput.addEventListener("input", validateValueInput);
   }
 
+  // Listener para mostrar/ocultar componentes del monomio
+  const typeInput = document.getElementById("typeInput");
+  const monomialPanel = document.getElementById("monomialComponents");
+  if (typeInput && monomialPanel) {
+      typeInput.addEventListener("change", () => {
+          if (typeInput.value === "Monomio") {
+              monomialPanel.classList.remove("hidden");
+          } else {
+              monomialPanel.classList.add("hidden");
+          }
+      });
+  }
+
   updateRowCount();
 }
 
@@ -226,42 +239,50 @@ function addTableRow() {
 
   const conceptInput = document.getElementById("conceptInput");
   const valueInput = document.getElementById("valueInput");
+  const expressionInput = document.getElementById("expressionInput");
+  const typeInput = document.getElementById("typeInput");
+  const coefInput = document.getElementById("coefInput");
+  const varInput = document.getElementById("varInput");
+  const expInput = document.getElementById("expInput");
 
   const concept = safeTrim(conceptInput.value);
   const value = parseFloat(valueInput.value);
-
-  console.log("Datos a agregar:", { concept, value });
+  const expression = safeTrim(expressionInput.value);
+  const type = typeInput.value;
+  
+  let analysis = "---";
+  if (type === "Monomio") {
+      const coef = safeTrim(coefInput.value) || "1";
+      const variable = safeTrim(varInput.value) || "x";
+      const exponent = safeTrim(expInput.value) || "1";
+      analysis = `C: ${coef}, V: ${variable}, E: ${exponent}`;
+  }
 
   // Validaciones
-  if (!concept) {
-    console.log("Error: Concepto vacío");
-    showFeedback("Por favor, ingresa un concepto", "error");
-    conceptInput.focus();
+  if (!concept || !expression || !type) {
+    showFeedback("Por favor, completa todos los campos de modelación", "error");
     return;
   }
 
   if (isNaN(value) || value < 0) {
-    console.log("Error: Valor inválido o negativo");
-    showFeedback("Por favor, ingresa un valor válido (no negativo)", "error");
-    valueInput.focus();
+    showFeedback("Por favor, ingresa un valor numérico válido", "error");
     return;
   }
 
   // Agregar a la tabla
   const tableBody = document.querySelector("#dataTable tbody");
-  console.log("Tabla body encontrada:", tableBody);
-
-  if (!tableBody) {
-    console.error("Tabla body no encontrada");
-    return;
-  }
+  if (!tableBody) return;
 
   const row = document.createElement("tr");
+  const typeClass = `badge-${type.toLowerCase()}`;
   row.innerHTML = `
         <td>${concept}</td>
         <td>${value}</td>
+        <td style="font-family: monospace; font-weight: bold;">${expression}</td>
+        <td><span class="algebraic-badge ${typeClass}">${type}</span></td>
+        <td style="font-size: 0.85rem; color: var(--muted);">${analysis}</td>
         <td>
-            <button class="delete-btn" onclick="deleteRow(this)">🗑️ Eliminar</button>
+            <button class="delete-btn" onclick="deleteRow(this)">🗑️</button>
         </td>
     `;
 
@@ -269,12 +290,17 @@ function addTableRow() {
   console.log("Fila agregada al DOM");
 
   // Agregar a datos del estado
-  AppState.tableData.push({ concept, value });
-  console.log("Datos actualizados:", AppState.tableData);
+  AppState.tableData.push({ concept, value, expression, type, analysis });
 
   // Limpiar inputs
   conceptInput.value = "";
   valueInput.value = "";
+  expressionInput.value = "";
+  typeInput.value = "";
+  coefInput.value = "";
+  varInput.value = "";
+  expInput.value = "";
+  document.getElementById("monomialComponents").classList.add("hidden");
 
   // Actualizar contador y botones
   updateRowCount();
@@ -780,8 +806,11 @@ function showFinalResult() {
         <table class="data-table">
             <thead>
                 <tr>
-                    <th>Concepto</th>
-                    <th>Minutos/semana</th>
+                    <th>Situación</th>
+                    <th>Valor</th>
+                    <th>Expresión</th>
+                    <th>Tipo</th>
+                    <th>Análisis</th>
                 </tr>
             </thead>
             <tbody>
@@ -791,6 +820,9 @@ function showFinalResult() {
                     <tr>
                         <td>${item.concept}</td>
                         <td>${item.value}</td>
+                        <td style="font-family: monospace;">${item.expression}</td>
+                        <td>${item.type}</td>
+                        <td>${item.analysis}</td>
                     </tr>
                 `,
                   )
@@ -832,9 +864,13 @@ function generateForumText() {
   lines.push(`Fecha y hora: ${new Date().toLocaleString("es-MX")}`);
   lines.push(`Código: ${AppState.completionCode}`);
   lines.push("");
-  lines.push("DATOS REGISTRADOS:");
+  lines.push("MODELACIÓN ALGEBRAICA REGISTRADA:");
   AppState.tableData.forEach((item, index) => {
-    lines.push(`${index + 1}. ${item.concept}: ${item.value} min/semana`);
+    lines.push(`${index + 1}. [${item.type}] ${item.concept}`);
+    lines.push(`   Expresión: ${item.expression}`);
+    if (item.type === "Monomio") lines.push(`   Análisis: ${item.analysis}`);
+    lines.push(`   Valor: ${item.value}`);
+    lines.push("---");
   });
   lines.push("");
   lines.push("GRÁFICAS GENERADAS:");
