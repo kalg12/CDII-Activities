@@ -231,6 +231,27 @@ body {
   cursor: grabbing;
 }
 
+.card-item.correct {
+  background: #e8f5e9;
+  border-color: var(--ok);
+  color: var(--ok);
+  box-shadow: 0 0 10px rgba(90, 122, 79, 0.3);
+}
+
+.card-item.error {
+  background: #ffebee;
+  border-color: var(--danger);
+  color: var(--danger);
+  box-shadow: 0 0 10px rgba(139, 58, 58, 0.3);
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
 .classification-zones {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

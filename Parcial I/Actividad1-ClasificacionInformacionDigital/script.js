@@ -48,8 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
         card.addEventListener('dragstart', function(e) {
             draggedItem = this;
             this.classList.add('dragging');
-            // Resetear borde al volver a arrastrar
-            this.style.borderColor = 'var(--border)';
+            // Resetear visual al volver a arrastrar
+            this.classList.remove('correct', 'error');
+            this.style.borderColor = '';
         });
 
         card.addEventListener('dragend', function(e) {
@@ -76,7 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const target = this.id === 'cardsContainer' ? this : this.querySelector('.zone-content');
                 if (target) {
                     target.appendChild(draggedItem);
-                    draggedItem.style.borderColor = 'var(--border)'; // Limpiar feedback anterior
+                    // Resetear visual al soltar
+                    draggedItem.classList.remove('correct', 'error');
+                    draggedItem.style.borderColor = '';
                 }
             }
         });
@@ -97,11 +100,14 @@ document.addEventListener('DOMContentLoaded', () => {
             placed += assignedCards.length;
 
             assignedCards.forEach(card => {
+                // Limpiar estados anteriores
+                card.classList.remove('correct', 'error');
+                
                 if (card.dataset.category === category) {
                     correct++;
-                    card.style.borderColor = 'var(--ok)';
+                    card.classList.add('correct');
                 } else {
-                    card.style.borderColor = 'var(--danger)';
+                    card.classList.add('error');
                 }
             });
         });
