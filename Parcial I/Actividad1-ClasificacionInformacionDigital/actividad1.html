@@ -1,109 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actividad 1: Clasificación Interactiva de Información Digital</title>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Actividad 1: Organización Simbólica de Información Digital</title>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
+    <title>Actividad 1: Clasificación interactiva de información y representación algebraica</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
         <div class="container">
-            <header class="hero">
-                <h1>Cultura Digital II</h1>
-                <p class="subtitle">Clasifica información escolar en lenguaje común con su representación simbólica usada por sistemas digitales. Sin cálculos, solo organización.</p>
-            </header>
-
-            <section class="intro">
-                <p>
-                    Imagina una plataforma escolar que organiza datos para apoyar decisiones responsables. Tu tarea es vincular
-                    las frases en lenguaje común con las etiquetas simbólicas que el sistema utiliza. Si la organización es mala,
-                    los reportes se vuelven confusos; si es buena, son claros y útiles.
-                </p>
-                <ul class="tips">
-                    <li>Arrastra cada tarjeta de la izquierda y suéltala sobre la etiqueta correcta a la derecha.</li>
-                    <li>No hay operaciones numéricas: solo relación y clasificación.</li>
-                    <li>Observa el panel de reporte: te indica si la organización es confusa o clara.</li>
-                </ul>
-            </section>
-
-            <main class="board">
-                <section class="column column-left" aria-label="Información en lenguaje común">
-                    <h2>Información en lenguaje común</h2>
-                    <div class="cards" id="cards">
-                        <div class="card" draggable="true" data-key="horas" aria-grabbed="false">Horas dedicadas a tareas digitales</div>
-                        <div class="card" draggable="true" data-key="entregados" aria-grabbed="false">Cantidad de trabajos entregados</div>
-                        <div class="card" draggable="true" data-key="pendientes" aria-grabbed="false">Trabajos pendientes</div>
-                        <div class="card" draggable="true" data-key="tiempo" aria-grabbed="false">Tiempo de uso de plataformas digitales</div>
-                        <div class="card" draggable="true" data-key="suma-horas" aria-grabbed="false">Suma de horas dedicadas (p. ej., dos sesiones)</div>
-                        <div class="card" draggable="true" data-key="tiempo-menos-pend" aria-grabbed="false">Tiempo disponible tras atender pendientes</div>
-                    </div>
-                </section>
-
-                <section class="column column-right" aria-label="Etiquetas del sistema digital">
-                    <h2>Etiquetas del sistema digital</h2>
-                    <div class="dropzones">
-                        <div class="dropzone" data-label="H" aria-dropeffect="move">
-                            <span class="label">H</span>
-                            <span class="desc">Horas</span>
-                        </div>
-                        <div class="dropzone" data-label="E" aria-dropeffect="move">
-                            <span class="label">E</span>
-                            <span class="desc">Entregados</span>
-                        </div>
-                        <div class="dropzone" data-label="P" aria-dropeffect="move">
-                            <span class="label">P</span>
-                            <span class="desc">Pendientes</span>
-                        </div>
-                        <div class="dropzone" data-label="T" aria-dropeffect="move">
-                            <span class="label">T</span>
-                            <span class="desc">Tiempo</span>
-                        </div>
-                        <div class="dropzone" data-label="H+H" aria-dropeffect="move">
-                            <span class="label">H + H</span>
-                            <span class="desc">Suma de tiempos</span>
-                        </div>
-                        <div class="dropzone" data-label="T-P" aria-dropeffect="move">
-                            <span class="label">T − P</span>
-                            <span class="desc">Diferencia entre datos</span>
-                        </div>
-                    </div>
-                </section>
-            </main>
-
-            <section class="report">
-                <h3>Reporte del sistema</h3>
-                <div id="reportList" class="report-list" aria-live="polite"></div>
-                <div class="actions">
-                    <button id="resetBtn" class="btn btn-secondary">Reiniciar</button>
-                </div>
-            </section>
-
-            <section id="completion" class="completion" hidden>
-                <div class="completion-card" role="dialog" aria-modal="true" aria-labelledby="completionTitle" aria-describedby="completionDesc">
-                    <h2 id="completionTitle">¡Actividad completada!</h2>
-                    <p id="completionDesc">Has organizado correctamente la información. Los reportes ahora son claros y facilitan decisiones responsables en el uso de tecnología.</p>
-                    <div class="completion-actions">
-                        <button id="closeCompletion" class="btn btn-outline">Cerrar</button>
-                        <a href="../Actividad2-ModelacionDatos/actividad2.html" class="btn btn-primary">Continuar</a>
-                    </div>
-                </div>
-            </section>
-
-            <footer class="footer">
-                <p>Contexto CETMAR No. 18 — Uso responsable de tecnología</p>
-            </footer>
+            <h1 class="title">Actividad 1: Clasificación interactiva de información y representación algebraica</h1>
+            <p class="subtitle">🎯 Organizar información digital y transformarla en expresiones algebraicas</p>
         </div>
+    </header>
 
-        <script src="script.js"></script>
-    </body>
-    </html>
+    <main class="main">
+        <!-- Registro del estudiante -->
         <section id="registration" class="section">
             <div class="container">
                 <h2 class="section-title">📝 Datos del Estudiante</h2>
@@ -116,6 +28,11 @@
                         <label for="career">Carrera técnica:</label>
                         <select id="career" name="career" required>
                             <option value="">Selecciona tu carrera</option>
+                            <option value="Programación">Programación</option>
+                            <option value="Administración de Recursos Humanos">Administración de Recursos Humanos</option>
+                            <option value="Mecánica Naval">Mecánica Naval</option>
+                            <option value="Acuacultura de Aguas Marítimas">Acuacultura de Aguas Marítimas</option>
+                            <option value="Refrigeración y Climatización">Refrigeración y Climatización</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -131,295 +48,149 @@
             </div>
         </section>
 
-        <!-- Actividad de clasificación -->
-        <section id="classification" class="section hidden">
+        <!-- Situación Problemática -->
+        <section id="problemSituation" class="section hidden">
             <div class="container">
-                <h2 class="section-title">🎮 Clasificación de Información Digital</h2>
-                <p class="instructions">Arrastra cada elemento al tipo de dato correspondiente:</p>
-
-                <!-- Tarjetas para clasificar -->
-                <div class="cards-container">
-                    <div class="card-item" draggable="true" data-type="texto">Nombre del estudiante</div>
-                    <div class="card-item" draggable="true" data-type="fecha">Fecha de entrega</div>
-                    <div class="card-item" draggable="true" data-type="numero">Calificación</div>
-                    <div class="card-item" draggable="true" data-type="categoria">Carrera técnica</div>
-                    <div class="card-item" draggable="true" data-type="texto">Comentario del docente</div>
-                    <div class="card-item" draggable="true" data-type="numero">Edad</div>
-                    <div class="card-item" draggable="true" data-type="fecha">Fecha de nacimiento</div>
-                    <div class="card-item" draggable="true" data-type="categoria">Nivel académico</div>
-                    <div class="card-item" draggable="true" data-type="numero">Semestre</div>
-                    <div class="card-item" draggable="true" data-type="texto">Correo electrónico</div>
+                <h2 class="section-title">🚩 Situación Problemática: CETMAR No. 18</h2>
+                <div class="instructions">
+                    <p>En el CETMAR No. 18, los estudiantes utilizan de manera constante herramientas digitales para comunicarse e investigar. Sin embargo, no siempre analizan críticamente cómo se procesa la información.</p>
+                    <p><strong>Tu reto:</strong> Ayuda a organizar la información digital simulada (compras, promedios, costos) clasificándolos correctamente para comprender cómo las expresiones algebraicas facilitan la toma de decisiones informadas.</p>
                 </div>
-
-                <!-- Zonas de clasificación -->
-                <div class="classification-zones">
-                    <div class="zone" data-zone="texto">
-                        <div class="zone-header">📄 Texto</div>
-                        <div class="zone-content"></div>
-                    </div>
-                    <div class="zone" data-zone="numero">
-                        <div class="zone-header">🔢 Número</div>
-                        <div class="zone-content"></div>
-                    </div>
-                    <div class="zone" data-zone="fecha">
-                        <div class="zone-header">📅 Fecha</div>
-                        <div class="zone-content"></div>
-                    </div>
-                    <div class="zone" data-zone="categoria">
-                        <div class="zone-header">🏷 Categoría</div>
-                        <div class="zone-content"></div>
-                    </div>
-                </div>
-
-                <!-- Retroalimentación -->
-                <div id="feedback" class="feedback hidden"></div>
-
-                <!-- Botón de verificación -->
-                <div class="verify-container">
-                    <button id="verifyBtn" class="btn btn-secondary">Verificar Clasificación</button>
+                <div style="text-align: center; padding: 1rem;">
+                    <button id="startActivityBtn" class="btn btn-primary">Continuar a la Actividad</button>
                 </div>
             </div>
         </section>
 
-        <!-- Tabla de organización -->
-        <section id="organization" class="section hidden">
+        <!-- Juego de Clasificación -->
+        <section id="gameSection" class="section hidden">
             <div class="container">
-                <h2 class="section-title">📊 Organización en Tabla Digital</h2>
-                <p class="instructions">Observa cómo se organiza la información correctamente:</p>
+                <h2 class="section-title">🎮 Clasificación de Información</h2>
+                <p class="instructions">Arrastra cada tarjeta al contenedor que representa su mejor forma de organización:</p>
 
-                <div class="table-container">
-                    <table id="dataTable" class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Carrera</th>
-                                <th>Fecha</th>
-                                <th>Comentario</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Se llenará dinámicamente -->
-                        </tbody>
-                    </table>
+                <div class="game-container">
+                    <!-- Tarjetas para arrastrar -->
+                    <div class="cards-container" id="cardsContainer">
+                        <div class="card-item" draggable="true" data-id="1" data-category="comun">El costo de cinco cuadernos</div>
+                        <div class="card-item" draggable="true" data-id="2" data-category="simbolo">x</div>
+                        <div class="card-item" draggable="true" data-id="3" data-category="algebraica">5x</div>
+                        <div class="card-item" draggable="true" data-id="4" data-category="comun">La suma de dos cantidades</div>
+                        <div class="card-item" draggable="true" data-id="5" data-category="simbolo">a, b</div>
+                        <div class="card-item" draggable="true" data-id="6" data-category="algebraica">a + b</div>
+                        <div class="card-item" draggable="true" data-id="7" data-category="comun">Promedio de dos calificaciones</div>
+                        <div class="card-item" draggable="true" data-id="8" data-category="simbolo">m, n</div>
+                        <div class="card-item" draggable="true" data-id="9" data-category="algebraica">(m + n) / 2</div>
+                        <div class="card-item" draggable="true" data-id="10" data-category="comun">Costo de un artículo + IVA (16%)</div>
+                        <div class="card-item" draggable="true" data-id="11" data-category="simbolo">c</div>
+                        <div class="card-item" draggable="true" data-id="12" data-category="algebraica">c + 0.16c</div>
+                    </div>
+
+                    <!-- Zonas de soltado -->
+                    <div class="classification-zones">
+                        <div class="zone" data-zone="comun">
+                            <div class="zone-header">🗣️ Lenguaje Común</div>
+                            <div class="zone-content" id="zone-comun"></div>
+                        </div>
+                        <div class="zone" data-zone="simbolo">
+                            <div class="zone-header">🔤 Símbolos y Letras</div>
+                            <div class="zone-content" id="zone-simbolo"></div>
+                        </div>
+                        <div class="zone" data-zone="algebraica">
+                            <div class="zone-header">➗ Expresión Algebraica</div>
+                            <div class="zone-content" id="zone-algebraica"></div>
+                        </div>
+                    </div>
+
+                    <div id="gameFeedback" class="feedback hidden"></div>
+
+                    <div class="verify-container">
+                        <button id="verifyBtn" class="btn btn-secondary">Verificar Clasificación</button>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-
-
-                <!-- Resultado final y reflexión -->
-                <div id="finalResult" class="final-result">
-                    <h3>🎯 Resultado Final de la Actividad</h3>
-
-                    <!-- Datos del estudiante -->
+        <!-- Reflexión y Resultado -->
+        <section id="resultSection" class="section hidden">
+            <div class="container">
+                <div class="result-content">
+                    <h2 class="section-title">📊 Resultado y Reflexión</h2>
+                    
                     <div class="student-summary">
-                        <h4>📋 Datos del Estudiante</h4>
-                        <div class="summary-grid">
-                            <div class="summary-item">
-                                <span class="label">Nombre:</span>
-                                <span id="summaryName" class="value">-</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="label">Carrera:</span>
-                                <span id="summaryCareer" class="value">-</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="label">Grupo:</span>
-                                <span id="summaryGroup" class="value">-</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="label">Fecha:</span>
-                                <span id="summaryDate" class="value">-</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Resultado de clasificación -->
-                    <div class="classification-result">
-                        <h4>🎮 Resultado de Clasificación</h4>
-                        <div id="resultMessage" class="result-message"></div>
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <span class="stat-number" id="correctCount">0</span>
-                                <span class="stat-label">Correctos</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number" id="totalCount">12</span>
-                                <span class="stat-label">Total</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number" id="percentage">0%</span>
-                                <span class="stat-label">Aciertos</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Reflexión dinámica para el foro -->
-                    <div class="reflection-section">
-                        <h4>💭 Tu Publicación para el Foro</h4>
-
-                        <!-- Formulario de reflexión -->
-                        <div class="reflection-form">
-                            <div class="form-group">
-                                <label for="easyType">¿Qué tipo de información fue más fácil de organizar?</label>
-                                <select id="easyType" class="form-select">
-                                    <option value="">Selecciona...</option>
-                                    <option value="texto">Texto</option>
-                                    <option value="numero">Número</option>
-                                    <option value="fecha">Fecha</option>
-                                    <option value="categoria">Categoría</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="difficultType">¿Qué tipo fue más difícil de organizar?</label>
-                                <select id="difficultType" class="form-select">
-                                    <option value="">Selecciona...</option>
-                                    <option value="texto">Texto</option>
-                                    <option value="numero">Número</option>
-                                    <option value="fecha">Fecha</option>
-                                    <option value="categoria">Categoría</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="importanceReason">¿Por qué es importante organizar datos para tomar
-                                    decisiones?</label>
-                                <textarea id="importanceReason" class="form-textarea" rows="3"
-                                    placeholder="Escribe tu reflexión (mínimo 20 palabras)..."></textarea>
-                                <div class="word-counter">
-                                    <span id="wordCount">0</span> / 20 palabras mínimas
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Vista previa dinámica -->
-                        <div class="preview-section">
-                            <h5>📋 Vista Previa de tu Publicación:</h5>
-                            <div id="dynamicContent" class="dynamic-content">
-                                <p><strong>Actividad:</strong> Clasificación interactiva de información digital y toma
-                                    de decisiones</p>
-                                <p><strong>Nombre:</strong> <span id="previewName">-</span></p>
-                                <p><strong>Carrera:</strong> <span id="previewCareer">-</span></p>
-                                <p><strong>Grupo:</strong> <span id="previewGroup">-</span></p>
-                                <p><strong>Resultado:</strong> <span id="previewResult">-</span>% de aciertos</p>
-                                <p><strong>Fecha:</strong> <span id="previewDate">-</span></p>
-                                <p><strong>ID:</strong> <span id="previewID">-</span></p>
-                                <p><strong>Reflexión:</strong></p>
-                                <p>La información más fácil de organizar fue: <span id="previewEasy">-</span></p>
-                                <p>La información más difícil de organizar fue: <span id="previewDifficult">-</span></p>
-                                <p>La organización de datos es importante porque: <span id="previewImportance">-</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Botón para continuar -->
-                    <div class="share-section">
-                        <button id="shareBtn" class="btn btn-primary">➡️ Continuar</button>
-                        <p class="share-hint">🎯 Finaliza tu actividad para obtener tu texto para el foro</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sección de publicación en Riseup Pad -->
-        <section id="riseup" class="section hidden">
-            <div class="container">
-                <h2 class="section-title">📝 Publicación de Evidencia</h2>
-
-                <div class="instructions-box">
-                    <h3>Pasos para completar la actividad:</h3>
-                    <ol>
-                        <li>Copia el reporte generado que aparece abajo.</li>
-                        <li>Ve a <a href="https://pad.riseup.net/" target="_blank"
-                                rel="noopener noreferrer">pad.riseup.net</a>.</li>
-                        <li>Crea un pad nuevo, pega tu reporte y cambia el nombre del pad (opcional).</li>
-                        <li>Copia el enlace de tu pad (asegúrate de que sea accesible o modo lectura si prefieres).</li>
-                        <li>Pega el enlace en el campo de abajo para validarlo.</li>
-                    </ol>
-                </div>
-
-                <div class="report-preview-container">
-                    <label for="reportToCopy">Tu reporte generado:</label>
-                    <textarea id="reportToCopy" class="form-textarea" rows="10" readonly></textarea>
-                    <button id="copyReportBtn" class="btn btn-secondary small-btn">📋 Copiar Reporte</button>
-                </div>
-
-                <div class="link-submission">
-                    <div class="form-group">
-                        <label for="riseupLink">Enlace de tu Riseup Pad:</label>
-                        <input type="url" id="riseupLink" placeholder="https://pad.riseup.net/..." required>
-                    </div>
-                    <button id="validateRiseupBtn" class="btn btn-primary">✅ Validar y Finalizar</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Página final de agradecimiento -->
-        <section id="thankYou" class="section hidden">
-            <div class="container">
-                <div class="thank-you-content">
-                    <div class="thank-you-icon">
-                        <div class="success-circle">
-                            <span class="checkmark">✓</span>
-                        </div>
-                    </div>
-
-                    <h2 class="thank-you-title">¡Muchas gracias!</h2>
-
-                    <div class="thank-you-message">
-                        <p>Has completado exitosamente la actividad de clasificación interactiva de información digital.
-                        </p>
-                        <p class="highlight">No olvides poner tu evidencia en el foro correspondiente.</p>
-                        <p>Tu participación es fundamental para desarrollar habilidades digitales y pensamiento crítico.
-                        </p>
-                    </div>
-
-                    <div class="completion-summary">
-                        <h3>📊 Resumen de tu Actividad</h3>
+                        <h3>📋 Datos del Estudiante</h3>
                         <div class="summary-grid">
                             <div class="summary-item">
                                 <span class="summary-label">Nombre:</span>
-                                <span class="summary-value" id="thankYouName">-</span>
+                                <span class="summary-value" id="resName">-</span>
                             </div>
                             <div class="summary-item">
                                 <span class="summary-label">Carrera:</span>
-                                <span class="summary-value" id="thankYouCareer">-</span>
+                                <span class="summary-value" id="resCareer">-</span>
                             </div>
                             <div class="summary-item">
-                                <span class="summary-label">Resultado:</span>
-                                <span class="summary-value" id="thankYouResult">-</span>
+                                <span class="summary-label">Grupo:</span>
+                                <span class="summary-value" id="resGroup">-</span>
                             </div>
                             <div class="summary-item">
-                                <span class="summary-label">ID:</span>
-                                <span class="summary-value" id="thankYouID">-</span>
+                                <span class="summary-label">Aciertos:</span>
+                                <span class="summary-value" id="resScore">-</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Vista previa del texto para foro -->
-                    <div class="forum-preview">
+                    <div class="reflection-section">
+                        <h3>💭 Análisis de Información Digital</h3>
+                        <p class="instructions">Completa tu reflexión para generar la evidencia del foro:</p>
+                        
+                        <div class="reflection-form">
+                            <div class="form-group">
+                                <label for="easyInfo">¿Qué información fue más fácil de representar con letras?</label>
+                                <textarea id="easyInfo" rows="2" placeholder="Ej: Las cantidades simples como el costo de un artículo..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="difficultInfo">¿Qué información fue más difícil de representar?</label>
+                                <textarea id="difficultInfo" rows="2" placeholder="Ej: Las expresiones que involucran porcentajes o promedios..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="importanceReason">¿Por qué es importante organizar y representar correctamente la información?</label>
+                                <textarea id="importanceReason" rows="3" placeholder="Ej: Para evitar confusiones en el análisis y tomar mejores decisiones..."></textarea>
+                                <div id="wordCounter" class="word-counter">0 / 20 palabras mínimas</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="completion-code">
+                        <button id="finishBtn" class="btn btn-primary">Generar Evidencia para Foro</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evidencia Final -->
+        <section id="finalEvidence" class="section hidden">
+            <div class="container">
+                <div class="result-content">
+                    <h2 class="section-title">🎉 Evidencia Lista</h2>
+                    
+                    <div class="completion-code">
+                        <h3>🆔 Código de Terminación</h3>
+                        <div id="finalCode" class="code-display">-</div>
+                    </div>
+
+                    <div class="forum-content">
                         <h3>📋 Texto para el Foro</h3>
-                        <div class="preview-box">
-                            <div id="forumContent" class="forum-content">
-                                <!-- Se llenará dinámicamente -->
-                            </div>
+                        <div class="forum-preview">
+                            <div id="forumText" class="forum-text-content"></div>
                         </div>
-                        <p class="preview-hint">💡 Este es el texto que se copiará para pegar en el foro</p>
+                        <div class="forum-actions" style="margin-top: 1rem;">
+                            <button id="copyForumBtn" class="btn btn-primary">📋 Copiar Texto</button>
+                        </div>
                     </div>
 
-                    <div class="final-actions">
-                        <button id="copyFinalBtn" class="btn btn-primary">
-                            📋 Copiar Texto para Foro
-                        </button>
-                        <button id="startNewBtn" class="btn btn-secondary">
-                            🔄 Iniciar Nueva Actividad
-                        </button>
-                    </div>
-
-                    <div class="final-message">
-                        <p><strong>¡Excelente trabajo! 🎉</strong></p>
-                        <p>La organización adecuada de datos es la base para tomar decisiones informadas en el mundo
-                            digital.</p>
+                    <div class="final-message" style="text-align: center; padding: 2rem;">
+                        <p><strong>¡Excelente trabajo!</strong></p>
+                        <p>Toma una captura de pantalla de esta sección y compártela en el <strong>Foro: Análisis de información digital</strong>.</p>
+                        <button onclick="location.reload()" class="btn btn-secondary" style="margin-top: 1rem;">Reiniciar Actividad</button>
                     </div>
                 </div>
             </div>
@@ -428,19 +199,15 @@
 
     <footer class="footer">
         <div class="container">
-            <p>© Centro de Estudios Tecnológicos del Mar <span id="footerYear">2026</span></p>
+            <p>© CETMAR No. 18 | Cultura Digital II | <span id="currentYear">2026</span></p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <!-- Loading Overlay -->
+    <!-- Loading overlay -->
     <div id="loadingOverlay" class="loading-overlay hidden">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <p class="loading-message">Cargando...</p>
-        </div>
+        <div class="loading-spinner"></div>
     </div>
 
+    <script src="script.js"></script>
 </body>
-
 </html>

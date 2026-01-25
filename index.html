@@ -1,299 +1,356 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portafolio: Cultura Digital II</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --bg: #6b2737;
-            --card: #7d2f42;
-            --card2: #4a1e2b;
-            --text: #2a1219;
-            --muted: #6d4a52;
-            --accent: #a67f5d;
-            --accent2: #c9a976;
-            --border: rgba(77, 30, 43, 0.3);
-            --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-            --radius: 16px;
-        }
+      :root {
+        --bg: #6b2737;
+        --card: #7d2f42;
+        --card2: #4a1e2b;
+        --text: #2a1219;
+        --muted: #6d4a52;
+        --accent: #a67f5d;
+        --accent2: #c9a976;
+        --border: rgba(77, 30, 43, 0.3);
+        --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        --radius: 16px;
+      }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background:
-                radial-gradient(1200px 600px at 10% -10%, rgba(166, 127, 93, 0.35), transparent 60%),
-                radial-gradient(900px 500px at 95% 10%, rgba(201, 169, 118, 0.25), transparent 55%),
-                radial-gradient(800px 450px at 50% 100%, rgba(139, 58, 58, 0.18), transparent 55%),
-                #f4e8d8;
-            color: var(--text);
-            min-height: 100vh;
-            padding: 2rem;
-            display: flex;
-            justify-content: center;
-        }
+      body {
+        font-family: "Poppins", sans-serif;
+        background:
+          radial-gradient(
+            1200px 600px at 10% -10%,
+            rgba(166, 127, 93, 0.35),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 500px at 95% 10%,
+            rgba(201, 169, 118, 0.25),
+            transparent 55%
+          ),
+          radial-gradient(
+            800px 450px at 50% 100%,
+            rgba(139, 58, 58, 0.18),
+            transparent 55%
+          ),
+          #f4e8d8;
+        color: var(--text);
+        min-height: 100vh;
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+      }
 
-        .container {
-            max-width: 1200px;
-            width: 100%;
-        }
+      .container {
+        max-width: 1200px;
+        width: 100%;
+      }
 
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            background: linear-gradient(135deg, var(--card), var(--card2));
-            color: white;
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+      header {
+        text-align: center;
+        margin-bottom: 3rem;
+        background: linear-gradient(135deg, var(--card), var(--card2));
+        color: white;
+        padding: 2rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
 
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(90deg, var(--accent2), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      p.subtitle {
+        opacity: 0.9;
+        font-size: 1.1rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--card2);
+        margin: 2rem 0 1rem;
+        padding-left: 1rem;
+        border-left: 5px solid var(--accent);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        transition: transform 0.3s;
+      }
+
+      .activity-card {
+        background: white;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card-link:hover .activity-card {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        border-color: var(--accent);
+      }
+
+      .card-header {
+        background: var(--card2);
+        color: white;
+        padding: 1.5rem;
+        font-weight: 700;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .card-body {
+        padding: 1.5rem;
+        flex: 1;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.9),
+          rgba(250, 246, 240, 0.9)
+        );
+      }
+
+      .card-desc {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 1rem;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .b-diag {
+        background: var(--accent2);
+        color: var(--card2);
+      }
+
+      .b-sem {
+        background: var(--accent);
+        color: white;
+      }
+
+      .b-final {
+        background: var(--card);
+        color: white;
+      }
+
+      @media (max-width: 600px) {
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, var(--accent2), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p.subtitle {
-            opacity: 0.9;
-            font-size: 1.1rem;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--card2);
-            margin: 2rem 0 1rem;
-            padding-left: 1rem;
-            border-left: 5px solid var(--accent);
+          font-size: 1.8rem;
         }
 
         .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+          grid-template-columns: 1fr;
         }
-
-        .card-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            transition: transform 0.3s;
-        }
-
-        .activity-card {
-            background: white;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-link:hover .activity-card {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-            border-color: var(--accent);
-        }
-
-        .card-header {
-            background: var(--card2);
-            color: white;
-            padding: 1.5rem;
-            font-weight: 700;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-body {
-            padding: 1.5rem;
-            flex: 1;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(250, 246, 240, 0.9));
-        }
-
-        .card-desc {
-            font-size: 0.9rem;
-            color: var(--muted);
-            margin-bottom: 1rem;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .b-diag {
-            background: var(--accent2);
-            color: var(--card2);
-        }
-
-        .b-sem {
-            background: var(--accent);
-            color: white;
-        }
-
-        .b-final {
-            background: var(--card);
-            color: white;
-        }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="container">
-        <header>
-            <h1>Portafolio Digital</h1>
-            <p class="subtitle">Cultura Digital II - Recopilación de Actividades</p>
-        </header>
+      <header>
+        <h1>Portafolio Digital</h1>
+        <p class="subtitle">Cultura Digital II - Recopilación de Actividades</p>
+      </header>
 
-        <!-- DIAGNÓSTICO -->
-        <h2 class="section-title">📊 Evaluaciones Iniciales</h2>
-        <div class="grid">
-            <a href="Parcial I/ActividadDiagnostica/index.html" class="card-link">
-                <div class="activity-card">
-                    <div class="card-header">
-                        <span>🔍 Diagnóstico Inicial</span>
-                    </div>
-                    <div class="card-body">
-                        <span class="badge b-diag">Inicio</span>
-                        <p class="card-desc">Evaluación de habilidades digitales y pensamiento crítico.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+      <!-- DIAGNÓSTICO -->
+      <h2 class="section-title">📊 Evaluaciones Iniciales</h2>
+      <div class="grid">
+        <a href="Parcial I/ActividadDiagnostica/index.html" class="card-link">
+          <div class="activity-card">
+            <div class="card-header">
+              <span>🔍 Diagnóstico Inicial</span>
+            </div>
+            <div class="card-body">
+              <span class="badge b-diag">Inicio</span>
+              <p class="card-desc">
+                Evaluación de habilidades digitales y pensamiento crítico.
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
 
-        <!-- SEMESTRE -->
-        <h2 class="section-title">📚 Actividades del Semestre</h2>
-        <div class="grid">
-            <a href="Parcial I/Actividad1-ClasificacionInformacionDigital/actividad1.html" class="card-link">
-                <div class="activity-card">
-                    <div class="card-header">Actividad 1</div>
-                    <div class="card-body">
-                        <span class="badge b-sem">Información</span>
-                        <p class="card-desc">Clasificación de Información Digital.</p>
-                    </div>
-                </div>
-            </a>
+      <!-- SEMESTRE -->
+      <h2 class="section-title">📚 Actividades del Semestre</h2>
+      <div class="grid">
+        <a
+          href="Parcial I/Actividad1-ClasificacionInformacionDigital/actividad1.html"
+          class="card-link"
+        >
+          <div class="activity-card">
+            <div class="card-header">Actividad 1</div>
+            <div class="card-body">
+              <span class="badge b-sem">Información</span>
+              <p class="card-desc">Clasificación de Información Digital.</p>
+            </div>
+          </div>
+        </a>
 
-            <a href="Parcial I/Actividad2-ModelacionDatos/actividad2.html" class="card-link">
-                <div class="activity-card">
-                    <div class="card-header">Actividad 2</div>
-                    <div class="card-body">
-                        <span class="badge b-sem">Datos</span>
-                        <p class="card-desc">Modelación de Datos.</p>
-                    </div>
-                </div>
-            </a>
+        <a
+          href="Parcial I/Actividad2-ModelacionDatos/actividad2.html"
+          class="card-link"
+        >
+          <div class="activity-card">
+            <div class="card-header">Actividad 2</div>
+            <div class="card-body">
+              <span class="badge b-sem">Datos</span>
+              <p class="card-desc">Modelación de Datos.</p>
+            </div>
+          </div>
+        </a>
 
-            <a href="Parcial II/Actividad4-ComunicacionDigitalResponsable/actividad4.html" class="card-link">
-                <div class="activity-card">
-                    <div class="card-header">Actividad 4</div>
-                    <div class="card-body">
-                        <span class="badge b-sem">Comunicación</span>
-                        <p class="card-desc">Comunicación Digital Responsable.</p>
-                    </div>
-                </div>
-            </a>
+        <a
+          href="Parcial II/Actividad4-ComunicacionDigitalResponsable/actividad4.html"
+          class="card-link"
+        >
+          <div class="activity-card">
+            <div class="card-header">Actividad 4</div>
+            <div class="card-body">
+              <span class="badge b-sem">Comunicación</span>
+              <p class="card-desc">Comunicación Digital Responsable.</p>
+            </div>
+          </div>
+        </a>
 
-            <a href="Parcial II/Actividad5-AnalisisEticoTecnologia/actividad5.html" class="card-link">
-                <div class="activity-card">
-                    <div class="card-header">Actividad 5</div>
-                    <div class="card-body">
-                        <span class="badge b-sem">Ética</span>
-                        <p class="card-desc">Análisis Ético de la Tecnología (Podcast).</p>
-                    </div>
-                </div>
-            </a>
+        <a
+          href="Parcial II/Actividad5-AnalisisEticoTecnologia/actividad5.html"
+          class="card-link"
+        >
+          <div class="activity-card">
+            <div class="card-header">Actividad 5</div>
+            <div class="card-body">
+              <span class="badge b-sem">Ética</span>
+              <p class="card-desc">
+                Análisis Ético de la Tecnología (Podcast).
+              </p>
+            </div>
+          </div>
+        </a>
 
-            <a href="Parcial II/Actividad6-ProyectoIntegrador/actividad6.html" class="card-link">
-                <div class="activity-card">
-                    <div class="card-header">Actividad 6</div>
-                    <div class="card-body">
-                        <span class="badge b-sem">Proyecto</span>
-                        <p class="card-desc">Proyecto Integrador.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a
+          href="Parcial II/Actividad6-ProyectoIntegrador/actividad6.html"
+          class="card-link"
+        >
+          <div class="activity-card">
+            <div class="card-header">Actividad 6</div>
+            <div class="card-body">
+              <span class="badge b-sem">Proyecto</span>
+              <p class="card-desc">Proyecto Integrador.</p>
+            </div>
+          </div>
+        </a>
+      </div>
 
-        <!-- CIERRE -->
-        <h2 class="section-title">🎓 Actividades de Cierre</h2>
-        <div class="grid">
-            <a href="Parcial II/ActividadCierre1-Decisiones/cierre1.html" class="card-link">
-                <div class="activity-card">
-                    <div class="card-header">Cierre 1: Decisiones</div>
-                    <div class="card-body">
-                        <span class="badge b-final">Juego</span>
-                        <p class="card-desc">Misión Energía Digital: Toma de decisiones gamificada.</p>
-                    </div>
-                </div>
-            </a>
+      <!-- CIERRE -->
+      <h2 class="section-title">🎓 Actividades de Cierre</h2>
+      <div class="grid">
+        <a
+          href="Parcial II/ActividadCierre1-Decisiones/cierre1.html"
+          class="card-link"
+        >
+          <div class="activity-card">
+            <div class="card-header">Cierre 1: Decisiones</div>
+            <div class="card-body">
+              <span class="badge b-final">Juego</span>
+              <p class="card-desc">
+                Misión Energía Digital: Toma de decisiones gamificada.
+              </p>
+            </div>
+          </div>
+        </a>
 
-            <a href="Parcial III/ActividadCierre2-Relacion/cierre2.html" class="card-link">
-                <div class="activity-card">
-                    <div class="card-header">Cierre 2: Saberes</div>
-                    <div class="card-body">
-                        <span class="badge b-final">Reto</span>
-                        <p class="card-desc">Conexión de Saberes: Relacionar columnas.</p>
-                    </div>
-                </div>
-            </a>
+        <a
+          href="Parcial III/ActividadCierre2-Relacion/cierre2.html"
+          class="card-link"
+        >
+          <div class="activity-card">
+            <div class="card-header">Cierre 2: Saberes</div>
+            <div class="card-body">
+              <span class="badge b-final">Reto</span>
+              <p class="card-desc">Conexión de Saberes: Relacionar columnas.</p>
+            </div>
+          </div>
+        </a>
 
-            <a href="Parcial III/ActividadCierre3-Reto/cierre3.html" class="card-link">
-                <div class="activity-card">
-                    <div class="card-header">Cierre 3: Reto Integral</div>
-                    <div class="card-body">
-                        <span class="badge b-final">Interactivo</span>
-                        <p class="card-desc">Reto por etapas: Clasificación, Quiz e Impacto.</p>
-                    </div>
-                </div>
-            </a>
+        <a
+          href="Parcial III/ActividadCierre3-Reto/cierre3.html"
+          class="card-link"
+        >
+          <div class="activity-card">
+            <div class="card-header">Cierre 3: Reto Integral</div>
+            <div class="card-body">
+              <span class="badge b-final">Interactivo</span>
+              <p class="card-desc">
+                Reto por etapas: Clasificación, Quiz e Impacto.
+              </p>
+            </div>
+          </div>
+        </a>
 
-            <a href="Parcial III/ActividadCierre4-Mural/cierre4.html" class="card-link">
-                <div class="activity-card">
-                    <div class="card-header">Cierre 4: Mural</div>
-                    <div class="card-body">
-                        <span class="badge b-final">Colaborativo</span>
-                        <p class="card-desc">Mural Digital Colectivo de Reflexiones.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a
+          href="Parcial III/ActividadCierre4-Mural/cierre4.html"
+          class="card-link"
+        >
+          <div class="activity-card">
+            <div class="card-header">Cierre 4: Mural</div>
+            <div class="card-body">
+              <span class="badge b-final">Colaborativo</span>
+              <p class="card-desc">Mural Digital Colectivo de Reflexiones.</p>
+            </div>
+          </div>
+        </a>
+      </div>
 
-        <footer style="text-align: center; margin-top: 3rem; color: var(--muted); font-size: 0.9rem;">
-            <p>© 2026 Centro de Estudios Tecnológicos del Mar</p>
-        </footer>
+      <footer
+        style="
+          text-align: center;
+          margin-top: 3rem;
+          color: var(--muted);
+          font-size: 0.9rem;
+        "
+      >
+        <p>© 2026 Centro de Estudios Tecnológicos del Mar</p>
+      </footer>
     </div>
-
-</body>
-
+  </body>
 </html>
