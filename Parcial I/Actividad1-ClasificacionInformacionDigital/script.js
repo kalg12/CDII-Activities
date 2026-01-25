@@ -251,11 +251,8 @@ function handleRegistrationSubmit(event) {
 
 // Sistema de Drag and Drop
 function initializeDragAndDrop() {
-  const cards = document.querySelectorAll(".card-item");
-  const zones = document.querySelectorAll(".zone");
-
-  // Lógica de arrastrar y soltar para organización simbólica
-  const mapping = {
+// Lógica de arrastrar y soltar para organización simbólica
+const mapping = {
     'horas': 'H',
     'entregados': 'E',
     'pendientes': 'P',
@@ -264,12 +261,12 @@ function initializeDragAndDrop() {
     'tiempo-menos-pend': 'T-P'
   };
 
-  const cardsContainer = document.getElementById('cards');
-  const cards = Array.from(document.querySelectorAll('.card[draggable="true"]'));
-  const dropzones = Array.from(document.querySelectorAll('.dropzone'));
-  const reportList = document.getElementById('reportList');
-  const resetBtn = document.getElementById('resetBtn');
-  const completion = document.getElementById('completion');
+const cardsContainer = document.getElementById('cards');
+const cards = Array.from(document.querySelectorAll('.card[draggable="true"]'));
+const dropzones = Array.from(document.querySelectorAll('.dropzone'));
+const reportList = document.getElementById('reportList');
+const resetBtn = document.getElementById('resetBtn');
+const completion = document.getElementById('completion');
 
   // Estado actual de asignaciones: { label -> key }
   const state = {};
