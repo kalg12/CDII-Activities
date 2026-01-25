@@ -251,97 +251,87 @@ function handleRegistrationSubmit(event) {
 
 // Sistema de Drag and Drop
 function initializeDragAndDrop() {
-// Lógica de arrastrar y soltar para organización simbólica
+// Actividad DnD: Organización simbólica de información escolar (CETMAR 18)
+
+// Mapeo correcto entre frases y etiquetas simbólicas
 const mapping = {
-    'horas': 'H',
-    'entregados': 'E',
-    'pendientes': 'P',
-    'tiempo': 'T',
-    'suma-horas': 'H+H',
-    'tiempo-menos-pend': 'T-P'
-  };
+  horas: 'H',
+  entregados: 'E',
+  pendientes: 'P',
+  tiempo: 'T',
+  'suma-horas': 'H+H',
+  'tiempo-menos-pend': 'T-P',
+};
 
-const cardsContainer = document.getElementById('cards');
-const cards = Array.from(document.querySelectorAll('.card[draggable="true"]'));
-const dropzones = Array.from(document.querySelectorAll('.dropzone'));
-const reportList = document.getElementById('reportList');
-const resetBtn = document.getElementById('resetBtn');
-const completion = document.getElementById('completion');
+// Estado actual de asignaciones: { etiqueta -> clave }
+const state = {};
 
-  // Estado actual de asignaciones: { label -> key }
-  const state = {};
-
-  function buildReportItem({ key, label, correct, message }) {
-    const item = document.createElement('div');
-    item.className = 'report-item ' + (correct ? 'clear' : 'confused');
-    item.innerHTML = `<span class="status">${correct ? 'Claro' : 'Confuso'}</span>: “${prettyKey(key)}” → ${label} <br><small>${message}</small>`;
-    return item;
+function prettyKey(key) {
+  switch (key) {
+    case 'horas': return 'Horas dedicadas a tareas digitales';
+    case 'entregados': return 'Cantidad de trabajos entregados';
+    case 'pendientes': return 'Trabajos pendientes';
+    case 'tiempo': return 'Tiempo de uso de plataformas digitales';
+    case 'suma-horas': return 'Suma de horas dedicadas (p. ej., dos sesiones)';
+    case 'tiempo-menos-pend': return 'Tiempo disponible tras atender pendientes';
+    default: return key;
   }
+}
 
-  function prettyKey(key) {
-    switch (key) {
-      case 'horas': return 'Horas dedicadas a tareas digitales';
-      case 'entregados': return 'Cantidad de trabajos entregados';
-      case 'pendientes': return 'Trabajos pendientes';
-      case 'tiempo': return 'Tiempo de uso de plataformas digitales';
-      case 'suma-horas': return 'Suma de horas dedicadas (p. ej., dos sesiones)';
-      case 'tiempo-menos-pend': return 'Tiempo disponible tras atender pendientes';
-      default: return key;
-    }
-  }
+function buildReportItem({ key, label, correct, message }) {
+  const item = document.createElement('div');
+  item.className = 'report-item ' + (correct ? 'clear' : 'confused');
+  item.innerHTML = `<span class="status">${correct ? 'Claro' : 'Confuso'}</span>: “${prettyKey(key)}” → ${label} <br><small>${message}</small>`;
+  return item;
+}
 
-  function confusionMessage(key, label) {
-    const base = {
-      'H': 'Horas', 'E': 'Entregados', 'P': 'Pendientes', 'T': 'Tiempo', 'H+H': 'Suma de tiempos', 'T-P': 'Diferencia tiempo-pendientes'
-    }[label] || label;
+function confusionMessage(key, label) {
+  const base = { H: 'Horas', E: 'Entregados', P: 'Pendientes', T: 'Tiempo', 'H+H': 'Suma de tiempos', 'T-P': 'Diferencia tiempo-pendientes' }[label] || label;
+  return `Usar “${base}” para “${prettyKey(key)}” genera reportes ambiguos y puede inducir decisiones equivocadas.`;
+}
 
-    return `Usar “${base}” para “${prettyKey(key)}” genera reportes ambiguos y puede inducir decisiones equivocadas.`;
-  }
-
-  function clearReport() {
-    reportList.innerHTML = '';
-  }
-
-  function refreshReport() {
-    clearReport();
-    Object.entries(state).forEach(([label, key]) => {
-      if (!key) return;
-      const correct = mapping[key] === label;
-      const message = correct
-        ? 'La etiqueta representa correctamente el concepto. El reporte es consistente.'
-        : confusionMessage(key, label);
-      reportList.appendChild(buildReportItem({ key, label, correct, message }));
-    });
-  }
-
-  function updateDropzoneVisual(dz, key) {
-    dz.classList.remove('correct', 'wrong');
-    const assigned = dz.querySelector('.assigned');
-    if (assigned) assigned.remove();
-
+function refreshReport(reportList) {
+  reportList.innerHTML = '';
+  Object.entries(state).forEach(([label, key]) => {
     if (!key) return;
-    const correct = mapping[key] === dz.dataset.label;
-    dz.classList.add(correct ? 'correct' : 'wrong');
+    const correct = mapping[key] === label;
+    const message = correct ? 'La etiqueta representa correctamente el concepto. El reporte es consistente.' : confusionMessage(key, label);
+    reportList.appendChild(buildReportItem({ key, label, correct, message }));
+  });
+}
 
-    const tag = document.createElement('div');
-    tag.className = 'assigned ' + (correct ? 'correct' : 'wrong');
-    tag.textContent = prettyKey(key);
-    dz.appendChild(tag);
-  }
+function updateDropzoneVisual(dz, key) {
+  dz.classList.remove('correct', 'wrong');
+  const assigned = dz.querySelector('.assigned');
+  if (assigned) assigned.remove();
+  if (!key) return;
+  const correct = mapping[key] === dz.dataset.label;
+  dz.classList.add(correct ? 'correct' : 'wrong');
+  const tag = document.createElement('div');
+  tag.className = 'assigned ' + (correct ? 'correct' : 'wrong');
+  tag.textContent = prettyKey(key);
+  dz.appendChild(tag);
+}
 
-  function checkCompletion() {
-    const total = Object.keys(mapping).length;
-    const correctCount = Object.entries(state)
-      .filter(([label, key]) => key && mapping[key] === label)
-      .length;
-    if (correctCount === total) {
-      completion.hidden = false;
-    } else {
-      completion.hidden = true;
-    }
-  }
+function checkCompletion(completionEl, closeBtn) {
+  const total = Object.keys(mapping).length;
+  const correctCount = Object.entries(state).filter(([label, key]) => key && mapping[key] === label).length;
+  completionEl.hidden = correctCount !== total;
+  if (!completionEl.hidden && closeBtn) closeBtn.focus();
+}
 
-  // Drag events
+function initDnD() {
+  const cards = Array.from(document.querySelectorAll('.card[draggable="true"]'));
+  const dropzones = Array.from(document.querySelectorAll('.dropzone'));
+  const reportList = document.getElementById('reportList');
+  const resetBtn = document.getElementById('resetBtn');
+  const completion = document.getElementById('completion');
+  const closeCompletionBtn = document.getElementById('closeCompletion');
+
+  // Asegurar estado inicial
+  if (completion) completion.hidden = true;
+
+  // Drag events para tarjetas
   cards.forEach(card => {
     card.addEventListener('dragstart', (e) => {
       e.dataTransfer.setData('text/plain', card.dataset.key);
@@ -352,37 +342,53 @@ const completion = document.getElementById('completion');
     });
   });
 
+  // Eventos para zonas de drop
   dropzones.forEach(dz => {
-    dz.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      dz.classList.add('hover');
-    });
+    dz.addEventListener('dragover', (e) => { e.preventDefault(); dz.classList.add('hover'); });
     dz.addEventListener('dragleave', () => dz.classList.remove('hover'));
     dz.addEventListener('drop', (e) => {
       e.preventDefault();
       dz.classList.remove('hover');
       const key = e.dataTransfer.getData('text/plain');
       if (!key) return;
-
-      // Asigna clave a etiqueta
       state[dz.dataset.label] = key;
       updateDropzoneVisual(dz, key);
-      refreshReport();
-      checkCompletion();
+      refreshReport(reportList);
+      checkCompletion(completion, closeCompletionBtn);
     });
   });
 
-  resetBtn.addEventListener('click', () => {
-    Object.keys(state).forEach(k => state[k] = undefined);
-    dropzones.forEach(dz => {
-      dz.classList.remove('correct', 'wrong', 'hover');
-      const assigned = dz.querySelector('.assigned');
-      if (assigned) assigned.remove();
+  // Reiniciar actividad
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      Object.keys(state).forEach(k => state[k] = undefined);
+      dropzones.forEach(dz => {
+        dz.classList.remove('correct', 'wrong', 'hover');
+        const assigned = dz.querySelector('.assigned');
+        if (assigned) assigned.remove();
+      });
+      if (reportList) reportList.innerHTML = '';
+      if (completion) completion.hidden = true;
     });
-    clearReport();
-    completion.hidden = true;
+  }
+
+  // Cerrar modal
+  if (closeCompletionBtn) {
+    closeCompletionBtn.addEventListener('click', () => { if (completion) completion.hidden = true; });
+  }
+  // Cerrar al pulsar Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && completion && !completion.hidden) completion.hidden = true;
   });
-  // Configurar tarjetas arrastrables
+  // Cerrar al pulsar fuera de la tarjeta
+  if (completion) {
+    completion.addEventListener('click', (e) => {
+      if (e.target === completion) completion.hidden = true;
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initDnD);
   cards.forEach((card) => {
     card.addEventListener("dragstart", handleDragStart);
     card.addEventListener("dragend", handleDragEnd);
@@ -1328,25 +1334,9 @@ function validateRiseupLink() {
 }
 
 // Inicialización cuando el DOM está listo
+// Desactivar inicialización legada que no aplica a esta actividad
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("DOM cargado, inicializando aplicación...");
-
-  // Establecer año dinámico en footer
-  const footerYear = document.getElementById("footerYear");
-  if (footerYear) {
-    footerYear.textContent = new Date().getFullYear();
-  }
-
-  // Inicializar registro
-  initializeRegistration();
-
-  // Inicializar funciones de compartir
-  initializeShare();
-
-  // Mostrar sección de registro por defecto
-  showElement("registration");
-
-  console.log("Aplicación inicializada completamente");
+  // Intencionalmente vacío: esta actividad usa initDnD (arriba)
 });
 
 // Manejo de errores globales

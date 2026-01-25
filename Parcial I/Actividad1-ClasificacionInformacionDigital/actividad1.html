@@ -86,10 +86,13 @@
             </section>
 
             <section id="completion" class="completion" hidden>
-                <div class="completion-card">
-                    <h2>¡Actividad completada!</h2>
-                    <p>Has organizado correctamente la información. Los reportes ahora son claros y facilitan decisiones responsables en el uso de tecnología.</p>
-                    <a href="../Actividad2-ModelacionDatos/actividad2.html" class="btn btn-primary">Continuar a la siguiente actividad</a>
+                <div class="completion-card" role="dialog" aria-modal="true" aria-labelledby="completionTitle" aria-describedby="completionDesc">
+                    <h2 id="completionTitle">¡Actividad completada!</h2>
+                    <p id="completionDesc">Has organizado correctamente la información. Los reportes ahora son claros y facilitan decisiones responsables en el uso de tecnología.</p>
+                    <div class="completion-actions">
+                        <button id="closeCompletion" class="btn btn-outline">Cerrar</button>
+                        <a href="../Actividad2-ModelacionDatos/actividad2.html" class="btn btn-primary">Continuar</a>
+                    </div>
                 </div>
             </section>
 
