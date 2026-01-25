@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 1: Expresiones algebraicas colaborativas</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Specific overrides for this activity */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1rem;
+            min-height: 150px;
+        }
+
+        #cardsContainer.zone-content .card-item {
+            width: auto;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: white;
+        }
+
+        .classification-zones {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .zone {
+            min-height: 120px;
+        }
+
+        .zone-header {
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .zone .card-item {
+            width: 100%;
+            border: none;
+            box-shadow: none;
+            background: transparent;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="title">Actividad 1: Expresiones algebraicas colaborativas</h1>
+            <p class="subtitle">🎯 CryptPad + Actividad Interactiva</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Registro del estudiante -->
+        <section id="registration" class="section">
+            <div class="container">
+                <h2 class="section-title">📝 Datos del Estudiante</h2>
+                <form id="studentForm" class="form">
+                    <div class="form-group">
+                        <label for="fullName">Nombre completo:</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="career">Carrera técnica:</label>
+                        <select id="career" name="career" required>
+                            <option value="">Selecciona tu carrera</option>
+                            <option value="TÉCNICO EN ACUACULTURA">TÉCNICO EN ACUACULTURA</option>
+                            <option value="TÉCNICO EN MECÁNICA NAVAL">TÉCNICO EN MECÁNICA NAVAL</option>
+                            <option value="TÉCNICO EN PREPARACIÓN DE ALIMENTOS Y BEBIDAS">TÉCNICO EN PREPARACIÓN DE
+                                ALIMENTOS Y BEBIDAS</option>
+                            <option value="TÉCNICO EN RECREACIONES ACUÁTICAS">TÉCNICO EN RECREACIONES ACUÁTICAS</option>
+                            <option value="TÉCNICO EN REFRIGERACIÓN Y CLIMATIZACIÓN">TÉCNICO EN REFRIGERACIÓN Y
+                                CLIMATIZACIÓN</option>
+                            <option value="TÉCNICO LABORATORISTA AMBIENTAL">TÉCNICO LABORATORISTA AMBIENTAL</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="group">Grupo:</label>
+                        <select id="group" name="group" required>
+                            <option value="">Selecciona tu grupo</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Comenzar Actividad</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Instrucciones -->
+        <section id="instructionsSection" class="section hidden">
+            <div class="container">
+                <h2 class="section-title">🚩 Instrucciones de Colaboración</h2>
+                <div class="instructions">
+                    <p><strong>Parte 1: Trabajo en Equipo con CryptPad</strong></p>
+                    <ol style="margin-left: 20px; margin-bottom: 1.5rem;">
+                        <li>Inicia sesión en <a href="https://cryptpad.fr" target="_blank"
+                                style="color: var(--accent); font-weight: bold;">cryptpad.fr</a>.</li>
+                        <li>En equipos, abran un nuevo <strong>Document</strong>.</li>
+                        <li>Registren las expresiones algebraicas para cada situación planteada en la actividad
+                            interactiva de abajo.</li>
+                        <li>Cada integrante debe aportar respuestas y revisar las de los demás para llegar a una versión
+                            final correcta.</li>
+                    </ol>
+
+                    <p><strong>Parte 2: Actividad Interactiva Individual</strong></p>
+                    <ol style="margin-left: 20px;">
+                        <li>Resuelve el reto de relacionar situaciones con sus expresiones algebraicas correctas.</li>
+                        <li>Al terminar, revisa tu puntaje y completa la reflexión.</li>
+                    </ol>
+                </div>
+                <div style="text-align: center; padding: 1rem;">
+                    <button id="startGameBtn" class="btn btn-primary">Ir al Reto Interactivo</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Juego de Relación -->
+        <section id="gameSection" class="section hidden">
+            <div class="container">
+                <h2 class="section-title">🎮 Reto: Lenguaje Común vs Algebraico</h2>
+                <p class="instructions">Arrastra la expresión algebraica a la situación que la describe:</p>
+
+                <div class="game-container">
+                    <!-- Pool - Expresiones -->
+                    <h3>Expresiones Algebraicas (Arrastra estas fichas)</h3>
+                    <div class="cards-container" id="cardsContainer" data-zone="pool">
+                        <div class="card-item" draggable="true" data-type="double">2x</div>
+                        <div class="card-item" draggable="true" data-type="sum">x + y</div>
+                        <div class="card-item" draggable="true" data-type="square">x²</div>
+                        <div class="card-item" draggable="true" data-type="diff">x - y</div>
+                        <div class="card-item" draggable="true" data-type="plus5">x + 5</div>
+                        <div class="card-item" draggable="true" data-type="div">x / y</div>
+                    </div>
+
+                    <!-- Zonas - Lenguaje Común -->
+                    <h3>Situaciones (Suelta aquí las fichas)</h3>
+                    <div class="classification-zones">
+                        <div class="zone" data-accept="double">
+                            <div class="zone-header">El doble de un número</div>
+                            <div class="zone-content"></div>
+                        </div>
+                        <div class="zone" data-accept="sum">
+                            <div class="zone-header">La suma de dos números</div>
+                            <div class="zone-content"></div>
+                        </div>
+                        <div class="zone" data-accept="square">
+                            <div class="zone-header">El cuadrado de un número</div>
+                            <div class="zone-content"></div>
+                        </div>
+                        <div class="zone" data-accept="diff">
+                            <div class="zone-header">La diferencia de dos números</div>
+                            <div class="zone-content"></div>
+                        </div>
+                        <div class="zone" data-accept="plus5">
+                            <div class="zone-header">Un número aumentado en 5</div>
+                            <div class="zone-content"></div>
+                        </div>
+                        <div class="zone" data-accept="div">
+                            <div class="zone-header">El cociente de dos números</div>
+                            <div class="zone-content"></div>
+                        </div>
+                    </div>
+
+                    <div id="gameFeedback" class="feedback hidden"></div>
+
+                    <div class="verify-container">
+                        <button id="verifyBtn" class="btn btn-secondary">Verificar Respuestas</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reflexión y Resultado -->
+        <section id="resultSection" class="section hidden">
+            <div class="container">
+                <div class="result-content">
+                    <h2 class="section-title">📊 Resultado y Reflexión</h2>
+
+                    <div class="student-summary">
+                        <h3>📋 Datos del Estudiante</h3>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <span class="summary-label">Nombre:</span>
+                                <span class="summary-value" id="resName">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Carrera:</span>
+                                <span class="summary-value" id="resCareer">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Grupo:</span>
+                                <span class="summary-value" id="resGroup">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Aciertos:</span>
+                                <span class="summary-value" id="resScore">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reflection-section">
+                        <h3>💭 Reflexión Final</h3>
+                        <p class="instructions">
+                            Responde las siguientes preguntas.
+                            <strong>Nota:</strong> Al finalizar, copia el texto generado y pégalo en un documento
+                            <strong>Rich Text</strong> en CryptPad. Luego, comparte ese enlace en el foro.
+                        </p>
+
+                        <div class="reflection-form">
+                            <!-- Pregunta 1 Eliminada -->
+
+                            <div class="form-group">
+                                <label for="diffExp">1. ¿Qué expresión fue la más difícil de identificar?</label>
+                                <textarea id="diffExp" rows="2"
+                                    placeholder="Ej: La diferencia de dos números..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="learning">2. ¿Qué aprendiste sobre lenguaje algebraico?</label>
+                                <textarea id="learning" rows="2"
+                                    placeholder="Ej: Que es útil para generalizar..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="completion-code">
+                        <button id="finishBtn" class="btn btn-primary">Generar Evidencia para Foro</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evidencia Final -->
+        <section id="finalEvidence" class="section hidden">
+            <div class="container">
+                <div class="result-content">
+                    <h2 class="section-title">🎉 Evidencia Lista</h2>
+
+                    <div class="completion-code">
+                        <h3>🆔 Código de Terminación</h3>
+                        <div id="finalCode" class="code-display">-</div>
+                    </div>
+
+                    <div class="forum-content">
+                        <h3>📋 Copia este texto a CryptPad (Rich Text)</h3>
+                        <div class="forum-preview">
+                            <div id="forumText" class="forum-text-content"></div>
+                        </div>
+                        <div class="forum-actions" style="margin-top: 1rem;">
+                            <button id="copyForumBtn" class="btn btn-primary">📋 Copiar Texto</button>
+                        </div>
+                    </div>
+
+                    <div class="final-message" style="text-align: center; padding: 2rem;">
+                        <p><strong>¡Excelente trabajo!</strong></p>
+                        <p>Has completado la actividad colaborativa e individual.</p>
+                        <button onclick="location.reload()" class="btn btn-secondary"
+                            style="margin-top: 1rem;">Reiniciar Actividad</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© CETMAR No. 18 | Cultura Digital II | <span id="currentYear">2026</span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
