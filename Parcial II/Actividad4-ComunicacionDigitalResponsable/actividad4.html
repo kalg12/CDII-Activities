@@ -467,23 +467,6 @@
             </div>
           </div>
 
-          <h3 class="section-subtitle">📎 Evidencia</h3>
-          <p class="instructions">
-            Sube una foto o captura de tu trabajo para comprobar la actividad.
-          </p>
-          <div class="evidence-box">
-            <div class="form-group">
-              <label for="evidenceUpload">Archivo de evidencia</label>
-              <input
-                type="file"
-                id="evidenceUpload"
-                accept="image/*,application/pdf,video/*"
-                multiple
-              />
-            </div>
-            <div id="evidencePreview" class="evidence-preview"></div>
-          </div>
-
           <div class="action-buttons">
             <button id="saveWork" class="btn btn-primary">
               💾 Guardar y Ver Resultado
@@ -565,14 +548,22 @@
                     class="opinion-text output-list"
                   ></ul>
                 </div>
-                <div class="opinion-box">
-                  <h4>📎 Evidencia</h4>
-                  <ul
-                    id="resultEvidence"
-                    class="opinion-text output-list"
-                  ></ul>
-                </div>
               </div>
+            </div>
+
+            <div class="forum-content">
+              <h3>📋 Texto para Foro</h3>
+              <div class="forum-preview">
+                <div id="forumText" class="forum-text-content"></div>
+              </div>
+              <div class="forum-actions">
+                <button id="copyForumBtn" class="btn btn-primary">
+                  📋 Copiar Texto
+                </button>
+              </div>
+              <p class="forum-hint">
+                Pega este texto en el foro: "Digital Responsibility - Activity 4"
+              </p>
             </div>
 
             <div class="action-buttons">
@@ -589,6 +580,9 @@
                 responsable. Esta experiencia te permite reflexionar sobre tus
                 hábitos tecnológicos y desarrollar una postura ética en el uso
                 de las herramientas digitales.
+              </p>
+              <p class="forum-hint">
+                💬 Pega tu texto final en el foro: "Digital Responsibility - Activity 4"
               </p>
               <p>
                 Comparte tus pensamientos con tus compañeros y continúa

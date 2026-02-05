@@ -17,7 +17,6 @@ const AppState = {
     spanishPractice: "",
     englishPractice: "",
     translationValid: false,
-    evidenceFiles: [],
     recommendations: [],
   },
   currentSelection: {
@@ -146,7 +145,6 @@ function initializeGrammarSection() {
   const orderCheckButtons = document.querySelectorAll(".order-check");
   const translatePracticeBtn = document.getElementById("translatePracticeBtn");
   const evaluatePracticeBtn = document.getElementById("evaluatePracticeBtn");
-  const evidenceUpload = document.getElementById("evidenceUpload");
 
   banks.forEach((bank) => shuffleWordBank(bank));
 
@@ -218,10 +216,6 @@ function initializeGrammarSection() {
 
   if (evaluatePracticeBtn) {
     evaluatePracticeBtn.addEventListener("click", evaluatePractice);
-  }
-
-  if (evidenceUpload) {
-    evidenceUpload.addEventListener("change", handleEvidencePreview);
   }
 
   if (saveBtn) saveBtn.addEventListener("click", saveGrammarWork);
@@ -484,17 +478,6 @@ function evaluateEnglishText(text) {
   return { ok: true, message: "OK" };
 }
 
-function handleEvidencePreview(event) {
-  const files = Array.from(event.target.files || []);
-  const preview = document.getElementById("evidencePreview");
-  if (!preview) return;
-  if (!files.length) {
-    preview.textContent = "Sin archivos seleccionados.";
-    return;
-  }
-  preview.textContent = `Archivos: ${files.map((file) => file.name).join(", ")}`;
-}
-
 function saveGrammarWork() {
   const sentences = {
     always: safeTrim(document.getElementById("sentenceAlways").dataset.value),
@@ -513,8 +496,6 @@ function saveGrammarWork() {
     safeTrim(document.getElementById("recommendationTwo").value),
     safeTrim(document.getElementById("recommendationThree").value),
   ];
-  const evidenceUpload = document.getElementById("evidenceUpload");
-  const evidenceFiles = evidenceUpload ? Array.from(evidenceUpload.files || []) : [];
 
   const missingSentences = Object.entries(sentences)
     .filter(([_, value]) => !value)
@@ -574,14 +555,8 @@ function saveGrammarWork() {
     return;
   }
 
-  if (!evidenceFiles.length) {
-    showFeedback("Sube al menos una evidencia.", "error");
-    return;
-  }
-
   AppState.activityData.sentences = sentences;
   AppState.activityData.recommendations = recommendations;
-  AppState.activityData.evidenceFiles = evidenceFiles.map((file) => file.name);
   AppState.activityData.generatedPhrase =
     "Present Simple + Adverbs of Frequency practice completed.";
 
@@ -615,11 +590,19 @@ function showFinalResult() {
     `ES: ${AppState.activityData.spanishPractice}`,
     `EN: ${AppState.activityData.englishPractice}`,
   ]);
-  updateList("resultEvidence", AppState.activityData.evidenceFiles);
 
   // Código
   const code = generateCompletionCode();
   AppState.completionCode = code;
+
+  generateForumText();
+
+  const copyBtn = document.getElementById("copyForumBtn");
+  if (copyBtn) {
+    const newBtn = copyBtn.cloneNode(true);
+    copyBtn.parentNode.replaceChild(newBtn, copyBtn);
+    newBtn.addEventListener("click", copyToClipboard);
+  }
 
   const newActivityBtn = document.getElementById("newActivity");
   if (newActivityBtn) {
@@ -642,6 +625,28 @@ function generateCompletionCode() {
   const hash = btoa(AppState.studentData.fullName).slice(0, 6).toUpperCase();
   const random = Math.floor(Math.random() * 10000);
   return `CD4-${hash}-${random}`;
+}
+
+function generateForumText() {
+  const s = AppState.studentData;
+  const a = AppState.activityData;
+
+  let text = `=== ACTIVIDAD 4: PRESENT SIMPLE ===\n`;
+  text += `Nombre: ${s.fullName}\nCarrera: ${s.career}\nGrupo: ${s.group}\nFecha: ${new Date().toLocaleString()}\n\n`;
+  text += `RECOMMENDATIONS (3):\n- ${a.recommendations.join("\n- ")}\n\n`;
+  text += `Código: ${AppState.completionCode}`;
+
+  const forumEl = document.getElementById("forumText");
+  if (forumEl) forumEl.textContent = text;
+}
+
+function copyToClipboard() {
+  const text = document.getElementById("forumText").textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    showFeedback("Copiado al portapapeles", "success");
+  }).catch(() => {
+    showFeedback("Error al copiar", "error");
+  });
 }
 
 // Sin texto para foro en esta actividad
