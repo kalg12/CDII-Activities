@@ -633,6 +633,7 @@ function generateForumText() {
 
   let text = `=== ACTIVIDAD 4: PRESENT SIMPLE ===\n`;
   text += `Nombre: ${s.fullName}\nCarrera: ${s.career}\nGrupo: ${s.group}\nFecha: ${new Date().toLocaleString()}\n\n`;
+  text += `PRESENTATION LINK:\n(PEGAR AQUI EL ENLACE DE CRYPTPAD)\n\n`;
   text += `RECOMMENDATIONS (3):\n- ${a.recommendations.join("\n- ")}\n\n`;
   text += `Código: ${AppState.completionCode}`;
 
