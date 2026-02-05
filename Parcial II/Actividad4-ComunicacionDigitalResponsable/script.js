@@ -633,7 +633,12 @@ function generateForumText() {
 
   let text = `=== ACTIVIDAD 4: PRESENT SIMPLE ===\n`;
   text += `Nombre: ${s.fullName}\nCarrera: ${s.career}\nGrupo: ${s.group}\nFecha: ${new Date().toLocaleString()}\n\n`;
-  text += `PRESENTATION LINK:\n(PEGAR AQUI EL ENLACE DE CRYPTPAD)\n\n`;
+  text += `INSTRUCCION PARA PRESENTACION:\n`;
+  text += `En equipo de hasta cuatro personas, elabora una presentación colaborativa en CryptPad, en la cual describan el uso de la tecnología en su vida diaria.\n`;
+  text += `En la presentación deberán incluir:\n`;
+  text += `- Oraciones en inglés utilizando Present Simple y adverbios de frecuencia (always, usually, sometimes, never) para describir cómo usan la tecnología en la escuela o en casa.\n`;
+  text += `- Una sección final con recomendaciones breves en inglés sobre el uso responsable de la tecnología.\n`;
+  text += `Al finalizar, comparte el enlace de la presentación y publícalo en el Foro: Rutinas digitales responsables en inglés.\n\n`;
   text += `RECOMMENDATIONS (3):\n- ${a.recommendations.join("\n- ")}\n\n`;
   text += `Código: ${AppState.completionCode}`;
 
