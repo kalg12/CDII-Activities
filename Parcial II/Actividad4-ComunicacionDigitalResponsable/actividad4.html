@@ -1,317 +1,622 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Actividad 4: Comunicación digital responsable</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
+  <body>
     <header class="header">
-        <div class="container">
-            <h1 class="title">Actividad 4: Comunicación digital responsable</h1>
-            <p class="subtitle">🎯 Expresa una opinión personal sobre el uso responsable de la tecnología</p>
-        </div>
+      <div class="container">
+        <h1 class="title">Actividad 4: Comunicación digital responsable</h1>
+        <p class="subtitle">
+          🎯 Practica Present Simple y uso responsable de la tecnología
+        </p>
+      </div>
     </header>
 
     <main class="main">
-        <!-- Formulario de registro -->
-        <section id="registration" class="section">
-            <div class="container">
-                <h2 class="section-title">📝 Datos del Estudiante</h2>
-                <form id="studentForm" class="form">
-                    <div class="form-group">
-                        <label for="fullName">Nombre completo:</label>
-                        <input type="text" id="fullName" name="fullName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="career">Carrera técnica:</label>
-                        <select id="career" name="career" required>
-                            <option value="">Selecciona tu carrera</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="group">Grupo:</label>
-                        <select id="group" name="group" required>
-                            <option value="">Selecciona tu grupo</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Comenzar Actividad</button>
-                </form>
+      <!-- Formulario de registro -->
+      <section id="registration" class="section">
+        <div class="container">
+          <h2 class="section-title">📝 Datos del Estudiante</h2>
+          <form id="studentForm" class="form">
+            <div class="form-group">
+              <label for="fullName">Nombre completo:</label>
+              <input type="text" id="fullName" name="fullName" required />
             </div>
-        </section>
-
-        <!-- Actividad interactiva de Relación -->
-        <section id="interactiveActivity" class="section hidden">
-            <div class="container">
-                <h2 class="section-title">🎮 Actividad de Relación</h2>
-
-                <div class="activity-instructions">
-                    <p><strong>Instrucciones:</strong></p>
-                    <p>Relaciona cada <b>Situación Tecnológica</b> (izquierda) con su <b>Consecuencia</b>
-                        correspondiente (derecha).</p>
-                    <p>Encuentra los 5 pares correctos.</p>
-                </div>
-
-                <div class="matching-game-container">
-                    <!-- Columna Situaciones -->
-                    <div class="column scenarios-column">
-                        <h3>📱 Situaciones</h3>
-                        <div class="cards-container" id="scenariosContainer">
-                            <div class="scenario-card match-card" data-id="excessive-phone">
-                                <div class="card-icon">📱</div>
-                                <div class="card-content">
-                                    <h4>Uso excesivo del celular</h4>
-                                    <p>Pasar muchas horas sin fines productivos</p>
-                                </div>
-                            </div>
-                            <div class="scenario-card match-card" data-id="ai-homework">
-                                <div class="card-icon">🤖</div>
-                                <div class="card-content">
-                                    <h4>Usar IA para tareas</h4>
-                                    <p>Copiar respuestas sin revisar ni entender</p>
-                                </div>
-                            </div>
-                            <div class="scenario-card match-card" data-id="social-media">
-                                <div class="card-icon">📵</div>
-                                <div class="card-content">
-                                    <h4>Redes en clase</h4>
-                                    <p>Distraerse mientras explica el profesor</p>
-                                </div>
-                            </div>
-                            <div class="scenario-card match-card" data-id="fake-news">
-                                <div class="card-icon">📰</div>
-                                <div class="card-content">
-                                    <h4>Noticias falsas</h4>
-                                    <p>Compartir información no verificada</p>
-                                </div>
-                            </div>
-                            <div class="scenario-card match-card" data-id="digital-wellness">
-                                <div class="card-icon">🧘</div>
-                                <div class="card-content">
-                                    <h4>Bienestar digital</h4>
-                                    <p>Tomar descansos y limitar pantallas</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Columna Consecuencias -->
-                    <div class="column consequences-column">
-                        <h3>⚡ Consecuencias</h3>
-                        <div class="cards-container" id="consequencesContainer">
-                            <div class="consequence-card match-card" data-target="academic-impact">
-                                <div class="card-icon">📚</div>
-                                <div class="card-content">
-                                    <h4>Impacto académico</h4>
-                                    <p>Bajo rendimiento y falta de atención</p>
-                                </div>
-                            </div>
-                            <div class="consequence-card match-card" data-target="health-issues">
-                                <div class="card-icon">🏥</div>
-                                <div class="card-content">
-                                    <h4>Problemas de salud</h4>
-                                    <p>Dolor de cabeza, vista cansada y estrés</p>
-                                </div>
-                            </div>
-                            <div class="consequence-card match-card" data-target="misinformation">
-                                <div class="card-icon">💭</div>
-                                <div class="card-content">
-                                    <h4>Desinformación</h4>
-                                    <p>Confusión y propagación de mentiras</p>
-                                </div>
-                            </div>
-                            <div class="consequence-card match-card" data-target="wellness-benefits">
-                                <div class="card-icon">🌟</div>
-                                <div class="card-content">
-                                    <h4>Beneficios personales</h4>
-                                    <p>Mejor salud mental y equilibrio</p>
-                                </div>
-                            </div>
-                            <!-- Nuevo par para IA -->
-                            <div class="consequence-card match-card" data-target="ai-dependency">
-                                <div class="card-icon">🧠</div>
-                                <div class="card-content">
-                                    <h4>Falta de aprendizaje</h4>
-                                    <p>Dependencia y nulo desarrollo cognitivo</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="game-status">
-                    <p>Pares encontrados: <span id="matchCount">0</span> / 5</p>
-                    <div id="gameMessage" class="game-message"></div>
-                </div>
-
-                <!-- Botón para continuar (deshabilitado hasta terminar) -->
-                <div class="builder-section">
-                    <button id="finishMatchingBtn" class="btn btn-primary" disabled>✅ Continuar a Opinión</button>
-                </div>
+            <div class="form-group">
+              <label for="career">Carrera técnica:</label>
+              <select id="career" name="career" required>
+                <option value="">Selecciona tu carrera</option>
+              </select>
             </div>
-        </section>
-
-        <!-- Área de opinión -->
-        <section id="opinionSection" class="section hidden">
-            <div class="container">
-                <h2 class="section-title">✍️ Tu Opinión Bilingüe</h2>
-
-                <div class="opinion-instructions">
-                    <div class="instruction-box spanish">
-                        <h3>🇪🇸 En Español</h3>
-                        <p>Expresa tu opinión sobre el uso responsable de la tecnología.</p>
-                        <p class="limit-instruction">⚠️ <strong>Mínimo: 25 palabras</strong></p>
-                        <div class="character-count">
-                            <span id="spanishWordCount">0</span> palabras
-                        </div>
-                    </div>
-
-                    <div class="instruction-box english">
-                        <h3>🇬🇧 In English</h3>
-                        <p>The system will help you translate your opinion.</p>
-                        <div class="character-count">
-                            <span id="englishWordCount">0</span> words
-                        </div>
-                    </div>
-                </div>
-
-                <div class="opinion-forms">
-                    <div class="form-group">
-                        <label for="spanishOpinion">Tu opinión en español:</label>
-                        <textarea id="spanishOpinion" rows="4" placeholder="Escribe tu opinión breve aquí..."
-                            maxlength="200"></textarea>
-                    </div>
-
-                    <div class="translate-controls">
-                        <button id="translateBtn" class="btn btn-primary">🔄 Traducir a Inglés (Auto-Translate)</button>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="englishOpinion">Your opinion in English (Auto-generated):</label>
-                        <textarea id="englishOpinion" rows="4" placeholder="Translation will appear here..."
-                            readonly></textarea>
-                    </div>
-                </div>
-
-                <!-- Botones de acción -->
-                <div class="action-buttons">
-                    <button id="saveOpinion" class="btn btn-primary">💾 Guardar Opinión y Continuar</button>
-                </div>
+            <div class="form-group">
+              <label for="group">Grupo:</label>
+              <select id="group" name="group" required>
+                <option value="">Selecciona tu grupo</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+              </select>
             </div>
-        </section>
+            <button type="submit" class="btn btn-primary">
+              Comenzar Actividad
+            </button>
+          </form>
+        </div>
+      </section>
 
-        <!-- Resultado final -->
-        <section id="finalResult" class="section hidden">
-            <div class="container">
-                <div class="result-content">
-                    <h2 class="section-title">🎉 Resultado de la Actividad</h2>
+      <!-- Present Simple + Adverbios de frecuencia -->
+      <section id="grammarSection" class="section hidden">
+        <div class="container">
+          <h2 class="section-title">
+            🧩 Present Simple + Adverbs of Frequency
+          </h2>
+          <p class="instructions">
+            Practica con ejemplos de tecnología en la escuela o en casa.
+          </p>
 
-                    <!-- Resumen del estudiante -->
-                    <div class="student-summary">
-                        <h3>📋 Datos del Estudiante</h3>
-                        <div class="summary-grid">
-                            <div class="summary-item">
-                                <span class="summary-label">Nombre:</span>
-                                <span class="summary-value" id="resultName">-</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="summary-label">Carrera:</span>
-                                <span class="summary-value" id="resultCareer">-</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="summary-label">Grupo:</span>
-                                <span class="summary-value" id="resultGroup">-</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="summary-label">Fecha:</span>
-                                <span class="summary-value" id="resultDate">-</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Resumen de la actividad -->
-                    <div class="activity-summary">
-                        <h3>🎮 Resumen de la Actividad</h3>
-                        <div class="activity-details">
-                            <div class="detail-item">
-                                <span class="detail-label">Situación elegida:</span>
-                                <span class="detail-value" id="resultScenario">-</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Consecuencia:</span>
-                                <span class="detail-value" id="resultConsequence">-</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Frase generada:</span>
-                                <span class="detail-value" id="resultPhrase">-</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Opiniones del estudiante -->
-                    <div class="opinions-summary">
-                        <h3>📝 Opiniones del Estudiante</h3>
-                        <div class="opinion-display">
-                            <div class="opinion-box">
-                                <h4>🇪🇸 Opinión en Español</h4>
-                                <div id="resultSpanish" class="opinion-text">-</div>
-                            </div>
-                            <div class="opinion-box">
-                                <h4>🇬🇧 Opinion in English</h4>
-                                <div id="resultEnglish" class="opinion-text">-</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Texto para el foro -->
-                    <div class="forum-content">
-                        <h3>📋 Texto para el Foro</h3>
-                        <div class="forum-preview">
-                            <div id="forumText" class="forum-text-content">
-                                <!-- Se generará dinámicamente -->
-                            </div>
-                        </div>
-                        <div class="forum-actions">
-                            <button id="copyForumBtn" class="btn btn-primary">📋 Copiar Texto para Foro</button>
-                            <button id="newActivity" class="btn btn-secondary">🔄 Nueva Actividad</button>
-                        </div>
-                        <p class="forum-hint">💡 Publica en el foro: "Digital responsibility opinion"</p>
-                    </div>
-
-                    <!-- Mensaje final -->
-                    <div class="final-message">
-                        <h3>🎯 Conclusión</h3>
-                        <p>Has completado exitosamente la actividad de comunicación digital responsable. Esta
-                            experiencia te permite reflexionar sobre tus hábitos tecnológicos y desarrollar una postura
-                            ética en el uso de las herramientas digitales.</p>
-                        <p>Comparte tus pensamientos con tus compañeros y continúa desarrollando un uso consciente y
-                            responsable de la tecnología.</p>
-                    </div>
-                </div>
+          <h3 class="section-subtitle">⚡ Regla rápida (súper simple)</h3>
+          <div class="grammar-theory">
+            <div class="instruction-box">
+              <h3>Orden básico</h3>
+              <p><strong>Subject + adverb + verb</strong></p>
+              <p class="mini-note">Ej: I always study online.</p>
             </div>
-        </section>
+            <div class="instruction-box">
+              <h3>3ª persona</h3>
+              <p>He/She/It + verb<strong> + s/es</strong></p>
+              <p class="mini-note">Ej: She never uses her phone in class.</p>
+            </div>
+            <div class="instruction-box">
+              <h3>ES → EN (orden)</h3>
+              <p><strong>ES:</strong> "Yo siempre uso la laptop."</p>
+              <p><strong>EN:</strong> "I always use the laptop."</p>
+            </div>
+          </div>
+
+          <h3 class="section-subtitle">🎮 Mini Lab: 4 oraciones</h3>
+          <p class="instructions">
+            Paso 1: toca palabras. Paso 2: ordena la oración. Paso 3: revisa.
+            Adverbios: always = siempre, usually = usualmente, sometimes = a veces,
+            never = nunca.
+          </p>
+
+          <div class="sentence-grid">
+            <div class="sentence-card">
+              <h4>Always</h4>
+              <p class="sentence-es">
+                ES: Yo siempre uso la tablet para investigar.
+              </p>
+              <div class="word-bank" data-target="sentenceAlways">
+                <button type="button" class="word-chip" data-insert="I">
+                  I
+                </button>
+                <button type="button" class="word-chip" data-insert="always">
+                  always
+                </button>
+                <button type="button" class="word-chip" data-insert="use">
+                  use
+                </button>
+                <button type="button" class="word-chip" data-insert="my tablet">
+                  my tablet
+                </button>
+                <button
+                  type="button"
+                  class="word-chip"
+                  data-insert="to research"
+                >
+                  to research
+                </button>
+              </div>
+              <div
+                id="sentenceAlways"
+                class="sentence-output"
+                data-placeholder="I always use my tablet to research."
+                data-answer="I always use my tablet to research."
+              ></div>
+              <div class="sentence-actions">
+                <button
+                  type="button"
+                  class="btn btn-secondary clear-sentence"
+                  data-target="sentenceAlways"
+                  data-feedback="feedbackAlways"
+                >
+                  Limpiar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary back-sentence"
+                  data-target="sentenceAlways"
+                  data-feedback="feedbackAlways"
+                >
+                  Borrar último
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary check-sentence"
+                  data-target="sentenceAlways"
+                  data-adverb="always"
+                  data-feedback="feedbackAlways"
+                >
+                  Revisar
+                </button>
+              </div>
+              <div id="feedbackAlways" class="sentence-feedback"></div>
+              <details class="sentence-hint">
+                <summary>Ver ejemplo</summary>
+                <p>I always use my tablet to research.</p>
+              </details>
+            </div>
+
+            <div class="sentence-card">
+              <h4>Usually</h4>
+              <p class="sentence-es">
+                ES: Nosotros usualmente tomamos notas en línea.
+              </p>
+              <div class="word-bank" data-target="sentenceUsually">
+                <button type="button" class="word-chip" data-insert="We">
+                  We
+                </button>
+                <button type="button" class="word-chip" data-insert="usually">
+                  usually
+                </button>
+                <button type="button" class="word-chip" data-insert="take">
+                  take
+                </button>
+                <button type="button" class="word-chip" data-insert="notes">
+                  notes
+                </button>
+                <button type="button" class="word-chip" data-insert="online">
+                  online
+                </button>
+              </div>
+              <div
+                id="sentenceUsually"
+                class="sentence-output"
+                data-placeholder="We usually take notes online."
+                data-answer="We usually take notes online."
+              ></div>
+              <div class="sentence-actions">
+                <button
+                  type="button"
+                  class="btn btn-secondary clear-sentence"
+                  data-target="sentenceUsually"
+                  data-feedback="feedbackUsually"
+                >
+                  Limpiar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary back-sentence"
+                  data-target="sentenceUsually"
+                  data-feedback="feedbackUsually"
+                >
+                  Borrar último
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary check-sentence"
+                  data-target="sentenceUsually"
+                  data-adverb="usually"
+                  data-feedback="feedbackUsually"
+                >
+                  Revisar
+                </button>
+              </div>
+              <div id="feedbackUsually" class="sentence-feedback"></div>
+              <details class="sentence-hint">
+                <summary>Ver ejemplo</summary>
+                <p>We usually take notes online.</p>
+              </details>
+            </div>
+
+            <div class="sentence-card">
+              <h4>Sometimes</h4>
+              <p class="sentence-es">
+                ES: Yo a veces estudio con videos en casa.
+              </p>
+              <div class="word-bank" data-target="sentenceSometimes">
+                <button type="button" class="word-chip" data-insert="I">
+                  I
+                </button>
+                <button type="button" class="word-chip" data-insert="sometimes">
+                  sometimes
+                </button>
+                <button type="button" class="word-chip" data-insert="study">
+                  study
+                </button>
+                <button
+                  type="button"
+                  class="word-chip"
+                  data-insert="with videos"
+                >
+                  with videos
+                </button>
+                <button type="button" class="word-chip" data-insert="at home">
+                  at home
+                </button>
+              </div>
+              <div
+                id="sentenceSometimes"
+                class="sentence-output"
+                data-placeholder="I sometimes study with videos at home."
+                data-answer="I sometimes study with videos at home."
+              ></div>
+              <div class="sentence-actions">
+                <button
+                  type="button"
+                  class="btn btn-secondary clear-sentence"
+                  data-target="sentenceSometimes"
+                  data-feedback="feedbackSometimes"
+                >
+                  Limpiar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary back-sentence"
+                  data-target="sentenceSometimes"
+                  data-feedback="feedbackSometimes"
+                >
+                  Borrar último
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary check-sentence"
+                  data-target="sentenceSometimes"
+                  data-adverb="sometimes"
+                  data-feedback="feedbackSometimes"
+                >
+                  Revisar
+                </button>
+              </div>
+              <div id="feedbackSometimes" class="sentence-feedback"></div>
+              <details class="sentence-hint">
+                <summary>Ver ejemplo</summary>
+                <p>I sometimes study with videos at home.</p>
+              </details>
+            </div>
+
+            <div class="sentence-card">
+              <h4>Never</h4>
+              <p class="sentence-es">ES: Él nunca usa el celular en clase.</p>
+              <div class="word-bank" data-target="sentenceNever">
+                <button type="button" class="word-chip" data-insert="He">
+                  He
+                </button>
+                <button type="button" class="word-chip" data-insert="never">
+                  never
+                </button>
+                <button type="button" class="word-chip" data-insert="uses">
+                  uses
+                </button>
+                <button type="button" class="word-chip" data-insert="his phone">
+                  his phone
+                </button>
+                <button type="button" class="word-chip" data-insert="in class">
+                  in class
+                </button>
+              </div>
+              <div
+                id="sentenceNever"
+                class="sentence-output"
+                data-placeholder="He never uses his phone in class."
+                data-answer="He never uses his phone in class."
+              ></div>
+              <div class="sentence-actions">
+                <button
+                  type="button"
+                  class="btn btn-secondary clear-sentence"
+                  data-target="sentenceNever"
+                  data-feedback="feedbackNever"
+                >
+                  Limpiar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary back-sentence"
+                  data-target="sentenceNever"
+                  data-feedback="feedbackNever"
+                >
+                  Borrar último
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary check-sentence"
+                  data-target="sentenceNever"
+                  data-adverb="never"
+                  data-feedback="feedbackNever"
+                >
+                  Revisar
+                </button>
+              </div>
+              <div id="feedbackNever" class="sentence-feedback"></div>
+              <details class="sentence-hint">
+                <summary>Ver ejemplo</summary>
+                <p>He never uses his phone in class.</p>
+              </details>
+            </div>
+          </div>
+
+          <h3 class="section-subtitle">🧠 Ordena la frase</h3>
+          <p class="instructions">
+            Toca las palabras en el orden correcto para formar la oración en
+            inglés.
+          </p>
+          <div class="ordering-card">
+            <p class="sentence-es">
+              ES: Ellos usualmente hacen tareas en línea.
+            </p>
+            <div class="word-bank ordering-bank" data-target="orderingOutput">
+              <button type="button" class="word-chip" data-insert="They">
+                They
+              </button>
+              <button type="button" class="word-chip" data-insert="online">
+                online
+              </button>
+              <button type="button" class="word-chip" data-insert="usually">
+                usually
+              </button>
+              <button type="button" class="word-chip" data-insert="do">
+                do
+              </button>
+              <button type="button" class="word-chip" data-insert="homework">
+                homework
+              </button>
+            </div>
+            <div
+              id="orderingOutput"
+              class="sentence-output"
+              data-placeholder="They usually do homework online."
+            ></div>
+            <div class="sentence-actions">
+              <button
+                type="button"
+                class="btn btn-secondary order-back"
+                data-target="orderingOutput"
+              >
+                Borrar último
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary order-clear"
+                data-target="orderingOutput"
+              >
+                Limpiar
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary order-check"
+                data-target="orderingOutput"
+                data-answer="They usually do homework online."
+                data-feedback="orderingFeedback"
+              >
+                Revisar
+              </button>
+            </div>
+            <div id="orderingFeedback" class="sentence-feedback"></div>
+          </div>
+
+          <h3 class="section-subtitle">🌐 ES → EN con traductor</h3>
+          <p class="instructions">
+            Escribe una frase en español con un adverbio (always/usually/
+            sometimes/never). Usa el traductor y luego evalúa si cumple.
+            Recuerda: always = siempre, usually = usualmente, sometimes = a veces,
+            never = nunca.
+          </p>
+          <div class="translate-grid">
+            <div class="form-group">
+              <label for="spanishPractice">Frase en español</label>
+              <textarea
+                id="spanishPractice"
+                rows="3"
+                placeholder="Ej: Yo siempre reviso el correo en la computadora."
+              ></textarea>
+            </div>
+            <div class="translate-controls">
+              <button id="translatePracticeBtn" class="btn btn-primary">
+                🔄 Traducir a Inglés
+              </button>
+              <button id="evaluatePracticeBtn" class="btn btn-secondary">
+                ✅ Evaluar
+              </button>
+            </div>
+            <div class="form-group">
+              <label for="englishPractice">Traducción en inglés</label>
+              <textarea
+                id="englishPractice"
+                rows="3"
+                placeholder="Translation will appear here..."
+                readonly
+              ></textarea>
+            </div>
+            <div id="translationFeedback" class="sentence-feedback"></div>
+          </div>
+
+          <h3 class="section-subtitle">✅ Recomendaciones breves</h3>
+          <p class="instructions">
+            Escribe 3 recomendaciones en inglés sobre uso responsable de la
+            tecnología.
+          </p>
+          <div class="recommendations-grid">
+            <div class="form-group">
+              <label for="recommendationOne">Recommendation 1</label>
+              <input
+                type="text"
+                id="recommendationOne"
+                placeholder="Use your phone only for learning in class."
+              />
+            </div>
+            <div class="form-group">
+              <label for="recommendationTwo">Recommendation 2</label>
+              <input
+                type="text"
+                id="recommendationTwo"
+                placeholder="Take short breaks from screens."
+              />
+            </div>
+            <div class="form-group">
+              <label for="recommendationThree">Recommendation 3</label>
+              <input
+                type="text"
+                id="recommendationThree"
+                placeholder="Verify information before sharing it."
+              />
+            </div>
+          </div>
+
+          <h3 class="section-subtitle">📎 Evidencia</h3>
+          <p class="instructions">
+            Sube una foto o captura de tu trabajo para comprobar la actividad.
+          </p>
+          <div class="evidence-box">
+            <div class="form-group">
+              <label for="evidenceUpload">Archivo de evidencia</label>
+              <input
+                type="file"
+                id="evidenceUpload"
+                accept="image/*,application/pdf,video/*"
+                multiple
+              />
+            </div>
+            <div id="evidencePreview" class="evidence-preview"></div>
+          </div>
+
+          <div class="action-buttons">
+            <button id="saveWork" class="btn btn-primary">
+              💾 Guardar y Ver Resultado
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resultado final -->
+      <section id="finalResult" class="section hidden">
+        <div class="container">
+          <div class="result-content">
+            <h2 class="section-title">🎉 Resultado de la Actividad</h2>
+
+            <!-- Resumen del estudiante -->
+            <div class="student-summary">
+              <h3>📋 Datos del Estudiante</h3>
+              <div class="summary-grid">
+                <div class="summary-item">
+                  <span class="summary-label">Nombre:</span>
+                  <span class="summary-value" id="resultName">-</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">Carrera:</span>
+                  <span class="summary-value" id="resultCareer">-</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">Grupo:</span>
+                  <span class="summary-value" id="resultGroup">-</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">Fecha:</span>
+                  <span class="summary-value" id="resultDate">-</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resumen de la actividad -->
+            <div class="activity-summary">
+              <h3>🎮 Resumen de la Actividad</h3>
+              <div class="activity-details">
+                <div class="detail-item">
+                  <span class="detail-label">Situación elegida:</span>
+                  <span class="detail-value" id="resultScenario">-</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Consecuencia:</span>
+                  <span class="detail-value" id="resultConsequence">-</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Frase generada:</span>
+                  <span class="detail-value" id="resultPhrase">-</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Opiniones del estudiante -->
+            <div class="opinions-summary">
+              <h3>📝 Producciones en Inglés</h3>
+              <div class="opinion-display">
+                <div class="opinion-box">
+                  <h4>🧩 Oraciones con adverbios</h4>
+                  <ul
+                    id="resultSentences"
+                    class="opinion-text output-list"
+                  ></ul>
+                </div>
+                <div class="opinion-box">
+                  <h4>✅ Recomendaciones</h4>
+                  <ul
+                    id="resultRecommendations"
+                    class="opinion-text output-list"
+                  ></ul>
+                </div>
+                <div class="opinion-box">
+                  <h4>🧠 Orden y traducción</h4>
+                  <ul
+                    id="resultExtraPractice"
+                    class="opinion-text output-list"
+                  ></ul>
+                </div>
+                <div class="opinion-box">
+                  <h4>📎 Evidencia</h4>
+                  <ul
+                    id="resultEvidence"
+                    class="opinion-text output-list"
+                  ></ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="action-buttons">
+              <button id="newActivity" class="btn btn-secondary">
+                🔄 Nueva Actividad
+              </button>
+            </div>
+
+            <!-- Mensaje final -->
+            <div class="final-message">
+              <h3>🎯 Conclusión</h3>
+              <p>
+                Has completado exitosamente la actividad de comunicación digital
+                responsable. Esta experiencia te permite reflexionar sobre tus
+                hábitos tecnológicos y desarrollar una postura ética en el uso
+                de las herramientas digitales.
+              </p>
+              <p>
+                Comparte tus pensamientos con tus compañeros y continúa
+                desarrollando un uso consciente y responsable de la tecnología.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p>© Centro de Estudios Tecnológicos del Mar <span id="footerYear">2026</span></p>
-        </div>
+      <div class="container">
+        <p>
+          © Centro de Estudios Tecnológicos del Mar
+          <span id="footerYear">2026</span>
+        </p>
+      </div>
     </footer>
 
     <!-- Loading overlay -->
     <div id="loadingOverlay" class="loading-overlay hidden">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <p class="loading-message">Procesando...</p>
-        </div>
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p class="loading-message">Procesando...</p>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
