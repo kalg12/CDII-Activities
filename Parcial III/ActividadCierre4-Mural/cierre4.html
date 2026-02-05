@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividad de Cierre 4: Mural Digital</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Kalam:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <!-- Libraries for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
+
 <body>
     <header class="header">
         <div class="container">
@@ -17,49 +24,52 @@
 
     <main class="main">
         <div class="container layout-grid">
-            
+
             <!-- LEFT: FORM -->
             <section class="section form-section">
                 <div class="card form-card">
                     <h2 class="section-title">✨ Tu Aportación</h2>
                     <p class="instruction">Comparte tu aprendizaje para completar el muro.</p>
-                    
+
                     <form id="postForm" class="form">
                         <div class="form-group">
                             <label for="fullName">Tu Nombre:</label>
                             <input type="text" id="fullName" required placeholder="Ej. Ana García">
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="idea">💡 Idea Clave Aprendida:</label>
-                            <textarea id="idea" rows="2" maxlength="100" required placeholder="¿Qué concepto te impactó más?"></textarea>
+                            <textarea id="idea" rows="2" maxlength="100" required
+                                placeholder="¿Qué concepto te impactó más?"></textarea>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="action">⚡ Acción Responsable:</label>
-                            <textarea id="action" rows="2" maxlength="100" required placeholder="¿Qué harás diferente desde hoy?"></textarea>
+                            <textarea id="action" rows="2" maxlength="100" required
+                                placeholder="¿Qué harás diferente desde hoy?"></textarea>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="reflection">💭 Reflexión Breve:</label>
-                            <textarea id="reflection" rows="3" maxlength="150" required placeholder="¿Cómo influye la tecnología en tu día a día?"></textarea>
+                            <textarea id="reflection" rows="3" maxlength="150" required
+                                placeholder="¿Cómo influye la tecnología en tu día a día?"></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary full-width">📌 Publicar en el Muro</button>
                     </form>
                 </div>
-                
+
                 <!-- EVIDENCE BOX (Hidden initially) -->
                 <div id="evidenceCard" class="card evidence-card hidden">
                     <h3>✅ ¡Publicación Exitosa!</h3>
-                    <p>Copia el siguiente código como evidencia:</p>
-                    <div id="evidenceText" class="evidence-box">...</div>
-                    <button id="copyBtn" class="btn btn-secondary full-width">📋 Copiar Evidencia</button>
+                    <p>Descarga la captura del mural como evidencia:</p>
+                    <!-- <div id="evidenceText" class="evidence-box">...</div> -->
+                    <button id="downloadBtn" class="btn btn-secondary full-width">📸 Descargar Evidencia (PDF)</button>
                 </div>
             </section>
 
             <!-- RIGHT: MURAL -->
-            <section class="section mural-section">
+            <section class="section mural-section" id="captureTarget">
                 <h2 class="section-title">🖼️ Muro de Aprendizaje</h2>
                 <div id="muralGrid" class="mural-grid">
                     <!-- Posts injected here -->
@@ -77,4 +87,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

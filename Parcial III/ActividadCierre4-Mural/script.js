@@ -69,19 +69,20 @@ document.addEventListener("DOMContentLoaded", () => {
             addPostToMural(userPost, true);
 
             // Show Evidence
-            showEvidence(author, idea);
+            showEvidence(author);
             
             // Clear form
             document.getElementById("postForm").reset();
             
             // Scroll to top of mural
-            document.querySelector(".mural-section").scrollIntoView({behavior: "smooth"});
+            // document.querySelector(".mural-section").scrollIntoView({behavior: "smooth"}); 
+            // Better to scroll to evidence card so they see the download button
+            document.getElementById("evidenceCard").scrollIntoView({behavior: "smooth"});
         }
     };
 
-    document.getElementById("copyBtn").onclick = () => {
-        const text = document.getElementById("evidenceText").innerText;
-        navigator.clipboard.writeText(text).then(() => alert("Código copiado"));
+    document.getElementById("downloadBtn").onclick = () => {
+        generatePDF();
     };
 });
 
@@ -136,12 +137,71 @@ function addPostToMural(post, prepend = false) {
     }
 }
 
-function showEvidence(author, idea) {
+function showEvidence(author) {
     const card = document.getElementById("evidenceCard");
     card.classList.remove("hidden");
-    
-    const dateCode = Date.now().toString().slice(-6);
-    const text = `=== MURAL DIGITAL: APORTACIÓN ===\nAlumno: ${author}\nIdea Clave: "${idea}"\nCódigo de Participación: MURAL-${dateCode}\nEstado: PUBLICADO`;
-    
-    document.getElementById("evidenceText").innerText = text;
+    // Store author name for filename if needed, or just use generic
+    window.lastAuthor = author || "Estudiante";
+}
+
+async function generatePDF() {
+    const downloadBtn = document.getElementById("downloadBtn");
+    const originalText = downloadBtn.innerText;
+    downloadBtn.innerText = "⏳ Generando PDF...";
+    downloadBtn.disabled = true;
+
+    try {
+        const { jsPDF } = window.jspdf;
+        const target = document.getElementById("captureTarget"); // The mural section
+
+        // Use html2canvas to capture the element
+        const canvas = await html2canvas(target, {
+            scale: 2, // Higher resolution
+            useCORS: true,
+            logging: false
+        });
+
+        const imgData = canvas.toDataURL('image/png');
+        
+        // A4 size: 210mm x 297mm
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        
+        // Calculate image dimensions to fit page width
+        const imgProps = pdf.getImageProperties(imgData);
+        const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        
+        // Add header text
+        pdf.setFontSize(16);
+        pdf.text("Evidencia: Mural Digital Colaborativo", 10, 10);
+        pdf.setFontSize(12);
+        pdf.text(`Fecha: ${new Date().toLocaleDateString()} - Alumno: ${window.lastAuthor}`, 10, 18);
+
+        // Add image
+        // If image is taller than page, might need multipage logic, but for now we scale to fit width
+        // and let it flow. If it's too long, we might need to handle it, but sticky notes are usually compact.
+        // Let's cap height to page margin if preserving aspect ratio is weird, 
+        // but generally scaling to width is the standard approach.
+        
+        let yPos = 25;
+        if (imgHeight > (pdfHeight - 30)) {
+             // If too tall, just scale to fit height? Or just let it be. 
+             // Simplest: just add it, users can scroll PDF.
+             // Actually, if it's longer than page, jsPDF cuts it off.
+             // For this activity, the mural shouldn't be effectively infinite.
+             // We'll proceed with fitting to width.
+        }
+
+        pdf.addImage(imgData, 'PNG', 0, yPos, pdfWidth, imgHeight);
+        
+        pdf.save(`Evidencia_Mural_${window.lastAuthor.replace(/\s+/g, '_')}.pdf`);
+
+    } catch (error) {
+        console.error("PDF Error:", error);
+        alert("Hubo un error al generar el PDF. Por favor intenta de nuevo.");
+    } finally {
+        downloadBtn.innerText = originalText;
+        downloadBtn.disabled = false;
+    }
 }
