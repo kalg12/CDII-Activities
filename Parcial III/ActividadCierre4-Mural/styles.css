@@ -100,7 +100,7 @@ body {
 
 .form-group { margin-bottom: 1rem; }
 .form-group label { display: block; margin-bottom: 0.3rem; font-weight: 600; font-size: 0.9rem; color: var(--text); }
-.form-group input, .form-group textarea {
+.form-group input, .form-group textarea, .form-group select {
     width: 100%;
     padding: 0.6rem;
     border: 2px solid var(--border);
@@ -109,7 +109,7 @@ body {
     resize: vertical;
     background: rgba(255, 255, 255, 0.8);
 }
-.form-group input:focus, .form-group textarea:focus {
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
     border-color: var(--accent); outline: none;
 }
 

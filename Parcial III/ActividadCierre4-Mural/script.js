@@ -41,22 +41,46 @@ const DEMO_POSTS = [
     }
 ];
 
+const CAREERS = [
+    "TÉCNICO EN ACUACULTURA",
+    "TÉCNICO EN MECÁNICA NAVAL",
+    "TÉCNICO EN PREPARACIÓN DE ALIMENTOS Y BEBIDAS",
+    "TÉCNICO EN RECREACIONES ACUÁTICAS",
+    "TÉCNICO EN REFRIGERACIÓN Y CLIMATIZACIÓN",
+    "TÉCNICO LABORATORISTA AMBIENTAL",
+];
+
 document.addEventListener("DOMContentLoaded", () => {
+    // Populate careers
+    const careerSelect = document.getElementById("career");
+    if (careerSelect) {
+        CAREERS.forEach(career => {
+            const option = document.createElement("option");
+            option.value = career;
+            option.textContent = career;
+            careerSelect.appendChild(option);
+        });
+    }
+
     renderMural();
 
     document.getElementById("postForm").onsubmit = (e) => {
         e.preventDefault();
-        
+
         // Get values
         const author = document.getElementById("fullName").value.trim();
+        const career = document.getElementById("career").value;
+        const group = document.getElementById("group").value;
         const idea = document.getElementById("idea").value.trim();
         const action = document.getElementById("action").value.trim();
         const reflection = document.getElementById("reflection").value.trim();
 
-        if(author && idea && action && reflection) {
+        if (author && career && group && idea && action && reflection) {
             // Create user post object
             const userPost = {
                 author: author,
+                career: career,
+                group: group,
                 idea: idea,
                 action: action,
                 reflection: reflection,
@@ -69,15 +93,15 @@ document.addEventListener("DOMContentLoaded", () => {
             addPostToMural(userPost, true);
 
             // Show Evidence
-            showEvidence(author);
-            
+            showEvidence(author, career, group);
+
             // Clear form
             document.getElementById("postForm").reset();
-            
+
             // Scroll to top of mural
             // document.querySelector(".mural-section").scrollIntoView({behavior: "smooth"}); 
             // Better to scroll to evidence card so they see the download button
-            document.getElementById("evidenceCard").scrollIntoView({behavior: "smooth"});
+            document.getElementById("evidenceCard").scrollIntoView({ behavior: "smooth" });
         }
     };
 
@@ -97,10 +121,10 @@ function renderMural() {
 
 function addPostToMural(post, prepend = false) {
     const grid = document.getElementById("muralGrid");
-    
+
     const note = document.createElement("div");
     note.className = `sticky-note ${post.color}`;
-    if(!post.isUser) {
+    if (!post.isUser) {
         // Randomize rotation slightly for demo posts if not set
         const rot = post.rot || (Math.random() * 6 - 3) + "deg";
         note.style.transform = `rotate(${rot})`;
@@ -127,21 +151,23 @@ function addPostToMural(post, prepend = false) {
             <p class="note-text">${post.reflection}</p>
         </div>
     `;
-    
+
     note.innerHTML = html;
 
-    if(prepend) {
+    if (prepend) {
         grid.prepend(note);
     } else {
         grid.appendChild(note);
     }
 }
 
-function showEvidence(author) {
+function showEvidence(author, career, group) {
     const card = document.getElementById("evidenceCard");
     card.classList.remove("hidden");
-    // Store author name for filename if needed, or just use generic
+    // Store author info for filename and PDF
     window.lastAuthor = author || "Estudiante";
+    window.lastCareer = career || "";
+    window.lastGroup = group || "";
 }
 
 async function generatePDF() {
@@ -162,39 +188,41 @@ async function generatePDF() {
         });
 
         const imgData = canvas.toDataURL('image/png');
-        
+
         // A4 size: 210mm x 297mm
         const pdf = new jsPDF('p', 'mm', 'a4');
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = pdf.internal.pageSize.getHeight();
-        
+
         // Calculate image dimensions to fit page width
         const imgProps = pdf.getImageProperties(imgData);
         const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        
+
         // Add header text
         pdf.setFontSize(16);
         pdf.text("Evidencia: Mural Digital Colaborativo", 10, 10);
         pdf.setFontSize(12);
-        pdf.text(`Fecha: ${new Date().toLocaleDateString()} - Alumno: ${window.lastAuthor}`, 10, 18);
+        pdf.text(`Fecha: ${new Date().toLocaleDateString()}`, 10, 18);
+        pdf.text(`Alumno: ${window.lastAuthor}`, 10, 24);
+        pdf.text(`Carrera: ${window.lastCareer} - Grupo: ${window.lastGroup}`, 10, 30);
 
         // Add image
         // If image is taller than page, might need multipage logic, but for now we scale to fit width
         // and let it flow. If it's too long, we might need to handle it, but sticky notes are usually compact.
         // Let's cap height to page margin if preserving aspect ratio is weird, 
         // but generally scaling to width is the standard approach.
-        
-        let yPos = 25;
-        if (imgHeight > (pdfHeight - 30)) {
-             // If too tall, just scale to fit height? Or just let it be. 
-             // Simplest: just add it, users can scroll PDF.
-             // Actually, if it's longer than page, jsPDF cuts it off.
-             // For this activity, the mural shouldn't be effectively infinite.
-             // We'll proceed with fitting to width.
+
+        let yPos = 35;
+        if (imgHeight > (pdfHeight - 40)) {
+            // If too tall, just scale to fit height? Or just let it be. 
+            // Simplest: just add it, users can scroll PDF.
+            // Actually, if it's longer than page, jsPDF cuts it off.
+            // For this activity, the mural shouldn't be effectively infinite.
+            // We'll proceed with fitting to width.
         }
 
         pdf.addImage(imgData, 'PNG', 0, yPos, pdfWidth, imgHeight);
-        
+
         pdf.save(`Evidencia_Mural_${window.lastAuthor.replace(/\s+/g, '_')}.pdf`);
 
     } catch (error) {
