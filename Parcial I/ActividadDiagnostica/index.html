@@ -9,17 +9,17 @@
     </title>
     <style>
       :root {
-        --bg: #6b2737;
-        --card: #7d2f42;
-        --card2: #4a1e2b;
-        --text: #2a1219;
-        --muted: #6d4a52;
-        --accent: #a67f5d;
-        --accent2: #c9a976;
-        --danger: #8b3a3a;
-        --ok: #5a7a4f;
-        --border: rgba(77, 30, 43, 0.3);
-        --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        --bg: #0f172a;
+        --card: #1e293b;
+        --card2: #334155;
+        --text: #0f172a;
+        --muted: #64748b;
+        --accent: #7c3aed;
+        --accent2: #22d3ee;
+        --danger: #ef4444;
+        --ok: #22c55e;
+        --border: rgba(51, 65, 85, 0.2);
+        --shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
         --radius: 16px;
       }
       * {
@@ -31,20 +31,20 @@
           sans-serif;
         background: radial-gradient(
             1200px 600px at 10% -10%,
-            rgba(166, 127, 93, 0.35),
+            rgba(34, 211, 238, 0.28),
             transparent 60%
           ),
           radial-gradient(
             900px 500px at 95% 10%,
-            rgba(201, 169, 118, 0.25),
+            rgba(124, 58, 237, 0.22),
             transparent 55%
           ),
           radial-gradient(
             800px 450px at 50% 100%,
-            rgba(139, 58, 58, 0.18),
+            rgba(239, 68, 68, 0.14),
             transparent 55%
           ),
-          #f4e8d8;
+          #eef2ff;
         color: var(--text);
         min-height: 100vh;
         display: flex;
@@ -71,12 +71,8 @@
         gap: 12px;
       }
       .badge {
-        background: linear-gradient(
-          90deg,
-          rgba(166, 127, 93, 0.95),
-          rgba(201, 169, 118, 0.9)
-        );
-        color: #3d1621;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        color: #0f172a;
         font-weight: 800;
         padding: 6px 10px;
         border-radius: 999px;
@@ -140,7 +136,7 @@
         width: 100%;
         padding: 12px 12px;
         border-radius: 12px;
-        border: 1px solid rgba(109, 74, 82, 0.3);
+        border: 1px solid var(--border);
         background: rgba(255, 255, 255, 0.5);
         color: var(--text);
         outline: none;
@@ -159,8 +155,8 @@
       input:focus,
       select:focus,
       textarea:focus {
-        border-color: rgba(166, 127, 93, 0.65);
-        box-shadow: 0 0 0 4px rgba(166, 127, 93, 0.12);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
       }
       textarea {
         min-height: 110px;
@@ -174,7 +170,7 @@
         gap: 12px;
         margin-top: 6px;
         padding-top: 10px;
-        border-top: 1px dashed rgba(109, 74, 82, 0.25);
+        border-top: 1px dashed rgba(100, 116, 139, 0.3);
       }
       .sectionTitle h2 {
         margin: 0;
@@ -188,8 +184,8 @@
       }
 
       .q {
-        background: rgba(255, 255, 255, 0.45);
-        border: 1px solid rgba(109, 74, 82, 0.18);
+        background: rgba(15, 23, 42, 0.03);
+        border: 1px solid rgba(100, 116, 139, 0.2);
         border-radius: 14px;
         padding: 12px;
         display: grid;
@@ -209,11 +205,11 @@
       }
       .pill {
         font-size: 11px;
-        color: #3d1621;
+        color: #0f172a;
         font-weight: 800;
         padding: 5px 9px;
         border-radius: 999px;
-        background: rgba(201, 169, 118, 0.9);
+        background: rgba(34, 211, 238, 0.9);
         white-space: nowrap;
       }
 
@@ -227,14 +223,14 @@
         gap: 10px;
         padding: 10px;
         border-radius: 12px;
-        border: 1px solid rgba(109, 74, 82, 0.15);
+        border: 1px solid rgba(100, 116, 139, 0.25);
         background: rgba(255, 255, 255, 0.3);
         cursor: pointer;
         transition: 0.15s;
         user-select: none;
       }
       .opt:hover {
-        border-color: rgba(166, 127, 93, 0.55);
+        border-color: rgba(124, 58, 237, 0.6);
         transform: translateY(-1px);
       }
       .opt input {
@@ -253,7 +249,7 @@
         justify-content: space-between;
         padding: 14px 18px;
         border-top: 1px solid var(--border);
-        background: rgba(166, 127, 93, 0.08);
+        background: rgba(124, 58, 237, 0.08);
       }
 
       .btn {
@@ -264,11 +260,7 @@
         font-weight: 800;
         cursor: pointer;
         color: #ffffff;
-        background: linear-gradient(
-          90deg,
-          rgba(166, 127, 93, 0.95),
-          rgba(201, 169, 118, 0.95)
-        );
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
         transition: 0.15s;
       }
       .btn:hover {
@@ -283,10 +275,10 @@
       .btnGhost {
         background: transparent;
         color: var(--text);
-        border: 1px solid rgba(109, 74, 82, 0.28);
+        border: 1px solid var(--border);
       }
       .btnGhost:hover {
-        border-color: rgba(166, 127, 93, 0.65);
+        border-color: var(--accent);
       }
 
       .msg {
@@ -313,7 +305,7 @@
       }
       .summary {
         background: rgba(255, 255, 255, 0.5);
-        border: 1px solid rgba(109, 74, 82, 0.2);
+        border: 1px solid var(--border);
         border-radius: 14px;
         padding: 12px;
         display: grid;
@@ -330,7 +322,7 @@
       }
       .kv {
         background: rgba(255, 255, 255, 0.6);
-        border: 1px solid rgba(109, 74, 82, 0.2);
+        border: 1px solid var(--border);
         border-radius: 12px;
         padding: 10px;
       }
@@ -349,7 +341,7 @@
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas,
           "Liberation Mono", monospace;
         background: rgba(255, 255, 255, 0.7);
-        border: 1px dashed rgba(109, 74, 82, 0.28);
+        border: 1px dashed rgba(100, 116, 139, 0.35);
         border-radius: 14px;
         padding: 12px;
         font-size: 12.5px;
@@ -382,7 +374,7 @@
         <div
           style="
             background: rgba(255, 255, 255, 0.4);
-            border-left: 4px solid rgba(166, 127, 93, 0.8);
+            border-left: 4px solid rgba(124, 58, 237, 0.8);
             padding: 14px;
             border-radius: 8px;
             margin: 0 18px;
