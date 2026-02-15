@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Navegación ---
     function showSection(sectionId) {
         Object.values(sections).forEach(s => s.classList.add('hidden'));
-        if(sections[sectionId]) sections[sectionId].classList.remove('hidden');
+        if (sections[sectionId]) sections[sectionId].classList.remove('hidden');
         window.scrollTo(0, 0);
     }
 
@@ -35,20 +35,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const startGameBtn = document.getElementById('startGameBtn');
-    if(startGameBtn) {
+    if (startGameBtn) {
         startGameBtn.addEventListener('click', () => {
             showSection('game');
         });
     }
 
+    // --- Audio Feedback ---
+    const audioCorrect = new Audio('audio/Muy Bien.mp3');
+    const audioIncorrect = new Audio('audio/Te equivocaste.mp3');
+
+    const pool = document.getElementById('cardsContainer');
+
+    // --- Randomize Cards ---
+    function shuffleCards() {
+        if (!pool) return;
+        for (let i = pool.children.length; i >= 0; i--) {
+            pool.appendChild(pool.children[Math.random() * i | 0]);
+        }
+    }
+    shuffleCards();
+
     // --- Lógica de Arrastrar y Soltar ---
     const cards = document.querySelectorAll('.card-item');
     const zones = document.querySelectorAll('.zone');
-    const pool = document.getElementById('cardsContainer');
     let draggedItem = null;
 
     cards.forEach(card => {
-        card.addEventListener('dragstart', function(e) {
+        card.addEventListener('dragstart', function (e) {
             draggedItem = this;
             this.classList.add('dragging');
             // Resetear visual al volver a arrastrar
@@ -56,16 +70,16 @@ document.addEventListener('DOMContentLoaded', () => {
             this.style.borderColor = '';
         });
 
-        card.addEventListener('dragend', function(e) {
+        card.addEventListener('dragend', function (e) {
             this.classList.remove('dragging');
             draggedItem = null;
         });
     });
 
     // Permitir drop en el pool también (para regresar items)
-    if(pool) {
-        pool.addEventListener('dragover', function(e) { e.preventDefault(); });
-        pool.addEventListener('drop', function(e) {
+    if (pool) {
+        pool.addEventListener('dragover', function (e) { e.preventDefault(); });
+        pool.addEventListener('drop', function (e) {
             e.preventDefault();
             if (draggedItem) {
                 this.appendChild(draggedItem);
@@ -76,32 +90,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     zones.forEach(zone => {
-        zone.addEventListener('dragover', function(e) {
+        zone.addEventListener('dragover', function (e) {
             e.preventDefault();
             this.classList.add('hover');
         });
 
-        zone.addEventListener('dragleave', function() {
+        zone.addEventListener('dragleave', function () {
             this.classList.remove('hover');
         });
 
-        zone.addEventListener('drop', function(e) {
+        zone.addEventListener('drop', function (e) {
             e.preventDefault();
             this.classList.remove('hover');
             if (draggedItem) {
                 // Zona de contenido dentro de la tarjeta de descripción
                 const content = this.querySelector('.zone-content');
-                
+
                 // Si ya hay un item, regresarlo al pool o intercambiar (simple: regresar al pool)
                 if (content.children.length > 0) {
-                   const existingItem = content.firstElementChild;
-                   pool.appendChild(existingItem);
+                    const existingItem = content.firstElementChild;
+                    pool.appendChild(existingItem);
                 }
 
                 content.appendChild(draggedItem);
-                // Resetear visual al soltar
-                draggedItem.classList.remove('correct', 'error');
-                draggedItem.style.borderColor = '';
+
+                // Feedback Inmediato
+                const requiredType = zone.dataset.accept;
+                if (draggedItem.dataset.type === requiredType) {
+                    audioCorrect.currentTime = 0;
+                    audioCorrect.play().catch(e => console.log("Audio play error:", e));
+                    draggedItem.classList.add('correct');
+                    draggedItem.classList.remove('error');
+                } else {
+                    audioIncorrect.currentTime = 0;
+                    audioIncorrect.play().catch(e => console.log("Audio play error:", e));
+                    draggedItem.classList.add('error');
+                    draggedItem.classList.remove('correct');
+                }
             }
         });
     });
@@ -109,8 +134,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Verificación ---
     const verifyBtn = document.getElementById('verifyBtn');
     const feedback = document.getElementById('gameFeedback');
+    let gameCompleted = false;
 
     verifyBtn.addEventListener('click', () => {
+        if (gameCompleted) {
+            showSection('result');
+            return;
+        }
+
         let correct = 0;
         let placed = 0;
         const totalItems = 9;
@@ -125,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 placed++;
                 // Limpiar estados anteriores
                 item.classList.remove('correct', 'error');
-                
+
                 if (item.dataset.type === requiredType) {
                     correct++;
                     item.classList.add('correct');
@@ -152,19 +183,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         studentData.score = correct;
-        
+
         feedback.textContent = `🎯 ¡Excelente! Has relacionado correctamente todas las herramientas.`;
         feedback.className = 'feedback success';
         feedback.classList.remove('hidden');
 
-        // Mostrar botón para continuar después de una breve pausa
-        setTimeout(() => {
-            document.getElementById('resName').textContent = studentData.name;
-            document.getElementById('resCareer').textContent = studentData.career;
-            document.getElementById('resGroup').textContent = studentData.group;
-            document.getElementById('resScore').textContent = `${correct} / ${studentData.total}`;
-            showSection('result');
-        }, 2000);
+        // Cambiar botón a Continuar
+        verifyBtn.textContent = "Continuar";
+        verifyBtn.classList.remove('btn-secondary');
+        verifyBtn.classList.add('btn-primary');
+        gameCompleted = true;
+
+        // Preparar datos para la siguiente sección
+        document.getElementById('resName').textContent = studentData.name;
+        document.getElementById('resCareer').textContent = studentData.career;
+        document.getElementById('resGroup').textContent = studentData.group;
+        document.getElementById('resScore').textContent = `${correct} / ${studentData.total}`;
     });
 
     // --- Reflexión ---
@@ -215,7 +249,7 @@ REFLEXIÓN:
 
     // --- Copiar al portapapeles ---
     const copyBtn = document.getElementById('copyForumBtn');
-    if(copyBtn) {
+    if (copyBtn) {
         copyBtn.addEventListener('click', () => {
             const text = document.getElementById('forumText').textContent;
             navigator.clipboard.writeText(text).then(() => {
@@ -228,5 +262,5 @@ REFLEXIÓN:
 
     // Año actual
     const yearSpan = document.getElementById('currentYear');
-    if(yearSpan) yearSpan.textContent = new Date().getFullYear();
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 });
